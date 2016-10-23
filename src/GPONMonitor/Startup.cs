@@ -1,4 +1,5 @@
 ﻿using GPONMonitor.Models.Configuration;
+using GPONMonitor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +39,8 @@ namespace GPONMonitor
 
             services.AddOptions();
             services.Configure<DevicesConfiguration>(Configuration.GetSection("DevicesConfiguration"));
+
+            services.AddSingleton<ISnmpDataService, SnmpDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
