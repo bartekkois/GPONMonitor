@@ -1,0 +1,17 @@
+﻿@using WebApplicationSharpSNMPTest.Models
+
+@{
+    ViewData["Title"] = "GPON Monitor";
+}
+
+
+<h4>@ViewData["Message"]</h4>
+
+@{  var onuList = ViewData["onulist"] as List<OnuShortDescription>; }
+
+<ul>
+    @foreach (var onu in onuList)
+    {
+        <li>@onu.OltPortId . @onu.OnuId - @onu.OnuDescription</li>
+    }
+</ul>
