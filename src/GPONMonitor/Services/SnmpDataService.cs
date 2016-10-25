@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GPONMonitor.Models;
 using GPONMonitor.Models.Configuration;
-using GPONMonitor.Models.Onu;
 
 namespace GPONMonitor.Services
 {
@@ -50,9 +49,9 @@ namespace GPONMonitor.Services
             return await configuredOlts.Single(s => s.Id == oltId).GetOnuDescriptionListAsync();
         }
 
-        public async Task<OnuGeneric> GetOnuDetailInfoAsync(uint oltId, uint oltPortId, uint onuId)
+        public async Task<string> GetOnuModelAsync(uint oltId, uint oltPortId, uint onuId)
         {
-            return await configuredOlts.Single(s => s.Id == oltId).GetOnuDetailInfoAsync(oltPortId, onuId);
+            return await configuredOlts.Single(s => s.Id == oltId).GetOnuModelAsync(oltPortId, onuId);
         }
     }
 }

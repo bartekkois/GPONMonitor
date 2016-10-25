@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using GPONMonitor.Exceptions;
-using GPONMonitor.Models.Onu;
 
 namespace GPONMonitor.Models
 {
@@ -181,11 +180,8 @@ namespace GPONMonitor.Models
             return onuList;
         }
 
-        public async Task<OnuGeneric> GetOnuDetailInfoAsync(uint oltPortId, uint onuId)
+        public async Task<string> GetOnuModelAsync(uint oltPortId, uint onuId)
         {
-            OnuGeneric onuDetailInfo;
-
-            // Check Onu model
             List<Variable> snmpResponseOnuModel = new List<Variable>();
 
             try
@@ -199,31 +195,8 @@ namespace GPONMonitor.Models
 
             if (snmpResponseOnuModel.Count == 0)
                 throw new SnmpConnectionException("SNMP request error: no results has been returned");
-
-            switch (snmpResponseOnuModel.First().Data.ToString())
-            {
-                case "H645B":
-                    onuDetailInfo = new H645BOnu();
-                    break;
-                case "H645G":
-                    onuDetailInfo = new H645GOnu();
-                    break;
-                case "H665G":
-                    onuDetailInfo = new H665GOnu();
-                    break;
-                case "H640GW-02":
-                    onuDetailInfo = new H665GOnu();
-                    break;
-                default:
-                    onuDetailInfo = new UnknownOnu();
-                    break;
-            }
-
             
-
-            // Implement gathering informations for specified Onu !!!!!!!!!!!!!
-
-            return onuDetailInfo;
+            return snmpResponseOnuModel.First().Data.ToString();
         }
     }
 }
