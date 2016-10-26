@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using GPONMonitor.Exceptions;
+using System.Threading;
 
 namespace GPONMonitor.Models
 {
@@ -88,45 +89,81 @@ namespace GPONMonitor.Models
                 throw new ArgumentException("Incorrect OLT SNMP timeout");
         }
 
-
-        private async Task<IList<Variable>> SnmpGetAsync(VersionCode snmpVersion, string oid)
+        private async Task<IList<Variable>> SnmpGetAsyncWithTimeout(VersionCode snmpVersion, string oid, int snmpRequestTimeout)
         {
-            Task<IList<Variable>> task = Messenger.GetAsync(snmpVersion,
-                                    new IPEndPoint(SnmpIPAddress, SnmpPort),
-                                    new OctetString(SnmpCommunity),
-                                    new List<Variable> { new Variable(new ObjectIdentifier(oid)) });
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task timeoutTask = Task.Delay(snmpRequestTimeout);
+            Task<IList<Variable>> task;
+
+            if (await Task.WhenAny(task = SnmpGetAsync(snmpVersion, oid), timeoutTask) == timeoutTask)
+            {
+                cancellationTokenSource.Cancel();
+                throw new SnmpTimeoutException("SNMP request timeout");
+            }
+
             return await task;
         }
 
+        private async Task<IList<Variable>> SnmpGetAsync(VersionCode snmpVersion, string oid)
+        {
+            try
+            {
+                Task<IList<Variable>> task = Messenger.GetAsync(snmpVersion,
+                                    new IPEndPoint(SnmpIPAddress, SnmpPort),
+                                    new OctetString(SnmpCommunity),
+                                    new List<Variable> { new Variable(new ObjectIdentifier(oid)) });
+
+                return await task;
+            }
+            catch (Exception exception)
+            {
+                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
+            }
+        }
+
+        private async Task<List<Variable>> SnmpWalkAsyncWithTimeout(VersionCode snmpVersion, string oid, int timeout, WalkMode walkMode, int snmpRequestTimeout)
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task timeoutTask = Task.Delay(snmpRequestTimeout);
+            Task<List<Variable>> task;
+
+            if (await Task.WhenAny(task = SnmpWalkAsync(snmpVersion, oid, timeout, walkMode), timeoutTask) == timeoutTask)
+            {
+                cancellationTokenSource.Cancel();
+                throw new SnmpTimeoutException("SNMP request timeout");
+            }
+
+            return await task;
+        }
 
         private async Task<List<Variable>> SnmpWalkAsync(VersionCode snmpVersion, string oid, int timeout, WalkMode walkMode)
         {
             List<Variable> snmpWalkResult = new List<Variable>();
 
-            Task<int> taskWalk = Messenger.WalkAsync(snmpVersion,
+            try
+            {
+                Task<int> taskWalk = Messenger.WalkAsync(snmpVersion,
                                     new IPEndPoint(SnmpIPAddress, SnmpPort),
                                     new OctetString(SnmpCommunity),
                                     new ObjectIdentifier(oid),
                                     snmpWalkResult,
                                     timeout,
                                     walkMode);
-            await taskWalk;
-            return snmpWalkResult;
-        }
 
-
-        public async Task<string> GetDescriptionAsync()
-        {
-            List<Variable> snmpResponseDescription = new List<Variable>();
-
-            try
-            {
-                snmpResponseDescription = await SnmpGetAsync(SnmpVersion, _snmpOIDOltDescription) as List<Variable>;
+                await taskWalk;
+                return snmpWalkResult;
             }
             catch (Exception exception)
             {
                 throw new SnmpConnectionException("SNMP request error: " + exception.Message);
             }
+        }
+
+        public async Task<string> GetDescriptionAsync()
+        {
+            List<Variable> snmpResponseDescription = new List<Variable>();
+
+            snmpResponseDescription = await SnmpGetAsyncWithTimeout(SnmpVersion, _snmpOIDOltDescription, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseDescription.Count == 0)
                 throw new SnmpConnectionException("SNMP request error: no results has been returned");
@@ -134,19 +171,11 @@ namespace GPONMonitor.Models
             return snmpResponseDescription.First().Data.ToString();
         }
 
-
         public async Task<string> GetUptimeAsync()
         {
             List<Variable> snmpResponseUptime = new List<Variable>();
 
-            try
-            {
-                snmpResponseUptime = await SnmpGetAsync(SnmpVersion, _snmpOIDOltUptime) as List<Variable>;
-            }
-            catch (Exception exception)
-            {
-                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
-            }
+            snmpResponseUptime = await SnmpGetAsyncWithTimeout(SnmpVersion, _snmpOIDOltUptime, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseUptime.Count == 0)
                 throw new SnmpConnectionException("SNMP request error: no results has been returned");
@@ -154,20 +183,12 @@ namespace GPONMonitor.Models
             return snmpResponseUptime.First().Data.ToString().Split('.').First();
         }
 
-
         public async Task<List<OnuShortDescription>> GetOnuDescriptionListAsync()
         {
             List<OnuShortDescription> onuList = new List<OnuShortDescription>();
             List<Variable> snmpResponseOnuList = new List<Variable>();
 
-            try
-            {
-                snmpResponseOnuList = await SnmpWalkAsync(SnmpVersion, _snmpOIDListOnuDescription, SnmpTimeout, WalkMode.WithinSubtree);
-            }
-            catch (Exception exception)
-            {
-                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
-            }
+            snmpResponseOnuList = await SnmpWalkAsyncWithTimeout(SnmpVersion, _snmpOIDListOnuDescription, SnmpTimeout, WalkMode.WithinSubtree, SnmpTimeout);
 
             foreach (Variable variable in snmpResponseOnuList)
             {
@@ -184,14 +205,7 @@ namespace GPONMonitor.Models
         {
             List<Variable> snmpResponseOnuModel = new List<Variable>();
 
-            try
-            {
-                snmpResponseOnuModel = await SnmpGetAsync(SnmpVersion, _snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId) as List<Variable>;
-            }
-            catch (Exception exception)
-            {
-                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
-            }
+            snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, _snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseOnuModel.Count == 0)
                 throw new SnmpConnectionException("SNMP request error: no results has been returned");

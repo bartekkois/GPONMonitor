@@ -4,6 +4,7 @@ using GPONMonitor.Models.Configuration;
 using Microsoft.Extensions.Options;
 using GPONMonitor.Services;
 using System;
+using GPONMonitor.Exceptions;
 
 namespace GPONMonitor.Controllers
 {
@@ -30,6 +31,14 @@ namespace GPONMonitor.Controllers
                 ViewData["Message"] = description + uptime;
                 ViewData["onulist"] = onulist;
                 ViewData["onudetail"] = onumodel;
+            }
+            catch(SnmpConnectionException ex)
+            {
+                ViewData["Message"] = ex.Message;
+            }
+            catch(SnmpTimeoutException ex)
+            {
+                ViewData["Message"] = ex.Message;
             }
             catch (Exception ex)
             {

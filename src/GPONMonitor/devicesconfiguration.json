@@ -8,7 +8,7 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 5000
+        "SnmpTimeout": 3000
       },
       {
         "Id": "1",
@@ -17,7 +17,7 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 5000
+        "SnmpTimeout": 3000
       },
       {
         "Id": "2",
@@ -26,7 +26,7 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 5000
+        "SnmpTimeout": 3000
       }
     ]
   }

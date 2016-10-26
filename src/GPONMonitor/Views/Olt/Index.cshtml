@@ -10,8 +10,11 @@
 @{  var onuList = ViewData["onulist"] as List<OnuShortDescription>; }
 
 <ul>
-    @foreach (var onu in onuList)
+    @if (onuList != null)
     {
-        <li>@onu.OltPortId . @onu.OnuId - @onu.OnuDescription</li>
+        @foreach (var onu in onuList)
+        {
+            <li>@onu.OltPortId . @onu.OnuId - @onu.OnuDescription</li>
+        }
     }
 </ul>
