@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace GPONMonitor
 {
@@ -39,6 +40,14 @@ namespace GPONMonitor
 
             services.AddOptions();
             services.Configure<DevicesConfiguration>(Configuration.GetSection("DevicesConfiguration"));
+
+            services.Configure<DevicesConfiguration>(devicesConfigurationOptions =>
+            {
+                foreach (var device in devicesConfigurationOptions.Devices.Select((value, index) => new { value, index }))
+                {
+                    device.value.Id = device.index;
+                }
+            });
 
             services.AddSingleton<ISnmpDataService, SnmpDataService>();
         }
