@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using GPONMonitor.Exceptions;
 using System.Threading;
 
-namespace GPONMonitor.Models
+namespace GPONMonitor.Models.Olt
 {
     public class Olt
     {
@@ -30,64 +30,15 @@ namespace GPONMonitor.Models
 
         public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout)
         {
-            IPAddress tryParseSnmpIPAddress;
-            int tryParseSnmpPort;
-            int tryParseSnmpTimeout;
-
-
-            if ((id >= 0 && id <= 128))
-                Id = id;
-            else
-                throw new ArgumentException("Incorrect OLT id");
-
-
-            if (!string.IsNullOrWhiteSpace(name))
-                Name = name;
-            else
-                throw new ArgumentException("Incorrect OLT name");
-
-
-            if (IPAddress.TryParse(snmpIPAddress, out tryParseSnmpIPAddress))
-                SnmpIPAddress = tryParseSnmpIPAddress;
-            else
-                throw new ArgumentException("Incorrect OLT SNMP IP address");
-            
-
-            if (int.TryParse(snmpPort, out tryParseSnmpPort) &&
-                (tryParseSnmpPort > 0 && tryParseSnmpPort < 65535))
-                SnmpPort = tryParseSnmpPort;
-            else
-                throw new ArgumentException("Incorrect OLT SNMP port number");
-
-
-            switch (snmpVersion)
-            {
-                case "1":
-                    SnmpVersion = VersionCode.V1;
-                    break;
-                case "2":
-                    SnmpVersion = VersionCode.V2;
-                    break;
-                case "3":
-                    SnmpVersion = VersionCode.V3;
-                    break;
-                default:
-                    throw new ArgumentException("Incorrect OLT SNMP version");
-            }
-
-
-            if (!string.IsNullOrWhiteSpace(snmpCommunity))
-                SnmpCommunity = snmpCommunity;
-            else
-                throw new ArgumentException("Incorrect OLT SNMP community");
-
-
-            if (int.TryParse(snmpTimeout, out tryParseSnmpTimeout) &&
-                (tryParseSnmpTimeout > 0 && tryParseSnmpTimeout < 60000))
-                SnmpTimeout = tryParseSnmpTimeout;
-            else
-                throw new ArgumentException("Incorrect OLT SNMP timeout");
+            Id = OltFormatChecks.CheckOltIdFormat(id);
+            Name = OltFormatChecks.CheckOltNameFormat(name);
+            SnmpIPAddress = OltFormatChecks.CheckOltSnmpIpAddressFormat(snmpIPAddress);
+            SnmpPort = OltFormatChecks.CheckOltSnmpPortFormat(snmpPort);
+            SnmpVersion = OltFormatChecks.CheckOltSnmpVersionFormat(snmpVersion);
+            SnmpCommunity = OltFormatChecks.CheckOltSnmpCommunityFormat(snmpCommunity);
+            SnmpTimeout = OltFormatChecks.CheckOltSnmpTimeoutFormat(snmpTimeout);
         }
+
 
         private async Task<IList<Variable>> SnmpGetAsyncWithTimeout(VersionCode snmpVersion, string oid, int snmpRequestTimeout)
         {

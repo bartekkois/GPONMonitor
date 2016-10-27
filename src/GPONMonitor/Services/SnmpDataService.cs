@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GPONMonitor.Models;
 using GPONMonitor.Models.Configuration;
+using GPONMonitor.Models.Olt;
+using GPONMonitor.Models;
 
 namespace GPONMonitor.Services
 {
