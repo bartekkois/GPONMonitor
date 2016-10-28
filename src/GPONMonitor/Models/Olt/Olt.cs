@@ -143,10 +143,16 @@ namespace GPONMonitor.Models.Olt
 
             foreach (Variable variable in snmpResponseOnuList)
             {
-                uint oltPortId = variable.Id.ToNumerical().ToArray().ElementAt(13); 
+                uint oltPortId = variable.Id.ToNumerical().ToArray().ElementAt(13);
                 uint onuId = variable.Id.ToNumerical().ToArray().ElementAt(14);
 
-                onuList.Add(new OnuShortDescription(oltPortId, onuId, variable.Data.ToString().Replace("_"," "))); 
+                string onuDescription = null;
+                if (variable.Data.ToString().Length > 0)
+                    onuDescription = variable.Data.ToString().Replace("_", " ");
+                else
+                    onuDescription = "Undefined description";
+
+                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription));
             }
 
             return onuList;
