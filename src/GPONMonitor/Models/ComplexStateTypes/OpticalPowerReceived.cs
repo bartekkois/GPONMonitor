@@ -1,4 +1,6 @@
-﻿namespace GPONMonitor.Models.Onu
+﻿using Newtonsoft.Json;
+
+namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class OpticalPowerReceived
     {
@@ -45,6 +47,9 @@
         public string DescriptionEng { get; private set; }
         public string DescriptionPol { get; private set; }
         public SeverityLevel Severity { get; private set; }
+
+        [JsonIgnore]
+        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.1.1.16";             // Optical power received (followed by OnuPortId and OnuId)
 
 
         // ONU Optical Power Received

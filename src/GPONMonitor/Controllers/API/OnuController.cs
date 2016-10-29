@@ -9,20 +9,18 @@ using System;
 namespace GPONMonitor.Controllers
 {
     [Route("api/Onu")]
-    public class OltApiController : Controller
+    public class OnuApiController : Controller
     {
         private readonly DevicesConfiguration _devicesConfiguration;
         private ISnmpDataService _snmpDataService;
 
-        public OltApiController(IOptions<DevicesConfiguration> devicesConfiguration, ISnmpDataService snmpDataService)
+        public OnuApiController(IOptions<DevicesConfiguration> devicesConfiguration, ISnmpDataService snmpDataService)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _snmpDataService = snmpDataService;
         }
 
-        // GET: api/values
-        // [HttpGet("{oltId:int}&{oltPortId:int}&{onuId:int}")]
-        // http://localhost:53621/api/Onu/?oltId=1&oltPortId=2&onuId=3
+        // GET: api/Onu/?oltId=1&oltPortId=2&onuId=3
         [HttpGet]
         public async Task<IActionResult> Get(uint oltId, uint oltPortId, uint onuId)
         {
@@ -39,22 +37,22 @@ namespace GPONMonitor.Controllers
 
             var onuDetailInfo = new object();
 
-            switch (await _snmpDataService.GetOnuModelAsync(oltId, oltPortId, onuId))
+            switch (modelName)
             {
                 case "H645B":
-                    onuDetailInfo = new H645BOnu();
+                    onuDetailInfo = new H645BOnu(oltPortId, onuId);
                     break;
                 case "H645G":
-                    onuDetailInfo = new H645GOnu();
+                    onuDetailInfo = new H645GOnu(oltPortId, onuId);
                     break;
                 case "H665G":
-                    onuDetailInfo = new H665GOnu();
+                    onuDetailInfo = new H665GOnu(oltPortId, onuId);
                     break;
                 case "H640GW-02":
-                    onuDetailInfo = new H665GOnu();
+                    onuDetailInfo = new H665GOnu(oltPortId, onuId);
                     break;
                 default:
-                    onuDetailInfo = new UnknownOnu();
+                    onuDetailInfo = new UnknownOnu(oltPortId, onuId);
                     break;
             }
 

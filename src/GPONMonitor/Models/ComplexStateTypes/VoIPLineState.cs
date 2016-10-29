@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GPONMonitor.Models.Onu
+namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class VoIPLineState
     {

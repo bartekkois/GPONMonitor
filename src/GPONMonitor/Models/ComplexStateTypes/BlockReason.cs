@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace GPONMonitor.Models.Onu
-{
+namespace GPONMonitor.Models.ComplexStateTypes
+{ 
     public class BlockReason
     {
         public int? Value
@@ -34,6 +35,9 @@ namespace GPONMonitor.Models.Onu
         public string DescriptionEng { get; private set; }
         public string DescriptionPol { get; private set; }
         public SeverityLevel Severity { get; private set; }
+
+        [JsonIgnore]
+        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.1.1.56";                      // Block reason (followed by OnuPortId and OnuId)
 
 
         // ONT Block Reason

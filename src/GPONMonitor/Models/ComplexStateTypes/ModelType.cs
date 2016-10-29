@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace GPONMonitor.Models.ComplexStateTypes
 {
-    public class OpticalConnectionUptime
+    public class ModelType
     {
-        public int? Value
+        public string Value
         {
             get
             {
@@ -15,11 +14,8 @@ namespace GPONMonitor.Models.ComplexStateTypes
             {
                 if (value != null)
                 {
-                    TimeSpan timeSpan = TimeSpan.FromSeconds(Convert.ToDouble(value));
-                    string displayTimeSpan = timeSpan.ToString("dd, hh:mm:tt");
-
-                    DescriptionEng = displayTimeSpan;
-                    DescriptionPol = displayTimeSpan;
+                    DescriptionEng = value.ToString();
+                    DescriptionPol = value.ToString();
                     Severity = SeverityLevel.Default;
 
                     Value = value;
@@ -40,6 +36,6 @@ namespace GPONMonitor.Models.ComplexStateTypes
         public SeverityLevel Severity { get; private set; }
 
         [JsonIgnore]
-        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.1.1.23";          // ONU optical connection uptime (the elapsed time after ont is up) (followed by OnuPortId and OnuId)
+        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.1.1.17";                        // Model type (followed by OnuPortId and OnuId)
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GPONMonitor.Models
+﻿namespace GPONMonitor.Models.ComplexStateTypes
 {
     public struct ResponseDescription
     {
