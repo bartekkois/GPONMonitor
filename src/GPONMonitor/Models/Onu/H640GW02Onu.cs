@@ -32,7 +32,7 @@ namespace GPONMonitor.Models.Onu
         const string snmpOIDOnuVoIPLineStatusUpdate3 = "1.3.6.1.4.1.6296.101.23.6.5.2.7";
         const string snmpOIDOnuVoIPLineStatusUpdate4 = "1.3.6.1.4.1.6296.101.23.6.5.2.3";
 
-        public H640GW02Onu(uint oltPortId, uint oltOnuId) : base(oltPortId, oltOnuId)
+        public H640GW02Onu(uint oltId, uint oltPortId, uint oltOnuId) : base(oltId, oltPortId, oltOnuId)
         {
         }
     }

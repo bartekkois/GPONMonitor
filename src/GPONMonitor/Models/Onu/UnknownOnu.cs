@@ -2,7 +2,7 @@
 {
     public class UnknownOnu : OnuGeneric
     {
-        public UnknownOnu(uint oltPortId, uint oltOnuId) : base(oltPortId, oltOnuId)
+        public UnknownOnu(uint oltId, uint oltPortId, uint oltOnuId) : base(oltId, oltPortId, oltOnuId)
         {
         }
     }

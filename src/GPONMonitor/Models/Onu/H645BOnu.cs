@@ -15,7 +15,7 @@ namespace GPONMonitor.Models.Onu
         const string snmpOIDOnuEthernetPort1Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";            // ETH port speed (followed by OnuPortId, OnuId, 1 and PortNumber)
         const string snmpOIDOnuEthernetPort2Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";
 
-        public H645BOnu(uint oltPortId, uint oltOnuId) : base(oltPortId, oltOnuId)
+        public H645BOnu(uint oltId, uint oltPortId, uint oltOnuId) : base(oltId, oltPortId, oltOnuId)
         {
         }
     }

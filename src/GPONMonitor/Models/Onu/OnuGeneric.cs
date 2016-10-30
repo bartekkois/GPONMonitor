@@ -4,6 +4,7 @@ namespace GPONMonitor.Models.Onu
 {
     public abstract class OnuGeneric
     {
+        public uint OltId { get; private set; }
         public uint OltPortId { get; private set; }
         public uint OltOnuId { get; private set; }
         public ModelType ModelType { get; private set; }
@@ -23,8 +24,9 @@ namespace GPONMonitor.Models.Onu
         public BlockReason BlockReason { get; private set; }
 
 
-        public OnuGeneric(uint oltPortId, uint oltOnuId)
+        public OnuGeneric(uint oltId, uint oltPortId, uint oltOnuId)
         {
+            OltId = oltId;
             OltPortId = oltPortId;
             OltOnuId = oltOnuId;
         }
