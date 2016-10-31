@@ -12,13 +12,13 @@ using System.Text.RegularExpressions;
 
 namespace GPONMonitor.Services
 {
-    public class SnmpDataService : ISnmpDataService
+    public class DataService : IDataService
     {
         private readonly DevicesConfiguration _devicesConfiguration;
         private readonly ILoggerFactory _loggerFactory;
         private List<Olt> configuredOlts = new List<Olt>();
 
-        public SnmpDataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory)
+        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _loggerFactory = loggerFactory;

@@ -26,9 +26,9 @@ namespace GPONMonitor.Models.Onu
         public BlockReason BlockReason { get; private set; }
 
         [JsonIgnore]
-        internal ISnmpDataService _snmpDataService;
+        internal IDataService _snmpDataService;
 
-        public OnuGeneric(uint oltId, uint oltPortId, uint oltOnuId, ISnmpDataService snmpDataService)
+        public OnuGeneric(uint oltId, uint oltPortId, uint oltOnuId, IDataService snmpDataService)
         {
             _snmpDataService = snmpDataService;
 

@@ -4,7 +4,7 @@ namespace GPONMonitor.Models.Onu
 {
     public class UnknownOnu : OnuGeneric
     {
-        public UnknownOnu(uint oltId, uint oltPortId, uint oltOnuId, ISnmpDataService snmpDataService) : base(oltId, oltPortId, oltOnuId, snmpDataService)
+        public UnknownOnu(uint oltId, uint oltPortId, uint oltOnuId, IDataService snmpDataService) : base(oltId, oltPortId, oltOnuId, snmpDataService)
         {
         }
     }

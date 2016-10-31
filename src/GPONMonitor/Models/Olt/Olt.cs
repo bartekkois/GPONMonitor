@@ -71,6 +71,37 @@ namespace GPONMonitor.Models.Olt
             }
         }
 
+        private async Task<IList<Variable>> SnmpSetAsyncWithTimeout(VersionCode snmpVersion, string oid, string data, int snmpRequestTimeout)
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task<IList<Variable>> task;
+
+            if (await Task.WhenAny(task = SnmpSetAsync(snmpVersion, oid, data), Task.Delay(snmpRequestTimeout)) == Task.Delay(snmpRequestTimeout))
+            {
+                cancellationTokenSource.Cancel();
+                throw new SnmpTimeoutException("SNMP request timeout");
+            }
+
+            return await task;
+        }
+
+        private async Task<IList<Variable>> SnmpSetAsync(VersionCode snmpVersion, string oid, string data)
+        {
+            try
+            {
+                Task<IList<Variable>> task = Messenger.Set(snmpVersion,
+                                    new IPEndPoint(SnmpIPAddress, SnmpPort),
+                                    new OctetString(SnmpCommunity),
+                                    new List<Variable> { new Variable(new ObjectIdentifier(oid), new OctetString(data))});
+
+                return await task;
+            }
+            catch (Exception exception)
+            {
+                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
+            }
+        }
+
         private async Task<List<Variable>> SnmpWalkAsyncWithTimeout(VersionCode snmpVersion, string oid, int timeout, WalkMode walkMode, int snmpRequestTimeout)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
