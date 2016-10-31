@@ -45,6 +45,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 2 - manual block
         // 255 - unblock
 
+        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> BlockStatusResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
             { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },

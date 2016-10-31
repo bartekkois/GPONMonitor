@@ -1,4 +1,5 @@
 ﻿using GPONMonitor.Models.ComplexStateTypes;
+using GPONMonitor.Services;
 
 namespace GPONMonitor.Models.Onu
 {
@@ -16,24 +17,19 @@ namespace GPONMonitor.Models.Onu
         public VoIPLineState VoIPLine1State { get; private set; }
         public VoIPLineState VoIPLine2State { get; private set; }
 
-
-        const string snmpOIDOnuEthernetPort1Status = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";           // ETH port status (followed by OnuPortId, OnuId, 1 and PortNumber)
-        const string snmpOIDOnuEthernetPort2Status = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";
-        const string snmpOIDOnuEthernetPort3Status = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";
-        const string snmpOIDOnuEthernetPort4Status = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";
-        const string snmpOIDOnuEthernetPort1Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";            // ETH port speed (followed by OnuPortId, OnuId, 1 and PortNumber)
-        const string snmpOIDOnuEthernetPort2Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";
-        const string snmpOIDOnuEthernetPort3Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";
-        const string snmpOIDOnuEthernetPort4Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";
-        const string snmpOIDOnuVoIPLine1Status = "1.3.6.1.4.1.6296.101.23.6.5.1.1.4";               // VoIP line status (followed by OnuPortId, OnuId and PortNumber)
-        const string snmpOIDOnuVoIPLine2Status = "1.3.6.1.4.1.6296.101.23.6.5.1.1.4";
-        const string snmpOIDOnuVoIPLineStatusUpdate1 = "1.3.6.1.4.1.6296.101.23.6.5.2.1";           // VoIP line status update
-        const string snmpOIDOnuVoIPLineStatusUpdate2 = "1.3.6.1.4.1.6296.101.23.6.5.2.6";
-        const string snmpOIDOnuVoIPLineStatusUpdate3 = "1.3.6.1.4.1.6296.101.23.6.5.2.7";
-        const string snmpOIDOnuVoIPLineStatusUpdate4 = "1.3.6.1.4.1.6296.101.23.6.5.2.3";
-
-        public H640GW02Onu(uint oltId, uint oltPortId, uint oltOnuId) : base(oltId, oltPortId, oltOnuId)
+        public H640GW02Onu(uint oltId, uint oltPortId, uint oltOnuId, ISnmpDataService snmpDataService) : base(oltId, oltPortId, oltOnuId, snmpDataService)
         {
+            EthernetPort1State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort1State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
+            EthernetPort1Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort1Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
+            EthernetPort2State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort2State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.2").Result;
+            EthernetPort2Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort2Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.2").Result;
+            EthernetPort3State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort3State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.3").Result;
+            EthernetPort3Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort3Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.3").Result;
+            EthernetPort4State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort4State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.4").Result;
+            EthernetPort4Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort4Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.4").Result;
+
+            VoIPLine1State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, VoIPLine1State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1").Result;
+            VoIPLine2State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, VoIPLine2State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".2").Result;
         }
     }
 }

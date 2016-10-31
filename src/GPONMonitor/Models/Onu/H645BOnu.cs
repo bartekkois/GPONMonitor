@@ -1,4 +1,5 @@
 ﻿using GPONMonitor.Models.ComplexStateTypes;
+using GPONMonitor.Services;
 
 namespace GPONMonitor.Models.Onu
 {
@@ -9,14 +10,12 @@ namespace GPONMonitor.Models.Onu
         public EthernetPortState EthernetPort2State { get; private set; }
         public EthernetPortSpeed EthernetPort2Speed { get; private set; }
 
-
-        const string snmpOIDOnuEthernetPort1Status = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";           // ETH port status (followed by OnuPortId, OnuId, 1 and PortNumber)
-        const string snmpOIDOnuEthernetPort2Status = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";
-        const string snmpOIDOnuEthernetPort1Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";            // ETH port speed (followed by OnuPortId, OnuId, 1 and PortNumber)
-        const string snmpOIDOnuEthernetPort2Speed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";
-
-        public H645BOnu(uint oltId, uint oltPortId, uint oltOnuId) : base(oltId, oltPortId, oltOnuId)
+        public H645BOnu(uint oltId, uint oltPortId, uint oltOnuId, ISnmpDataService snmpDataService) : base(oltId, oltPortId, oltOnuId, snmpDataService)
         {
+            EthernetPort1State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort1State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
+            EthernetPort1Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort1Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
+            EthernetPort2State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort2State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.2").Result;
+            EthernetPort2Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort2Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.2").Result;
         }
     }
 }

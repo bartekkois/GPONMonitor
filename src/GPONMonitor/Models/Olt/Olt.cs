@@ -113,7 +113,7 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponseDescription = await SnmpGetAsyncWithTimeout(SnmpVersion, _snmpOIDOltDescription, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseDescription.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no results has been returned");
+                throw new SnmpConnectionException("SNMP request error: no result has been returned");
 
             return snmpResponseDescription.First().Data.ToString();
         }
@@ -123,7 +123,7 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponseUptime = await SnmpGetAsyncWithTimeout(SnmpVersion, _snmpOIDOltUptime, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseUptime.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no results has been returned");
+                throw new SnmpConnectionException("SNMP request error: no result has been returned");
 
             return snmpResponseUptime.First().Data.ToString().Split('.').First();
         }
@@ -156,9 +156,33 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, _snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseOnuModel.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no results has been returned");
+                throw new SnmpConnectionException("SNMP request error: no result has been returned");
             
             return snmpResponseOnuModel.First().Data.ToString();
+        }
+
+        public async Task<string> GetOnuStringPropertyAsync(string snmpOid)
+        {
+            List<Variable> snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
+
+            if (snmpResponseOnuModel.Count == 0)
+                throw new SnmpConnectionException("SNMP request error: no result has been returned");
+
+            return snmpResponseOnuModel.First().Data.ToString();
+        }
+
+        public async Task<int> GetOnuIntPropertyAsync(string snmpOid)
+        {
+            int parsedResult;
+            List<Variable> snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
+
+            if (snmpResponseOnuModel.Count == 0)
+                throw new SnmpConnectionException("SNMP request error: no result has been returned");
+
+            if (int.TryParse(snmpResponseOnuModel.First().Data.ToString(), out parsedResult) == false)
+                throw new SnmpConnectionException("SNMP request error: wrong format result has been returned");
+
+            return parsedResult; 
         }
     }
 }

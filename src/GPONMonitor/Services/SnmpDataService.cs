@@ -47,10 +47,11 @@ namespace GPONMonitor.Services
             return await configuredOlts.Single(s => s.Id == oltId).GetUptimeAsync();
         }
 
-        public string GetOltFirmwareVersionAsync(uint oltId)
+        // REFACTOR
+        public async Task<string> GetOltFirmwareVersionAsync(uint oltId)
         {
             Regex firmwareVersionRegex = new Regex(@"([0-9]+)\.([A-Za-z0-9\-]+)");
-            Match firmwareVersionMatch = firmwareVersionRegex.Match(GetOltDescriptionAsync(oltId).Result);
+            Match firmwareVersionMatch = firmwareVersionRegex.Match(await GetOltDescriptionAsync(oltId));
 
             if (firmwareVersionMatch.Success)
                 return firmwareVersionMatch.Value;
@@ -68,20 +69,30 @@ namespace GPONMonitor.Services
             return await configuredOlts.Single(s => s.Id == oltId).GetOnuModelAsync(oltPortId, onuId);
         }
 
+        public async Task<string> GetOnuStringPropertyAsync(uint oltId, string snmpOid)
+        {
+            return await configuredOlts.Single(s => s.Id == oltId).GetOnuStringPropertyAsync(snmpOid);
+        }
+
+        public async Task<int> GetOnuIntPropertyAsync(uint oltId, string snmpOid)
+        {
+            return await configuredOlts.Single(s => s.Id == oltId).GetOnuIntPropertyAsync(snmpOid);
+        }
+
         public async Task<object> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId)
         {
             switch (await GetOnuModelAsync(oltId, oltPortId, onuId))
             {
                 case "H645B":
-                    return new H645GOnu(oltId, oltPortId, onuId);
+                    return new H645BOnu(oltId, oltPortId, onuId, this);
                 case "H645G":
-                    return new H645GOnu(oltId, oltPortId, onuId);
+                    return new H645GOnu(oltId, oltPortId, onuId, this);
                 case "H665G":
-                    return new H665GOnu(oltId, oltPortId, onuId);
+                    return new H665GOnu(oltId, oltPortId, onuId, this);
                 case "H640GW-02":
-                    return new H665GOnu(oltId, oltPortId, onuId);
+                    return new H665GOnu(oltId, oltPortId, onuId, this);
                 default:
-                    return new UnknownOnu(oltId, oltPortId, onuId);
+                    return new UnknownOnu(oltId, oltPortId, onuId, this);
             }
         }
     }

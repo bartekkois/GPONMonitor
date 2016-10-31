@@ -44,6 +44,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 1 - manual block
         // 2 - sourcemac block
 
+        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> EthernetPortStateResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
             { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },

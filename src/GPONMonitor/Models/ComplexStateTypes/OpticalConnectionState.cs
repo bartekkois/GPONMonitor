@@ -46,6 +46,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 2 - active
         // 3 - running (OBSOLETE: removed in 5.08)
 
+        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> OpticalConnectionStateResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
             { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },

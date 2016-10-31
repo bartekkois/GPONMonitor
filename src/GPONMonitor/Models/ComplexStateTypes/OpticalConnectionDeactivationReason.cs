@@ -67,6 +67,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // los(100),
         // unknown(255)
 
+        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> OpticalConnectionDeactivationReasonResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
             { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },

@@ -45,6 +45,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 2 - 100 Mb/s
         // 3 - 1000 Mb/s
 
+        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> EthernetPortSpeedResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
             { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GPONMonitor.Models.ComplexStateTypes
 {
@@ -35,6 +36,17 @@ namespace GPONMonitor.Models.ComplexStateTypes
         public string DescriptionPol { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
+        [JsonIgnore]
+        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.6.5.1.1.4";                  // ONU system uptime (followed by OnuPortId and OnuId)
+        [JsonIgnore]
+        public string SnmpOIDOnuVoipLineUpdate1 { get; private set; } = "1.3.6.1.4.1.6296.101.23.6.5.2.1";  // ONU time update (set ??)
+        [JsonIgnore]
+        public string SnmpOIDOnuVoipLineUpdate2 { get; private set; } = "1.3.6.1.4.1.6296.101.23.6.5.2.6";
+        [JsonIgnore]
+        public string SnmpOIDOnuVoipLineUpdate3 { get; private set; } = "1.3.6.1.4.1.6296.101.23.6.5.2.7";
+        [JsonIgnore]
+        public string SnmpOIDOnuVoipLineUpdate4 { get; private set; } = "1.3.6.1.4.1.6296.101.23.6.5.2.3";
+
 
         // ONT VoIP Line Status
         // noneInitial(1),
@@ -53,7 +65,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // portNotConfigured(14),
         // configDone(15)
 
-
+        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> VoIPLinestatusResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
             { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },

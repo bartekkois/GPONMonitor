@@ -40,6 +40,14 @@ namespace GPONMonitor.Models.ComplexStateTypes
         public SeverityLevel Severity { get; private set; }
 
         [JsonIgnore]
-        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.1.1.85";    // ONU optical connections inactive time (the elapsed time after ont Inactive) (followed by OnuPortId and OnuId)
+        public string SnmpOID { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.1.1.85";               // ONU optical connections inactive time (the elapsed time after ont Inactive) (followed by OnuPortId and OnuId)
+        [JsonIgnore]
+        public string SnmpOIDOnuTimeUpdate1 { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.2.1";    // ONU time update (set 21)
+        [JsonIgnore]
+        public string SnmpOIDOnuTimeUpdate2 { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.2.6";
+        [JsonIgnore]
+        public string SnmpOIDOnuTimeUpdate3 { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.2.7";
+        [JsonIgnore]
+        public string SnmpOIDOnuTimeUpdate4 { get; private set; } = "1.3.6.1.4.1.6296.101.23.3.2.3";
     }
 }
