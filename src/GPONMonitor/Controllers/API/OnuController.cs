@@ -11,9 +11,9 @@ namespace GPONMonitor.Controllers
     public class OnuApiController : Controller
     {
         private readonly DevicesConfiguration _devicesConfiguration;
-        private ISnmpDataService _snmpDataService;
+        private IDataService _snmpDataService;
 
-        public OnuApiController(IOptions<DevicesConfiguration> devicesConfiguration, ISnmpDataService snmpDataService)
+        public OnuApiController(IOptions<DevicesConfiguration> devicesConfiguration, IDataService snmpDataService)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _snmpDataService = snmpDataService;

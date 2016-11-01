@@ -4,7 +4,7 @@ using GPONMonitor.Models;
 
 namespace GPONMonitor.Services
 {
-    public interface ISnmpDataService
+    public interface IDataService
     {
         Task<string> GetOltDescriptionAsync(uint oltId);
         Task<string> GetOltUptimeAsync(uint oltId);
