@@ -4,29 +4,28 @@ namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class OpticalCableDistance
     {
+        private int? value;
         public int? Value
         {
             get
             {
-                return Value;
+                return value;
             }
             set
             {
                 if (value != null)
                 {
-                    DescriptionEng = value.ToString();
-                    DescriptionPol = value.ToString();
+                    DescriptionEng = value.ToString() + " m";
+                    DescriptionPol = value.ToString() + " m";
                     Severity = SeverityLevel.Default;
-
-                    Value = value;
+                    this.value = value;
                 }
                 else
                 {
                     DescriptionEng = null;
                     DescriptionPol = null;
                     Severity = SeverityLevel.Unknown;
-
-                    Value = null;
+                    this.value = null;
                 }
             }
         }

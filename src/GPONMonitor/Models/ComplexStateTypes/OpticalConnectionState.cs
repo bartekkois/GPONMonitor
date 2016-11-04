@@ -5,11 +5,12 @@ namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class OpticalConnectionState
     {
+        private int? value;
         public int? Value
         {
             get
             {
-                return Value;
+                return value;
             }
             set
             {
@@ -27,8 +28,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
                 DescriptionEng = responseDescription.DescriptionEng;
                 DescriptionPol = responseDescription.DescriptionPol;
                 Severity = responseDescription.Severity;
-
-                Value = value;
+                this.value = value;
             }
         }
 
@@ -46,14 +46,13 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 2 - active
         // 3 - running (OBSOLETE: removed in 5.08)
 
-        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> OpticalConnectionStateResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
-            { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },
             { 0, new ResponseDescription("invalid", "niepoprawne", SeverityLevel.Danger) },
             { 1, new ResponseDescription("inactive", "nieaktywne", SeverityLevel.Danger) },
             { 2, new ResponseDescription("active", "aktywne", SeverityLevel.Success) },
-            { 3, new ResponseDescription("running", "działające", SeverityLevel.Success) }
+            { 3, new ResponseDescription("running", "działające", SeverityLevel.Success) },
+            { 255, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Success) }
         };
     }
 }

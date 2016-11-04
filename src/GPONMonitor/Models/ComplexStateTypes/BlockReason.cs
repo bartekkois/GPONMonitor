@@ -5,11 +5,12 @@ namespace GPONMonitor.Models.ComplexStateTypes
 { 
     public class BlockReason
     {
+        private int? value;
         public int? Value
         {
             get
             {
-                return Value;
+                return value;
             }
             set
             {
@@ -27,8 +28,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
                 DescriptionEng = responseDescription.DescriptionEng;
                 DescriptionPol = responseDescription.DescriptionPol;
                 Severity = responseDescription.Severity;
-
-                Value = value;
+                this.value = value;
             }
         }
 
@@ -45,13 +45,11 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 2 - sourcemac block
         // 255 - unblock
 
-        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> BlockReasonResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
-            { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },
             { 1, new ResponseDescription("manual block", "blokada ręczna", SeverityLevel.Danger) },
             { 2, new ResponseDescription("sourcemac block", "blokada sourcemac", SeverityLevel.Danger) },
-            { 255, new ResponseDescription("unblock", "brak blokady", SeverityLevel.Success) },
+            { 255, new ResponseDescription("unblock", "brak blokady", SeverityLevel.Success) }
         };
 
     }

@@ -5,11 +5,12 @@ namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class EthernetPortSpeed
     {
+        private int? value;
         public int? Value
         {
             get
             {
-                return Value;
+                return value;
             }
             set
             {
@@ -27,8 +28,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
                 DescriptionEng = responseDescription.DescriptionEng;
                 DescriptionPol = responseDescription.DescriptionPol;
                 Severity = responseDescription.Severity;
-
-                Value = value;
+                this.value = value;
             }
         }
 
@@ -45,13 +45,12 @@ namespace GPONMonitor.Models.ComplexStateTypes
         // 2 - 100 Mb/s
         // 3 - 1000 Mb/s
 
-        [JsonIgnore]
         readonly Dictionary<int?, ResponseDescription> EthernetPortSpeedResponseDictionary = new Dictionary<int?, ResponseDescription>()
         {
-            { null, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) },
             { 1, new ResponseDescription("10 Mb/s", "10 Mb/s", SeverityLevel.Success) },
             { 2, new ResponseDescription("100 Mb/s", "100 Mb/s", SeverityLevel.Success) },
-            { 3, new ResponseDescription("1000 Mb/s", "1000 Mb/s", SeverityLevel.Success) }
+            { 3, new ResponseDescription("1000 Mb/s", "1000 Mb/s", SeverityLevel.Success) },
+            { 255, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) }
         };
     }
 }

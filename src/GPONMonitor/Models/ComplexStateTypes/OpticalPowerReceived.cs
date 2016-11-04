@@ -4,25 +4,26 @@ namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class OpticalPowerReceived
     {
+        private string value;
         public string Value
         {
             get
             {
-                return Value;
+                return value;
             }
             set
             {
-                int parsedValue;
+                decimal parsedValue;
 
-                if (int.TryParse(value, out parsedValue))
+                if (decimal.TryParse(value, out parsedValue))
                 {
-                    decimal calculateddBmPower = parsedValue/10;
+                    decimal calculateddBmPower = parsedValue / 10;
 
                     if (calculateddBmPower < -14.0m && calculateddBmPower > -26.0m)
                     {
                         Severity = SeverityLevel.Success;
                     }
-                    else if((calculateddBmPower < -13.0m && calculateddBmPower >= -14.0m) || (calculateddBmPower <= -26.0m && calculateddBmPower > -27.0m))
+                    else if ((calculateddBmPower < -13.0m && calculateddBmPower >= -14.0m) || (calculateddBmPower <= -26.0m && calculateddBmPower > -27.0m))
                     {
                         Severity = SeverityLevel.Warning;
                     }
@@ -31,15 +32,16 @@ namespace GPONMonitor.Models.ComplexStateTypes
                         Severity = SeverityLevel.Danger;
                     }
 
-                    Value = calculateddBmPower + " dBm";
+                    DescriptionEng = calculateddBmPower + " dBm";
+                    DescriptionPol = calculateddBmPower + " dBm";
+                    this.value = value;
                 }
                 else
                 {
                     DescriptionEng = "unknown";
                     DescriptionPol = "brak odczytu";
                     Severity = SeverityLevel.Unknown;
-
-                    Value = null;
+                    this.value = null;
                 }
             }
         }

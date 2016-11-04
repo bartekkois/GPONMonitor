@@ -4,11 +4,12 @@ namespace GPONMonitor.Models.ComplexStateTypes
 {
     public class ModelType
     {
+        private string value;
         public string Value
         {
             get
             {
-                return Value;
+                return value;
             }
             set
             {
@@ -17,16 +18,14 @@ namespace GPONMonitor.Models.ComplexStateTypes
                     DescriptionEng = value.ToString();
                     DescriptionPol = value.ToString();
                     Severity = SeverityLevel.Default;
-
-                    Value = value;
+                    this.value = value;
                 }
                 else
                 {
                     DescriptionEng = null;
                     DescriptionPol = null;
                     Severity = SeverityLevel.Unknown;
-
-                    Value = null;
+                    this.value = null;
                 }
             }
         }

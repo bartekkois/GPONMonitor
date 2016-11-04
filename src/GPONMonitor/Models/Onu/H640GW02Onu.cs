@@ -19,6 +19,17 @@ namespace GPONMonitor.Models.Onu
 
         public H640GW02Onu(uint oltId, uint oltPortId, uint oltOnuId, IDataService snmpDataService) : base(oltId, oltPortId, oltOnuId, snmpDataService)
         {
+            EthernetPort1State = new EthernetPortState();
+            EthernetPort1Speed = new EthernetPortSpeed();
+            EthernetPort2State = new EthernetPortState();
+            EthernetPort2Speed = new EthernetPortSpeed();
+            EthernetPort3State = new EthernetPortState();
+            EthernetPort3Speed = new EthernetPortSpeed();
+            EthernetPort4State = new EthernetPortState();
+            EthernetPort4Speed = new EthernetPortSpeed();
+            VoIPLine1State = new VoIPLineState();
+            VoIPLine2State = new VoIPLineState();
+
             EthernetPort1State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort1State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
             EthernetPort1Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort1Speed.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
             EthernetPort2State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, EthernetPort2State.SnmpOID + "." + oltPortId + "." + oltOnuId + ".1.2").Result;

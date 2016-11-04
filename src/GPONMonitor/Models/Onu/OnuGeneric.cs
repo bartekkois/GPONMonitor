@@ -12,14 +12,14 @@ namespace GPONMonitor.Models.Onu
         public ModelType ModelType { get; private set; }
         public Description Description { get; private set; }
         public GponSerialNumber GponSerialNumber { get; private set; }
-
+        
         public OpticalConnectionState OpticalConnectionState { get; private set; }
         public OpticalConnectionDeactivationReason OpticalConnectionDeactivationReason { get; private set; }
         public OpticalPowerReceived OpticalPowerReceived { get; private set; }
         public OpticalCableDistance OpticalCableDistance { get; private set; }
 
         public OpticalConnectionUptime OpticalConnectionUptime { get; private set; }
-        public OpticalConnectionInactiveTime OpticalConnectionInactiveTime{ get; private set; }
+        public OpticalConnectionInactiveTime OpticalConnectionInactiveTime { get; private set; }
         public SystemUptime SystemUptime { get; private set; }
 
         public BlockStatus BlockStatus { get; private set; }
@@ -36,6 +36,20 @@ namespace GPONMonitor.Models.Onu
             OltPortId = oltPortId;
             OltOnuId = oltOnuId;
 
+            ModelType = new ModelType();
+            Description = new Description();
+            GponSerialNumber = new GponSerialNumber();
+            
+            OpticalConnectionState = new OpticalConnectionState();
+            OpticalConnectionDeactivationReason = new OpticalConnectionDeactivationReason();
+            OpticalPowerReceived = new OpticalPowerReceived();
+            OpticalCableDistance = new OpticalCableDistance();
+            OpticalConnectionUptime = new OpticalConnectionUptime();
+            OpticalConnectionInactiveTime = new OpticalConnectionInactiveTime();
+            SystemUptime = new SystemUptime();
+            BlockStatus = new BlockStatus();
+            BlockReason = new BlockReason();
+
             ModelType.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, ModelType.SnmpOID + "." + oltPortId + "."  + oltOnuId).Result;
             Description.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, Description.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
             GponSerialNumber.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, GponSerialNumber.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
@@ -45,9 +59,14 @@ namespace GPONMonitor.Models.Onu
             OpticalPowerReceived.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, OpticalPowerReceived.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
             OpticalCableDistance.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalCableDistance.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
 
-            OpticalConnectionUptime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalConnectionUptime.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
-            OpticalConnectionInactiveTime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalConnectionInactiveTime.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
-            SystemUptime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SystemUptime.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
+            if (_snmpDataService.GetOltFirmwareVersionAsync(oltId).Result != "5.01")
+            {
+                // Add timers update if necessary !!!
+
+                OpticalConnectionUptime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalConnectionUptime.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
+                OpticalConnectionInactiveTime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalConnectionInactiveTime.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
+                SystemUptime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SystemUptime.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
+            }
 
             BlockStatus.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, BlockStatus.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
             BlockReason.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, BlockReason.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
