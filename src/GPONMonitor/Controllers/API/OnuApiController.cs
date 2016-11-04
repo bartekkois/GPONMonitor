@@ -21,7 +21,7 @@ namespace GPONMonitor.Controllers
 
         // GET: api/Onu/?oltId=1&oltPortId=2&onuId=3
         [HttpGet]
-        public async Task<IActionResult> Get(uint oltId, uint oltPortId, uint onuId)
+        public async Task<IActionResult> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId)
         {
             try
             {
