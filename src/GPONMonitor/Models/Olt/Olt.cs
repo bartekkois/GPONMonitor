@@ -24,7 +24,8 @@ namespace GPONMonitor.Models.Olt
         // OLT SNMP OIDs
         const string _snmpOIDOltDescription = "1.3.6.1.2.1.1.1.0";
         const string _snmpOIDOltUptime = "1.3.6.1.2.1.1.3.0";
-        const string _snmpOIDListOnuDescription = "1.3.6.1.4.1.6296.101.23.3.1.1.18";
+        const string _snmpOIDOnuDescription = "1.3.6.1.4.1.6296.101.23.3.1.1.18";       // (followed by OnuPortId and OnuId)
+        const string _snmpOIDOnuGponSerialNumber = "1.3.6.1.4.1.6296.101.23.3.1.1.4";   // (followed by OnuPortId and OnuId)
         const string _snmpOIDGetOnuModelType = "1.3.6.1.4.1.6296.101.23.3.1.1.17";      // (followed by OnuPortId and OnuId)
 
 
@@ -163,20 +164,29 @@ namespace GPONMonitor.Models.Olt
         {
             List<OnuShortDescription> onuList = new List<OnuShortDescription>();
 
-            List<Variable> snmpResponseOnuList = await SnmpWalkAsyncWithTimeout(SnmpVersion, _snmpOIDListOnuDescription, SnmpTimeout, WalkMode.WithinSubtree, SnmpTimeout);
+            List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, _snmpOIDOnuGponSerialNumber, SnmpTimeout, WalkMode.WithinSubtree, SnmpTimeout);
+            List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, _snmpOIDOnuDescription, SnmpTimeout, WalkMode.WithinSubtree, SnmpTimeout);
 
-            foreach (Variable variable in snmpResponseOnuList)
+            foreach (Variable variable in snmpOnuGponSerialNumberList)
             {
                 uint oltPortId = variable.Id.ToNumerical().ToArray().ElementAt(13);
                 uint onuId = variable.Id.ToNumerical().ToArray().ElementAt(14);
 
-                string onuDescription = null;
+                string onuGponSerialNumber;
                 if (variable.Data.ToString().Length > 0)
-                    onuDescription = variable.Data.ToString().Replace("_", " ");
+                    onuGponSerialNumber = variable.Data.ToString();
                 else
-                    onuDescription = "Undefined description";
+                    onuGponSerialNumber = "unknown";
 
-                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription));
+                var relatedOnuDescription = snmpOnuDescriptionList.FirstOrDefault(x => x.Id.ToNumerical().ToArray().ElementAt(13) == oltPortId && x.Id.ToNumerical().ToArray().ElementAt(14) == onuId);
+
+                string onuDescription;
+                if (relatedOnuDescription != null)
+                    onuDescription = relatedOnuDescription.Data.ToString().Replace("_", " ");
+                else
+                    onuDescription = "undefined";
+
+                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription, onuGponSerialNumber));
             }
 
             return onuList;

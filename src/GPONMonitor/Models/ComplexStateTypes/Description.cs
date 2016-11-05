@@ -15,8 +15,8 @@ namespace GPONMonitor.Models.ComplexStateTypes
             {
                 if (value != null)
                 {
-                    DescriptionEng = value.ToString();
-                    DescriptionPol = value.ToString();
+                    DescriptionEng = value.ToString().Replace("_", " ");
+                    DescriptionPol = value.ToString().Replace("_", " ");
                     Severity = SeverityLevel.Default;
                     this.value = value;
                 }
