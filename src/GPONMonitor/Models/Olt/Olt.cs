@@ -81,35 +81,25 @@ namespace GPONMonitor.Models.Olt
             return onuList;
         }
 
-        public async Task<string> GetOnuModelAsync(uint oltPortId, uint onuId)
+        public async Task<string> GetStringPropertyAsync(string snmpOid)
         {
-            List<Variable> snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId, SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
 
-            if (snmpResponseOnuModel.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no result has been returned");
-            
-            return snmpResponseOnuModel.First().Data.ToString();
-        }
-
-        public async Task<string> GetOnuStringPropertyAsync(string snmpOid)
-        {
-            List<Variable> snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
-
-            if (snmpResponseOnuModel.Count == 0)
+            if (snmpResponse.Count == 0)
                 throw new SnmpConnectionException("SNMP request error: no result has been returned");
 
-            return snmpResponseOnuModel.First().Data.ToString();
+            return snmpResponse.First().Data.ToString();
         }
 
-        public async Task<int> GetOnuIntPropertyAsync(string snmpOid)
+        public async Task<int> GetIntPropertyAsync(string snmpOid)
         {
             int parsedResult;
-            List<Variable> snmpResponseOnuModel = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
 
-            if (snmpResponseOnuModel.Count == 0)
+            if (snmpResponse.Count == 0)
                 throw new SnmpConnectionException("SNMP request error: no result has been returned");
 
-            if (int.TryParse(snmpResponseOnuModel.First().Data.ToString(), out parsedResult) == false)
+            if (int.TryParse(snmpResponse.First().Data.ToString(), out parsedResult) == false)
                 throw new SnmpConnectionException("SNMP request error: wrong format result has been returned");
 
             return parsedResult; 

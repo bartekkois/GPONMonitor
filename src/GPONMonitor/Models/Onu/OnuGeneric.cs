@@ -53,27 +53,27 @@ namespace GPONMonitor.Models.Onu
             BlockStatus = new BlockStatus();
             BlockReason = new BlockReason();
 
-            ModelType.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "."  + oltOnuId).Result;
-            Description.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuDescription + "." + oltPortId + "." + oltOnuId).Result;
-            GponSerialNumber.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponSerialNumber + "." + oltPortId + "." + oltOnuId).Result;
-            GponProfile.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponProfile + "." + oltPortId + "." + oltOnuId).Result;
+            ModelType.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "."  + oltOnuId).Result;
+            Description.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuDescription + "." + oltPortId + "." + oltOnuId).Result;
+            GponSerialNumber.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponSerialNumber + "." + oltPortId + "." + oltOnuId).Result;
+            GponProfile.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponProfile + "." + oltPortId + "." + oltOnuId).Result;
 
-            OpticalConnectionState.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState + "." + oltPortId + "." + oltOnuId).Result;
-            OpticalConnectionDeactivationReason.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionDeactivationReason + "." + oltPortId + "." + oltOnuId).Result;
-            OpticalPowerReceived.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalPowerReceived + "." + oltPortId + "." + oltOnuId).Result;
-            OpticalCableDistance.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalCabelDistance + "." + oltPortId + "." + oltOnuId).Result;
+            OpticalConnectionState.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState + "." + oltPortId + "." + oltOnuId).Result;
+            OpticalConnectionDeactivationReason.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionDeactivationReason + "." + oltPortId + "." + oltOnuId).Result;
+            OpticalPowerReceived.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalPowerReceived + "." + oltPortId + "." + oltOnuId).Result;
+            OpticalCableDistance.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalCabelDistance + "." + oltPortId + "." + oltOnuId).Result;
 
             if (_snmpDataService.GetOltFirmwareVersionAsync(oltId).Result != "5.01")
             {
                 // Add timers update if necessary !!!
 
-                OpticalConnectionUptime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId,SnmpOIDCollection.snmpOIDOnuOpticalConnectionUptime + "." + oltPortId + "." + oltOnuId).Result;
-                OpticalConnectionInactiveTime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOpticalConnectionInactiveTime + "." + oltPortId + "." + oltOnuId).Result;
-                SystemUptime.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDSystemUptime + "." + oltPortId + "." + oltOnuId).Result;
+                OpticalConnectionUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId,SnmpOIDCollection.snmpOIDOnuOpticalConnectionUptime + "." + oltPortId + "." + oltOnuId).Result;
+                OpticalConnectionInactiveTime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOpticalConnectionInactiveTime + "." + oltPortId + "." + oltOnuId).Result;
+                SystemUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDSystemUptime + "." + oltPortId + "." + oltOnuId).Result;
             }
 
-            BlockStatus.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockStatus + "." + oltPortId + "." + oltOnuId).Result;
-            BlockReason.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockReason + "." + oltPortId + "." + oltOnuId).Result;
+            BlockStatus.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockStatus + "." + oltPortId + "." + oltOnuId).Result;
+            BlockReason.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockReason + "." + oltPortId + "." + oltOnuId).Result;
         }
     }
 }

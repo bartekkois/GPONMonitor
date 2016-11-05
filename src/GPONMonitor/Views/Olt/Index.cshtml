@@ -14,7 +14,7 @@
     {
         @foreach (var onu in onuList)
         {
-            <li>@onu.OltPortId . @onu.OnuId - @onu.OnuDescription</li>
+            <li>@onu.OltPortId . @onu.OnuId - @onu.OnuDescription (@onu.OnuGponSerialNumber)</li>
         }
     }
 </ul>

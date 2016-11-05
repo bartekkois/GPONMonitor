@@ -14,8 +14,8 @@ namespace GPONMonitor.Models.Onu
             EthernetPort1State = new EthernetPortState();
             EthernetPort1Speed = new EthernetPortSpeed();
 
-            EthernetPort1State.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortState + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
-            EthernetPort1Speed.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortSpeed + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
+            EthernetPort1State.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortState + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
+            EthernetPort1Speed.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortSpeed + "." + oltPortId + "." + oltOnuId + ".1.1").Result;
         }
     }
 }

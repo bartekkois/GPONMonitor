@@ -10,9 +10,8 @@ namespace GPONMonitor.Services
         Task<string> GetOltUptimeAsync(uint oltId);
         Task<string> GetOltFirmwareVersionAsync(uint oltId);
         Task<List<OnuShortDescription>> GetOnuListAsync(uint oltId);
-        Task<string> GetOnuModelAsync(uint oltId, uint oltPortId, uint onuId);
         Task<object> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId);
-        Task<string> GetOnuStringPropertyAsync(uint oltId, string snmpOid);
-        Task<int> GetOnuIntPropertyAsync(uint oltId, string snmpOid);
+        Task<string> GetStringPropertyAsync(uint oltId, string snmpOid);
+        Task<int> GetIntPropertyAsync(uint oltId, string snmpOid);
     }
 }

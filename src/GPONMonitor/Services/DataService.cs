@@ -47,7 +47,6 @@ namespace GPONMonitor.Services
             return await configuredOlts.Single(s => s.Id == oltId).GetUptimeAsync();
         }
 
-        // REFACTOR
         public async Task<string> GetOltFirmwareVersionAsync(uint oltId)
         {
             Regex firmwareVersionRegex = new Regex(@"([0-9]+)\.([A-Za-z0-9\-]+)");
@@ -56,7 +55,7 @@ namespace GPONMonitor.Services
             if (firmwareVersionMatch.Success)
                 return firmwareVersionMatch.Value;
             else
-                throw new Exception("Error parisng OLT firmware version number");
+                throw new Exception("Error getting OLT firmware version number");
         }
 
         public async Task<List<OnuShortDescription>> GetOnuListAsync(uint oltId)
@@ -64,24 +63,19 @@ namespace GPONMonitor.Services
             return await configuredOlts.Single(s => s.Id == oltId).GetOnuDescriptionListAsync();
         }
 
-        public async Task<string> GetOnuModelAsync(uint oltId, uint oltPortId, uint onuId)
+        public async Task<string> GetStringPropertyAsync(uint oltId, string snmpOid)
         {
-            return await configuredOlts.Single(s => s.Id == oltId).GetOnuModelAsync(oltPortId, onuId);
+            return await configuredOlts.Single(s => s.Id == oltId).GetStringPropertyAsync(snmpOid);
         }
 
-        public async Task<string> GetOnuStringPropertyAsync(uint oltId, string snmpOid)
+        public async Task<int> GetIntPropertyAsync(uint oltId, string snmpOid)
         {
-            return await configuredOlts.Single(s => s.Id == oltId).GetOnuStringPropertyAsync(snmpOid);
-        }
-
-        public async Task<int> GetOnuIntPropertyAsync(uint oltId, string snmpOid)
-        {
-            return await configuredOlts.Single(s => s.Id == oltId).GetOnuIntPropertyAsync(snmpOid);
+            return await configuredOlts.Single(s => s.Id == oltId).GetIntPropertyAsync(snmpOid);
         }
 
         public async Task<object> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId)
         {
-            switch (await GetOnuModelAsync(oltId, oltPortId, onuId))
+            switch (await GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId))
             {
                 case "H645B":
                     return new H645BOnu(oltId, oltPortId, onuId, this);
