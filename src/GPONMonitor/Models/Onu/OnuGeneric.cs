@@ -12,7 +12,8 @@ namespace GPONMonitor.Models.Onu
         public ModelType ModelType { get; private set; }
         public Description Description { get; private set; }
         public GponSerialNumber GponSerialNumber { get; private set; }
-        
+        public GponProfile GponProfile { get; private set; }
+
         public OpticalConnectionState OpticalConnectionState { get; private set; }
         public OpticalConnectionDeactivationReason OpticalConnectionDeactivationReason { get; private set; }
         public OpticalPowerReceived OpticalPowerReceived { get; private set; }
@@ -39,7 +40,8 @@ namespace GPONMonitor.Models.Onu
             ModelType = new ModelType();
             Description = new Description();
             GponSerialNumber = new GponSerialNumber();
-            
+            GponProfile = new GponProfile();
+
             OpticalConnectionState = new OpticalConnectionState();
             OpticalConnectionDeactivationReason = new OpticalConnectionDeactivationReason();
             OpticalPowerReceived = new OpticalPowerReceived();
@@ -53,6 +55,7 @@ namespace GPONMonitor.Models.Onu
             ModelType.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, ModelType.SnmpOID + "." + oltPortId + "."  + oltOnuId).Result;
             Description.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, Description.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
             GponSerialNumber.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, GponSerialNumber.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
+            GponProfile.Value = _snmpDataService.GetOnuStringPropertyAsync(oltId, GponProfile.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
 
             OpticalConnectionState.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalConnectionState.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
             OpticalConnectionDeactivationReason.Value = _snmpDataService.GetOnuIntPropertyAsync(oltId, OpticalConnectionDeactivationReason.SnmpOID + "." + oltPortId + "." + oltOnuId).Result;
