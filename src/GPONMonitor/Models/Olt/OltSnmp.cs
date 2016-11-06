@@ -14,9 +14,10 @@ namespace GPONMonitor.Models.Olt
         private async Task<IList<Variable>> SnmpGetAsyncWithTimeout(VersionCode snmpVersion, string oid, int snmpRequestTimeout)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task timeoutTask = Task.Delay(snmpRequestTimeout);
             Task<IList<Variable>> task;
 
-            if (await Task.WhenAny(task = SnmpGetAsync(snmpVersion, oid), Task.Delay(snmpRequestTimeout)) == Task.Delay(snmpRequestTimeout))
+            if (await Task.WhenAny(task = SnmpGetAsync(snmpVersion, oid), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
                 throw new SnmpTimeoutException("SNMP request timeout");
@@ -45,9 +46,10 @@ namespace GPONMonitor.Models.Olt
         private async Task<IList<Variable>> SnmpSetAsyncWithTimeout(VersionCode snmpVersion, string oid, string data, int snmpRequestTimeout)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task timeoutTask = Task.Delay(snmpRequestTimeout);
             Task<IList<Variable>> task;
 
-            if (await Task.WhenAny(task = SnmpSetAsync(snmpVersion, oid, data), Task.Delay(snmpRequestTimeout)) == Task.Delay(snmpRequestTimeout))
+            if (await Task.WhenAny(task = SnmpSetAsync(snmpVersion, oid, data), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
                 throw new SnmpTimeoutException("SNMP request timeout");
@@ -76,9 +78,10 @@ namespace GPONMonitor.Models.Olt
         private async Task<List<Variable>> SnmpWalkAsyncWithTimeout(VersionCode snmpVersion, string oid, int timeout, WalkMode walkMode, int snmpRequestTimeout)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task timeoutTask = Task.Delay(snmpRequestTimeout);
             Task<List<Variable>> task;
 
-            if (await Task.WhenAny(task = SnmpWalkAsync(snmpVersion, oid, timeout, walkMode), Task.Delay(snmpRequestTimeout)) == Task.Delay(snmpRequestTimeout))
+            if (await Task.WhenAny(task = SnmpWalkAsync(snmpVersion, oid, timeout, walkMode), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
                 throw new SnmpTimeoutException("SNMP request timeout");
