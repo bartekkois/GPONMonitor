@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using GPONMonitor.Services;
 using System;
 using GPONMonitor.Exceptions;
+using Microsoft.Extensions.Localization;
 
 namespace GPONMonitor.Controllers
 {
@@ -12,11 +13,13 @@ namespace GPONMonitor.Controllers
     {
         private readonly DevicesConfiguration _devicesConfiguration;
         private IDataService _snmpDataService;
+        private readonly IStringLocalizer<OltController> _localizer;
 
-        public OltController(IOptions<DevicesConfiguration> devicesConfiguration, IDataService snmpDataService)
+        public OltController(IOptions<DevicesConfiguration> devicesConfiguration, IDataService snmpDataService, IStringLocalizer<OltController> localizer)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _snmpDataService = snmpDataService;
+            _localizer = localizer;
         }
 
         public async Task<IActionResult> Index()
@@ -30,11 +33,11 @@ namespace GPONMonitor.Controllers
                 ViewData["Message"] = description + uptime;
                 ViewData["onulist"] = onulist;
             }
-            catch(SnmpConnectionException ex)
+            catch (SnmpConnectionException ex)
             {
                 ViewData["Message"] = ex.Message;
             }
-            catch(SnmpTimeoutException ex)
+            catch (SnmpTimeoutException ex)
             {
                 ViewData["Message"] = ex.Message;
             }

@@ -2,9 +2,12 @@
 using GPONMonitor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 using System.Linq;
 
 namespace GPONMonitor
@@ -36,6 +39,8 @@ namespace GPONMonitor
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             services.AddMvc();
 
             services.AddOptions();
@@ -55,6 +60,20 @@ namespace GPONMonitor
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            var supportedCultures = new[]
+            {
+                      new CultureInfo("en-US"),
+                      new CultureInfo("en-GB"),
+                      new CultureInfo("en"),
+                      new CultureInfo("pl-PL"),
+                      new CultureInfo("pl")
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"), SupportedCultures = supportedCultures, SupportedUICultures = supportedCultures
+            });
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
