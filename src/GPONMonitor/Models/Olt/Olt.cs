@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using GPONMonitor.Exceptions;
+using GPONMonitor.Services;
 
 namespace GPONMonitor.Models.Olt
 {
@@ -18,15 +19,19 @@ namespace GPONMonitor.Models.Olt
         public string SnmpCommunity { get; private set; }
         public int SnmpTimeout { get; private set; }
 
-        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout)
+        private readonly IOltFormatChecks _oltFormatChecks;
+
+        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, IOltFormatChecks oltFormatChecks)
         {
-            Id = OltFormatChecks.CheckOltIdFormat(id);
-            Name = OltFormatChecks.CheckOltNameFormat(name);
-            SnmpIPAddress = OltFormatChecks.CheckOltSnmpIpAddressFormat(snmpIPAddress);
-            SnmpPort = OltFormatChecks.CheckOltSnmpPortFormat(snmpPort);
-            SnmpVersion = OltFormatChecks.CheckOltSnmpVersionFormat(snmpVersion);
-            SnmpCommunity = OltFormatChecks.CheckOltSnmpCommunityFormat(snmpCommunity);
-            SnmpTimeout = OltFormatChecks.CheckOltSnmpTimeoutFormat(snmpTimeout);
+            _oltFormatChecks = oltFormatChecks;
+
+            Id = oltFormatChecks.CheckOltIdFormat(id);
+            Name = oltFormatChecks.CheckOltNameFormat(name);
+            SnmpIPAddress = oltFormatChecks.CheckOltSnmpIpAddressFormat(snmpIPAddress);
+            SnmpPort = oltFormatChecks.CheckOltSnmpPortFormat(snmpPort);
+            SnmpVersion = oltFormatChecks.CheckOltSnmpVersionFormat(snmpVersion);
+            SnmpCommunity = oltFormatChecks.CheckOltSnmpCommunityFormat(snmpCommunity);
+            SnmpTimeout = oltFormatChecks.CheckOltSnmpTimeoutFormat(snmpTimeout);
         }
 
         public async Task<string> GetDescriptionAsync()

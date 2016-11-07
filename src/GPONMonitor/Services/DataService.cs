@@ -18,7 +18,7 @@ namespace GPONMonitor.Services
         private readonly ILoggerFactory _loggerFactory;
         private List<Olt> configuredOlts = new List<Olt>();
 
-        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory)
+        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory, IOltFormatChecks oltFormatChecks)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _loggerFactory = loggerFactory;
@@ -28,7 +28,7 @@ namespace GPONMonitor.Services
             {
                 foreach (var device in _devicesConfiguration.Devices)
                 {
-                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout));
+                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, oltFormatChecks));
                 }
             }
             catch (Exception exception)

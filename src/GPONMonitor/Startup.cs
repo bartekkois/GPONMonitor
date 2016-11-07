@@ -1,11 +1,11 @@
 ﻿using GPONMonitor.Models.Configuration;
+using GPONMonitor.Models.Olt;
 using GPONMonitor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
 using System.Linq;
@@ -55,6 +55,7 @@ namespace GPONMonitor
             });
 
             services.AddSingleton<IDataService, DataService>();
+            services.AddSingleton<IOltFormatChecks, OltFormatChecks>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

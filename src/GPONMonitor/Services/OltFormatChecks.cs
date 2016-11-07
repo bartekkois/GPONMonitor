@@ -1,20 +1,29 @@
-﻿using Lextm.SharpSnmpLib;
+﻿using GPONMonitor.Services;
+using Lextm.SharpSnmpLib;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Net;
 
 namespace GPONMonitor.Models.Olt
 {
-    public static class OltFormatChecks
+    public class OltFormatChecks : IOltFormatChecks
     {
-        public static int CheckOltIdFormat(int id)
+        private readonly IStringLocalizer<OltFormatChecks> _localizer;
+
+        public OltFormatChecks(IStringLocalizer<OltFormatChecks> localizer)
+        {
+            _localizer = localizer;
+        }
+
+        public int CheckOltIdFormat(int id)
         {
             if ((id >= 0 && id <= 128))
                 return id;
             else
-                throw new ArgumentException("Incorrect OLT id");
+                throw new ArgumentException(_localizer["Incorrect OLT id"]);
         }
 
-        public static string CheckOltNameFormat(string name)
+        public string CheckOltNameFormat(string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
                 return name;
@@ -22,7 +31,7 @@ namespace GPONMonitor.Models.Olt
                 throw new ArgumentException("Incorrect OLT name");
         }
 
-        public static IPAddress CheckOltSnmpIpAddressFormat(string snmpIPAddress)
+        public IPAddress CheckOltSnmpIpAddressFormat(string snmpIPAddress)
         {
             IPAddress tryParseSnmpIPAddress;
             if (IPAddress.TryParse(snmpIPAddress, out tryParseSnmpIPAddress))
@@ -31,7 +40,7 @@ namespace GPONMonitor.Models.Olt
                 throw new ArgumentException("Incorrect OLT SNMP IP address");
         }
 
-        public static int CheckOltSnmpPortFormat(string snmpPort)
+        public int CheckOltSnmpPortFormat(string snmpPort)
         {
             int tryParseSnmpPort;
             if (int.TryParse(snmpPort, out tryParseSnmpPort) && (tryParseSnmpPort > 0 && tryParseSnmpPort < 65535))
@@ -40,7 +49,7 @@ namespace GPONMonitor.Models.Olt
                 throw new ArgumentException("Incorrect OLT SNMP port number");
         }
 
-        public static VersionCode CheckOltSnmpVersionFormat(string snmpVersion)
+        public VersionCode CheckOltSnmpVersionFormat(string snmpVersion)
         {
             switch (snmpVersion)
             {
@@ -55,7 +64,7 @@ namespace GPONMonitor.Models.Olt
             }
         }
 
-        public static string CheckOltSnmpCommunityFormat(string snmpCommunity)
+        public string CheckOltSnmpCommunityFormat(string snmpCommunity)
         {
             if (!string.IsNullOrWhiteSpace(snmpCommunity))
                 return snmpCommunity;
@@ -63,7 +72,7 @@ namespace GPONMonitor.Models.Olt
                 throw new ArgumentException("Incorrect OLT SNMP community");
         }
 
-        public static int CheckOltSnmpTimeoutFormat(string snmpTimeout)
+        public int CheckOltSnmpTimeoutFormat(string snmpTimeout)
         {
             int tryParseSnmpTimeout;
             if (int.TryParse(snmpTimeout, out tryParseSnmpTimeout) && (tryParseSnmpTimeout > 0 && tryParseSnmpTimeout < 60000))
