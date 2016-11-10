@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using GPONMonitor.Services;
 
 namespace GPONMonitor.Models.ComplexStateTypes
 {
@@ -13,17 +13,8 @@ namespace GPONMonitor.Models.ComplexStateTypes
             }
             set
             {
-                ResponseDescription responseDescription;
 
-                if (BlockReasonResponseDictionary.ContainsKey(value))
-                {
-                    BlockReasonResponseDictionary.TryGetValue(value, out responseDescription);
-                }
-                else
-                {
-                    BlockReasonResponseDictionary.TryGetValue(null, out responseDescription);
-                }
-
+                ResponseDescription responseDescription = _responseDescriptionDictionaries.BlockReasonResponse(value.Value);
                 DescriptionEng = responseDescription.DescriptionEng;
                 DescriptionPol = responseDescription.DescriptionPol;
                 Severity = responseDescription.Severity;
@@ -35,18 +26,11 @@ namespace GPONMonitor.Models.ComplexStateTypes
         public string DescriptionPol { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
+        private readonly IResponseDescriptionDictionaries _responseDescriptionDictionaries;
 
-        // ONT Block Reason
-        // 1 - manual block
-        // 2 - sourcemac block
-        // 255 - unblock
-
-        readonly Dictionary<int?, ResponseDescription> BlockReasonResponseDictionary = new Dictionary<int?, ResponseDescription>()
+        public BlockReason(IResponseDescriptionDictionaries responseDescriptionDictionaries)
         {
-            { 1, new ResponseDescription("manual block", "blokada ręczna", SeverityLevel.Danger) },
-            { 2, new ResponseDescription("sourcemac block", "blokada sourcemac", SeverityLevel.Danger) },
-            { 255, new ResponseDescription("unblock", "brak blokady", SeverityLevel.Success) }
-        };
-
+            _responseDescriptionDictionaries = responseDescriptionDictionaries;
+        }
     }
 }

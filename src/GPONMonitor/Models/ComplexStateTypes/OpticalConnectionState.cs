@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using GPONMonitor.Services;
 
 namespace GPONMonitor.Models.ComplexStateTypes
 {
@@ -13,17 +13,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
             }
             set
             {
-                ResponseDescription responseDescription;
-
-                if (OpticalConnectionStateResponseDictionary.ContainsKey(value))
-                {
-                    OpticalConnectionStateResponseDictionary.TryGetValue(value, out responseDescription);
-                }
-                else
-                {
-                    OpticalConnectionStateResponseDictionary.TryGetValue(null, out responseDescription);
-                }
-
+                ResponseDescription responseDescription = _responseDescriptionDictionaries.OpticalConnectionStateResponse(value.Value);
                 DescriptionEng = responseDescription.DescriptionEng;
                 DescriptionPol = responseDescription.DescriptionPol;
                 Severity = responseDescription.Severity;
@@ -35,20 +25,11 @@ namespace GPONMonitor.Models.ComplexStateTypes
         public string DescriptionPol { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
+        private readonly IResponseDescriptionDictionaries _responseDescriptionDictionaries;
 
-        // ONU Link Status
-        // 0 - invalid
-        // 1 - inactive
-        // 2 - active
-        // 3 - running (OBSOLETE: removed in 5.08)
-
-        readonly Dictionary<int?, ResponseDescription> OpticalConnectionStateResponseDictionary = new Dictionary<int?, ResponseDescription>()
+        public OpticalConnectionState(IResponseDescriptionDictionaries responseDescriptionDictionaries)
         {
-            { 0, new ResponseDescription("invalid", "niepoprawne", SeverityLevel.Danger) },
-            { 1, new ResponseDescription("inactive", "nieaktywne", SeverityLevel.Danger) },
-            { 2, new ResponseDescription("active", "aktywne", SeverityLevel.Success) },
-            { 3, new ResponseDescription("running", "działające", SeverityLevel.Success) },
-            { 255, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Success) }
-        };
+            _responseDescriptionDictionaries = responseDescriptionDictionaries;
+        }
     }
 }

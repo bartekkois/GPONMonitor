@@ -56,6 +56,7 @@ namespace GPONMonitor
 
             services.AddSingleton<IDataService, DataService>();
             services.AddSingleton<IOltFormatChecks, OltFormatChecks>();
+            services.AddSingleton<IResponseDescriptionDictionaries, ResponseDescriptionDictionaries>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

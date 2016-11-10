@@ -28,10 +28,14 @@ namespace GPONMonitor.Models.Onu
         public BlockReason BlockReason { get; private set; }
 
         [JsonIgnore]
+        internal IResponseDescriptionDictionaries _responseDescriptionDictionaries;
+        [JsonIgnore]
         internal IDataService _snmpDataService;
 
-        public OnuGeneric(uint oltId, uint oltPortId, uint oltOnuId, IDataService snmpDataService)
+
+        public OnuGeneric(uint oltId, uint oltPortId, uint oltOnuId, IResponseDescriptionDictionaries responseDescriptionDictionaries, IDataService snmpDataService)
         {
+            _responseDescriptionDictionaries = responseDescriptionDictionaries;
             _snmpDataService = snmpDataService;
 
             OltId = oltId;
@@ -43,15 +47,15 @@ namespace GPONMonitor.Models.Onu
             GponSerialNumber = new GponSerialNumber();
             GponProfile = new GponProfile();
 
-            OpticalConnectionState = new OpticalConnectionState();
-            OpticalConnectionDeactivationReason = new OpticalConnectionDeactivationReason();
+            OpticalConnectionState = new OpticalConnectionState(_responseDescriptionDictionaries);
+            OpticalConnectionDeactivationReason = new OpticalConnectionDeactivationReason(_responseDescriptionDictionaries);
             OpticalPowerReceived = new OpticalPowerReceived();
             OpticalCableDistance = new OpticalCableDistance();
             OpticalConnectionUptime = new OpticalConnectionUptime();
             OpticalConnectionInactiveTime = new OpticalConnectionInactiveTime();
             SystemUptime = new SystemUptime();
-            BlockStatus = new BlockStatus();
-            BlockReason = new BlockReason();
+            BlockStatus = new BlockStatus(_responseDescriptionDictionaries);
+            BlockReason = new BlockReason(_responseDescriptionDictionaries);
 
             ModelType.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "."  + oltOnuId).Result;
             Description.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuDescription + "." + oltPortId + "." + oltOnuId).Result;

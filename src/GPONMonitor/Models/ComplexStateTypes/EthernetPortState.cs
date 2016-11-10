@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using GPONMonitor.Services;
 
 namespace GPONMonitor.Models.ComplexStateTypes
 {
@@ -13,17 +13,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
             }
             set
             {
-                ResponseDescription responseDescription;
-
-                if (EthernetPortStateResponseDictionary.ContainsKey(value))
-                {
-                    EthernetPortStateResponseDictionary.TryGetValue(value, out responseDescription);
-                }
-                else
-                {
-                    EthernetPortStateResponseDictionary.TryGetValue(null, out responseDescription);
-                }
-
+                ResponseDescription responseDescription = _responseDescriptionDictionaries.EthernetPortStateResponse(value.Value);
                 DescriptionEng = responseDescription.DescriptionEng;
                 DescriptionPol = responseDescription.DescriptionPol;
                 Severity = responseDescription.Severity;
@@ -35,16 +25,11 @@ namespace GPONMonitor.Models.ComplexStateTypes
         public string DescriptionPol { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
+        private readonly IResponseDescriptionDictionaries _responseDescriptionDictionaries;
 
-        // ONT Ethernet Port State
-        // 1 - manual block
-        // 2 - sourcemac block
-
-        readonly Dictionary<int?, ResponseDescription> EthernetPortStateResponseDictionary = new Dictionary<int?, ResponseDescription>()
+        public EthernetPortState(IResponseDescriptionDictionaries responseDescriptionDictionaries)
         {
-            { 1, new ResponseDescription("up", "podniesiony", SeverityLevel.Danger) },
-            { 2, new ResponseDescription("down", "opuszczony", SeverityLevel.Success) },
-            { 255, new ResponseDescription("unknown", "brak odczytu", SeverityLevel.Unknown) }
-        };
+            _responseDescriptionDictionaries = responseDescriptionDictionaries;
+        }
     }
 }

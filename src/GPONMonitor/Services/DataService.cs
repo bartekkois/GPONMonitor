@@ -16,12 +16,14 @@ namespace GPONMonitor.Services
     {
         private readonly DevicesConfiguration _devicesConfiguration;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly IResponseDescriptionDictionaries _responseDescriptionDictionaries;
         private List<Olt> configuredOlts = new List<Olt>();
 
-        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory, IOltFormatChecks oltFormatChecks)
+        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory, IOltFormatChecks oltFormatChecks, IResponseDescriptionDictionaries responseDescriptionDictionaries)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _loggerFactory = loggerFactory;
+            _responseDescriptionDictionaries = responseDescriptionDictionaries;
             var logger = _loggerFactory.CreateLogger("SNMP Data Service");
 
             try
@@ -78,15 +80,15 @@ namespace GPONMonitor.Services
             switch (await GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId))
             {
                 case "H645B":
-                    return new H645BOnu(oltId, oltPortId, onuId, this);
+                    return new H645BOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 case "H645G":
-                    return new H645GOnu(oltId, oltPortId, onuId, this);
+                    return new H645GOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 case "H665G":
-                    return new H665GOnu(oltId, oltPortId, onuId, this);
+                    return new H665GOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 case "H640GW-02":
-                    return new H665GOnu(oltId, oltPortId, onuId, this);
+                    return new H665GOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 default:
-                    return new UnknownOnu(oltId, oltPortId, onuId, this);
+                    return new UnknownOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
             }
         }
     }
