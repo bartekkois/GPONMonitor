@@ -1,6 +1,6 @@
 ﻿namespace GPONMonitor.Models.ComplexStateTypes
 {
-    public class Description
+    public class DescriptionName
     {
         private string value;
         public string Value
@@ -13,23 +13,20 @@
             {
                 if (value != null)
                 {
-                    DescriptionEng = value.ToString().Replace("_", " ");
-                    DescriptionPol = value.ToString().Replace("_", " ");
+                    Description = value.ToString().Replace("_", " ");
                     Severity = SeverityLevel.Default;
                     this.value = value;
                 }
                 else
                 {
-                    DescriptionEng = null;
-                    DescriptionPol = null;
+                    Description = null;
                     Severity = SeverityLevel.Unknown;
                     this.value = null;
                 }
             }
         }
 
-        public string DescriptionEng { get; private set; }
-        public string DescriptionPol { get; private set; }
+        public string Description { get; private set; }
         public SeverityLevel Severity { get; private set; }
     }
 }

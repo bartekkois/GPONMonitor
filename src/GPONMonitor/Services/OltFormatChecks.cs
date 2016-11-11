@@ -28,7 +28,7 @@ namespace GPONMonitor.Models.Olt
             if (!string.IsNullOrWhiteSpace(name))
                 return name;
             else
-                throw new ArgumentException("Incorrect OLT name");
+                throw new ArgumentException(_localizer["Incorrect OLT name"]);
         }
 
         public IPAddress CheckOltSnmpIpAddressFormat(string snmpIPAddress)
@@ -37,7 +37,7 @@ namespace GPONMonitor.Models.Olt
             if (IPAddress.TryParse(snmpIPAddress, out tryParseSnmpIPAddress))
                 return tryParseSnmpIPAddress;
             else
-                throw new ArgumentException("Incorrect OLT SNMP IP address");
+                throw new ArgumentException(_localizer["Incorrect OLT SNMP IP address"]);
         }
 
         public int CheckOltSnmpPortFormat(string snmpPort)
@@ -46,7 +46,7 @@ namespace GPONMonitor.Models.Olt
             if (int.TryParse(snmpPort, out tryParseSnmpPort) && (tryParseSnmpPort > 0 && tryParseSnmpPort < 65535))
                 return tryParseSnmpPort;
             else
-                throw new ArgumentException("Incorrect OLT SNMP port number");
+                throw new ArgumentException(_localizer["Incorrect OLT SNMP port number"]);
         }
 
         public VersionCode CheckOltSnmpVersionFormat(string snmpVersion)
@@ -60,7 +60,7 @@ namespace GPONMonitor.Models.Olt
                 case "3":
                     return VersionCode.V3;
                 default:
-                    throw new ArgumentException("Incorrect OLT SNMP version");
+                    throw new ArgumentException(_localizer["Incorrect OLT SNMP version"]);
             }
         }
 
@@ -69,7 +69,7 @@ namespace GPONMonitor.Models.Olt
             if (!string.IsNullOrWhiteSpace(snmpCommunity))
                 return snmpCommunity;
             else
-                throw new ArgumentException("Incorrect OLT SNMP community");
+                throw new ArgumentException(_localizer["Incorrect OLT SNMP community"]);
         }
 
         public int CheckOltSnmpTimeoutFormat(string snmpTimeout)
@@ -78,7 +78,7 @@ namespace GPONMonitor.Models.Olt
             if (int.TryParse(snmpTimeout, out tryParseSnmpTimeout) && (tryParseSnmpTimeout > 0 && tryParseSnmpTimeout < 60000))
                 return tryParseSnmpTimeout;
             else
-                throw new ArgumentException("Incorrect OLT SNMP timeout");
+                throw new ArgumentException(_localizer["Incorrect OLT SNMP timeout"]);
         }
     }
 }

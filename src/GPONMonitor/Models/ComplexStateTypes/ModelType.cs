@@ -13,23 +13,20 @@
             {
                 if (value != null)
                 {
-                    DescriptionEng = value.ToString();
-                    DescriptionPol = value.ToString();
+                    Description = value.ToString();
                     Severity = SeverityLevel.Default;
                     this.value = value;
                 }
                 else
                 {
-                    DescriptionEng = null;
-                    DescriptionPol = null;
+                    Description = null;
                     Severity = SeverityLevel.Unknown;
                     this.value = null;
                 }
             }
         }
 
-        public string DescriptionEng { get; private set; }
-        public string DescriptionPol { get; private set; }
+        public string Description { get; private set; }
         public SeverityLevel Severity { get; private set; }
     }
 }

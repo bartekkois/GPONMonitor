@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="10 Mb/s&quot;" xml:space="preserve">
+    <value>10 Mb/s"</value>
+    <comment>EthernetPortSpeedResponseDictionary 1</comment>
+  </data>
+  <data name="100 Mb/s&quot;" xml:space="preserve">
+    <value>100 Mb/s"</value>
+    <comment>EthernetPortSpeedResponseDictionary 2</comment>
+  </data>
+  <data name="1000 Mb/s&quot;" xml:space="preserve">
+    <value>1000 Mb/s"</value>
+    <comment>EthernetPortSpeedResponseDictionary 3</comment>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>aktywne</value>
+    <comment>OpticalConnectionStateResponseDictionary 2</comment>
+  </data>
+  <data name="admin active change" xml:space="preserve">
+    <value>zamina na aktywny (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 11</comment>
+  </data>
+  <data name="admin deactivate" xml:space="preserve">
+    <value>deaktywacja (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 19</comment>
+  </data>
+  <data name="admin olt configuration" xml:space="preserve">
+    <value>konfiguracja olt (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 12</comment>
+  </data>
+  <data name="admin olt deactivate" xml:space="preserve">
+    <value>deaktyacja olt (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 20</comment>
+  </data>
+  <data name="admin omcc down" xml:space="preserve">
+    <value>deaktywacja omcc (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 21</comment>
+  </data>
+  <data name="admin remove onu" xml:space="preserve">
+    <value>usunięcie onu (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 23</comment>
+  </data>
+  <data name="admin reset" xml:space="preserve">
+    <value>reset (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 10</comment>
+  </data>
+  <data name="admin rogue onu" xml:space="preserve">
+    <value>uszkodzony modem (administator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 16</comment>
+  </data>
+  <data name="admin rogue onu candidate" xml:space="preserve">
+    <value>uszkodzony modem (kandydujący)(administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 15</comment>
+  </data>
+  <data name="admin rogue onu self detect block&quot;" xml:space="preserve">
+    <value>uszkodzony modem (automatyczna blokada) (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 17</comment>
+  </data>
+  <data name="admin set redundancy" xml:space="preserve">
+    <value>ustawienie redundancji (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 22</comment>
+  </data>
+  <data name="admin slot remove" xml:space="preserve">
+    <value>usunięcie slotu (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 14</comment>
+  </data>
+  <data name="admin slot restart" xml:space="preserve">
+    <value>restart slotu (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 13</comment>
+  </data>
+  <data name="admin tx off optic" xml:space="preserve">
+    <value>laser wyłączony (administrator)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 18</comment>
+  </data>
+  <data name="autoblock" xml:space="preserve">
+    <value>blokada automatyczna</value>
+    <comment>BlockStatusResponseDictionary 1</comment>
+  </data>
+  <data name="config done" xml:space="preserve">
+    <value>port skonfigurowany</value>
+    <comment>VoIPLinestatusResponseDictionary 15</comment>
+  </data>
+  <data name="down" xml:space="preserve">
+    <value>opuszczony</value>
+    <comment>EthernetPortStateResponseDictionary 2</comment>
+  </data>
+  <data name="dying gasp (DGI)" xml:space="preserve">
+    <value>zanik zasilania (DGi)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 2</comment>
+  </data>
+  <data name="failed invite (failed authentication)" xml:space="preserve">
+    <value>błąd zaproszenia do sesji (błąd uwierzytelniania)</value>
+    <comment>VoIPLinestatusResponseDictionary 11</comment>
+  </data>
+  <data name="failed invite (failed TCP)" xml:space="preserve">
+    <value>błąd zaproszenia do sesji (błąd TCP)</value>
+    <comment>VoIPLinestatusResponseDictionary 10</comment>
+  </data>
+  <data name="failed invite (ICMP error)" xml:space="preserve">
+    <value>błąd zaproszenia do sesji (błąd ICMP)</value>
+    <comment>VoIPLinestatusResponseDictionary 9</comment>
+  </data>
+  <data name="failed invite (server fail code)" xml:space="preserve">
+    <value>błąd zaproszenia do sesji (błądserwera)</value>
+    <comment>VoIPLinestatusResponseDictionary 13</comment>
+  </data>
+  <data name="failed invite (timeout)" xml:space="preserve">
+    <value>błąd zaproszenia do sesji (przekroczono limit czasu)</value>
+    <comment>VoIPLinestatusResponseDictionary 12</comment>
+  </data>
+  <data name="failed registration (failed authentication)" xml:space="preserve">
+    <value>bład rejestracji (błąd uwierzytelniania)</value>
+    <comment>VoIPLinestatusResponseDictionary 6</comment>
+  </data>
+  <data name="failed registration (failed TCP)" xml:space="preserve">
+    <value>błąd rejestracji (błąd TCP)</value>
+    <comment>VoIPLinestatusResponseDictionary 5</comment>
+  </data>
+  <data name="failed registration (ICMP error)" xml:space="preserve">
+    <value>błąd rejestracji (błąd ICMP)</value>
+    <comment>VoIPLinestatusResponseDictionary 4</comment>
+  </data>
+  <data name="failed registration (server fail code)" xml:space="preserve">
+    <value>błąd rejestracji (błąd serwera)</value>
+    <comment>VoIPLinestatusResponseDictionary 8</comment>
+  </data>
+  <data name="failed registration (timeout)" xml:space="preserve">
+    <value>błąd rejestracji (przekroczono limit czasu)</value>
+    <comment>VoIPLinestatusResponseDictionary 7</comment>
+  </data>
+  <data name="in session" xml:space="preserve">
+    <value>rozmowa</value>
+    <comment>VoIPLinestatusResponseDictionary 3</comment>
+  </data>
+  <data name="inactive" xml:space="preserve">
+    <value>nieaktywne</value>
+    <comment>OpticalConnectionStateResponseDictionary 1</comment>
+  </data>
+  <data name="invalid" xml:space="preserve">
+    <value>niepoprawne</value>
+    <comment>OpticalConnectionStateResponseDictionary 0</comment>
+  </data>
+  <data name="loss of frame (LOFI)" xml:space="preserve">
+    <value>uszk. kabel abonencki (LOFI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 4</comment>
+  </data>
+  <data name="loss of key sync (LOKI)" xml:space="preserve">
+    <value>utrata klucza (LOKI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 9</comment>
+  </data>
+  <data name="loss of PLOAM (LOAI)" xml:space="preserve">
+    <value>utrata PLOAM (LOAI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 7</comment>
+  </data>
+  <data name="loss of PLOAM (LOAMI)" xml:space="preserve">
+    <value>utrata PLOAM (LOAMI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 8</comment>
+  </data>
+  <data name="loss of signal (LOS)" xml:space="preserve">
+    <value>zanik sygału portu PON (LOS)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 100</comment>
+  </data>
+  <data name="loss of signal (LOSI)" xml:space="preserve">
+    <value>uszk. kabel abonencki (LOSI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 3</comment>
+  </data>
+  <data name="manual block" xml:space="preserve">
+    <value>blokada ręczna</value>
+    <comment>All Block Dictionaries</comment>
+  </data>
+  <data name="none" xml:space="preserve">
+    <value>brak powodu</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 1</comment>
+  </data>
+  <data name="none initial" xml:space="preserve">
+    <value>niezarejestrowany</value>
+    <comment>VoIPLinestatusResponseDictionary 1</comment>
+  </data>
+  <data name="port not configured" xml:space="preserve">
+    <value>port nieskonfigurowany</value>
+    <comment>VoIPLinestatusResponseDictionary 14</comment>
+  </data>
+  <data name="registered" xml:space="preserve">
+    <value>zarejestrowany</value>
+    <comment>VoIPLinestatusResponseDictionary 2</comment>
+  </data>
+  <data name="running" xml:space="preserve">
+    <value>działające</value>
+    <comment>OpticalConnectionStateResponseDictionary 3</comment>
+  </data>
+  <data name="signal fail (SFI)" xml:space="preserve">
+    <value>błędy transmisji (SFI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 5</comment>
+  </data>
+  <data name="sourcemac block" xml:space="preserve">
+    <value>blokada sourcemac</value>
+    <comment>BlockReasonResponseDictionary 2</comment>
+  </data>
+  <data name="start-up failure (SUFI)" xml:space="preserve">
+    <value>błędy inicjalizacji (SUFI)</value>
+    <comment>OpticalConnectionDeactivationReasonResponseDictionary 6</comment>
+  </data>
+  <data name="unblock" xml:space="preserve">
+    <value>brak blokady</value>
+    <comment>All Block Dictionaries</comment>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>brak odczytu</value>
+    <comment>All Dictionaries</comment>
+  </data>
+  <data name="up" xml:space="preserve">
+    <value>podniesiony</value>
+    <comment>EthernetPortStateResponseDictionary 1</comment>
+  </data>
+</root>

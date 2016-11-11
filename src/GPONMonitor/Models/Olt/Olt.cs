@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using GPONMonitor.Exceptions;
 using GPONMonitor.Services;
+using Microsoft.Extensions.Localization;
 
 namespace GPONMonitor.Models.Olt
 {
@@ -20,10 +21,12 @@ namespace GPONMonitor.Models.Olt
         public int SnmpTimeout { get; private set; }
 
         private readonly IOltFormatChecks _oltFormatChecks;
+        private readonly IStringLocalizer<Olt> _localizer;
 
-        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, IOltFormatChecks oltFormatChecks)
+        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, IOltFormatChecks oltFormatChecks, IStringLocalizer<Olt> localizer)
         {
             _oltFormatChecks = oltFormatChecks;
+            _localizer = localizer;
 
             Id = oltFormatChecks.CheckOltIdFormat(id);
             Name = oltFormatChecks.CheckOltNameFormat(name);
@@ -39,7 +42,7 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponseDescription = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOltDescription, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseDescription.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no result has been returned");
+                throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
 
             return snmpResponseDescription.First().Data.ToString();
         }
@@ -49,7 +52,7 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponseUptime = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOltUptime, SnmpTimeout) as List<Variable>;
 
             if (snmpResponseUptime.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no result has been returned");
+                throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
 
             return snmpResponseUptime.First().Data.ToString().Split('.').First();
         }
@@ -70,7 +73,7 @@ namespace GPONMonitor.Models.Olt
                 if (variable.Data.ToString().Length > 0)
                     onuGponSerialNumber = variable.Data.ToString();
                 else
-                    onuGponSerialNumber = "unknown";
+                    onuGponSerialNumber = _localizer["unknown"];
 
                 var relatedOnuDescription = snmpOnuDescriptionList.FirstOrDefault(x => x.Id.ToNumerical().ToArray().ElementAt(13) == oltPortId && x.Id.ToNumerical().ToArray().ElementAt(14) == onuId);
 
@@ -78,7 +81,7 @@ namespace GPONMonitor.Models.Olt
                 if (relatedOnuDescription != null)
                     onuDescription = relatedOnuDescription.Data.ToString().Replace("_", " ");
                 else
-                    onuDescription = "undefined";
+                    onuDescription = _localizer["undefined"];
 
                 onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription, onuGponSerialNumber));
             }
@@ -91,7 +94,7 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
 
             if (snmpResponse.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no result has been returned");
+                throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
 
             return snmpResponse.First().Data.ToString();
         }
@@ -102,10 +105,10 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
 
             if (snmpResponse.Count == 0)
-                throw new SnmpConnectionException("SNMP request error: no result has been returned");
+                throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
 
             if (int.TryParse(snmpResponse.First().Data.ToString(), out parsedResult) == false)
-                throw new SnmpConnectionException("SNMP request error: wrong format result has been returned");
+                throw new SnmpConnectionException(_localizer["SNMP request error: wrong format result has been returned"]);
 
             return parsedResult; 
         }

@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About" xml:space="preserve">
-    <value>Na temat</value>
+  <data name="Incorrect OLT name" xml:space="preserve">
+    <value>Błędna nazwa OLTa</value>
+  </data>
+  <data name="Incorrect OLT SNMP community" xml:space="preserve">
+    <value>Błędne community SNMP</value>
+  </data>
+  <data name="Incorrect OLT SNMP IP address" xml:space="preserve">
+    <value>Błędny adres IP SNMP OLTa</value>
+  </data>
+  <data name="Incorrect OLT SNMP port number" xml:space="preserve">
+    <value>Błędny numer portu SNMP</value>
+  </data>
+  <data name="Incorrect OLT SNMP timeout" xml:space="preserve">
+    <value>Błędny timeout SNMP</value>
+  </data>
+  <data name="Incorrect OLT SNMP version" xml:space="preserve">
+    <value>Błędna wersja protokołu SNMP</value>
   </data>
 </root>

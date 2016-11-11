@@ -30,22 +30,19 @@
                         Severity = SeverityLevel.Danger;
                     }
 
-                    DescriptionEng = calculateddBmPower + " dBm";
-                    DescriptionPol = calculateddBmPower + " dBm";
+                    Description = calculateddBmPower + " dBm";
                     this.value = value;
                 }
                 else
                 {
-                    DescriptionEng = "unknown";
-                    DescriptionPol = "brak odczytu";
+                    Description = null;
                     Severity = SeverityLevel.Unknown;
                     this.value = null;
                 }
             }
         }
 
-        public string DescriptionEng { get; private set; }
-        public string DescriptionPol { get; private set; }
+        public string Description { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
 

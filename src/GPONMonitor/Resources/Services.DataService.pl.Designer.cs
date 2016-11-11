@@ -22,13 +22,13 @@ namespace GPONMonitor.Resources.Controllers {
     // with the /str option, or rebuild your VS project.
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class OltController {
+    public class DataService {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
-        internal OltController() {
+        internal DataService() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace GPONMonitor.Resources.Controllers {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GPONMonitor.Resources.Controllers.OltController", typeof(OltController).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GPONMonitor.Resources.Controllers.DataService", typeof(DataService).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,11 +60,29 @@ namespace GPONMonitor.Resources.Controllers {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Na temat.
+        ///    Looks up a localized string similar to konfiguracja środowiska.
         /// </summary>
-        public static string About {
+        public static string enviroment_configuration_ {
             get {
-                return ResourceManager.GetString("About", resourceCulture);
+                return ResourceManager.GetString("enviroment configuration:", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Błąd pobieranie wersji firmware OLTa.
+        /// </summary>
+        public static string Error_getting_OLT_firmware_version_number {
+            get {
+                return ResourceManager.GetString("Error getting OLT firmware version number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to SNMP Data Service.
+        /// </summary>
+        public static string SNMP_Data_Service {
+            get {
+                return ResourceManager.GetString("SNMP Data Service", resourceCulture);
             }
         }
     }

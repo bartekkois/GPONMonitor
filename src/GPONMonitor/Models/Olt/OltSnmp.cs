@@ -20,7 +20,7 @@ namespace GPONMonitor.Models.Olt
             if (await Task.WhenAny(task = SnmpGetAsync(snmpVersion, oid), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
-                throw new SnmpTimeoutException("SNMP request timeout");
+                throw new SnmpTimeoutException(_localizer["SNMP request timeout"]);
             }
 
             return await task;
@@ -39,7 +39,7 @@ namespace GPONMonitor.Models.Olt
             }
             catch (Exception exception)
             {
-                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
+                throw new SnmpConnectionException(_localizer["SNMP request error: "] + exception.Message);
             }
         }
 
@@ -52,7 +52,7 @@ namespace GPONMonitor.Models.Olt
             if (await Task.WhenAny(task = SnmpSetAsync(snmpVersion, oid, data), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
-                throw new SnmpTimeoutException("SNMP request timeout");
+                throw new SnmpTimeoutException(_localizer["SNMP request timeout"]);
             }
 
             return await task;
@@ -71,7 +71,7 @@ namespace GPONMonitor.Models.Olt
             }
             catch (Exception exception)
             {
-                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
+                throw new SnmpConnectionException(_localizer["SNMP request error: "] + exception.Message);
             }
         }
 
@@ -84,7 +84,7 @@ namespace GPONMonitor.Models.Olt
             if (await Task.WhenAny(task = SnmpWalkAsync(snmpVersion, oid, timeout, walkMode), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
-                throw new SnmpTimeoutException("SNMP request timeout");
+                throw new SnmpTimeoutException(_localizer["SNMP request timeout"]);
             }
 
             return await task;
@@ -109,7 +109,7 @@ namespace GPONMonitor.Models.Olt
             }
             catch (Exception exception)
             {
-                throw new SnmpConnectionException("SNMP request error: " + exception.Message);
+                throw new SnmpConnectionException(_localizer["SNMP request error: "] + exception.Message);
             }
         }
     }

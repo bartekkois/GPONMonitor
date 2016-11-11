@@ -14,15 +14,13 @@ namespace GPONMonitor.Models.ComplexStateTypes
             set
             {
                 ResponseDescription responseDescription = _responseDescriptionDictionaries.OpticalConnectionDeactivationReasonResponse(value.Value);
-                DescriptionEng = responseDescription.DescriptionEng;
-                DescriptionPol = responseDescription.DescriptionPol;
+                Description = responseDescription.Description;
                 Severity = responseDescription.Severity;
                 this.value = value;
             }
         }
 
-        public string DescriptionEng { get; private set; }
-        public string DescriptionPol { get; private set; }
+        public string Description { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
         private readonly IResponseDescriptionDictionaries _responseDescriptionDictionaries;

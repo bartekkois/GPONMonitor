@@ -9,6 +9,7 @@ using GPONMonitor.Models.Olt;
 using GPONMonitor.Models;
 using GPONMonitor.Models.Onu;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Localization;
 
 namespace GPONMonitor.Services
 {
@@ -16,26 +17,29 @@ namespace GPONMonitor.Services
     {
         private readonly DevicesConfiguration _devicesConfiguration;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly IStringLocalizer<DataService> _localizerDataService;
         private readonly IResponseDescriptionDictionaries _responseDescriptionDictionaries;
+
         private List<Olt> configuredOlts = new List<Olt>();
 
-        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory, IOltFormatChecks oltFormatChecks, IResponseDescriptionDictionaries responseDescriptionDictionaries)
+        public DataService(IOptions<DevicesConfiguration> devicesConfiguration, ILoggerFactory loggerFactory, IOltFormatChecks oltFormatChecks, IResponseDescriptionDictionaries responseDescriptionDictionaries, IStringLocalizer<DataService> localizerDataService, IStringLocalizer<Olt> localizerOlt)
         {
             _devicesConfiguration = devicesConfiguration.Value;
             _loggerFactory = loggerFactory;
+            _localizerDataService = localizerDataService;
             _responseDescriptionDictionaries = responseDescriptionDictionaries;
-            var logger = _loggerFactory.CreateLogger("SNMP Data Service");
+            var logger = _loggerFactory.CreateLogger(_localizerDataService["SNMP Data Service"]);
 
             try
             {
                 foreach (var device in _devicesConfiguration.Devices)
                 {
-                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, oltFormatChecks));
+                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, oltFormatChecks, localizerOlt));
                 }
             }
             catch (Exception exception)
             {
-                logger.LogError("enviroment configuration: " + exception.Message);
+                logger.LogError(_localizerDataService["enviroment configuration: "] + exception.Message);
             }
         }
 
@@ -57,7 +61,7 @@ namespace GPONMonitor.Services
             if (firmwareVersionMatch.Success)
                 return firmwareVersionMatch.Value;
             else
-                throw new Exception("Error getting OLT firmware version number");
+                throw new Exception(_localizerDataService["Error getting OLT firmware version number"]);
         }
 
         public async Task<List<OnuShortDescription>> GetOnuListAsync(uint oltId)

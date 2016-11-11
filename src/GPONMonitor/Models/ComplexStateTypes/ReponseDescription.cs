@@ -2,14 +2,12 @@
 {
     public struct ResponseDescription
     {
-        public string DescriptionEng { get; private set; }
-        public string DescriptionPol { get; private set; }
+        public string Description { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
-        public ResponseDescription(string descriptionEng, string descriptionPol, SeverityLevel severity)
+        public ResponseDescription(string description, SeverityLevel severity)
         {
-            DescriptionEng = descriptionEng;
-            DescriptionPol = descriptionPol;
+            Description = description;
             Severity = severity;
         }
     }

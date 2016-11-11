@@ -11,7 +11,7 @@ namespace GPONMonitor.Models.Onu
         public uint OltPortId { get; private set; }
         public uint OltOnuId { get; private set; }
         public ModelType ModelType { get; private set; }
-        public Description Description { get; private set; }
+        public DescriptionName Description { get; private set; }
         public GponSerialNumber GponSerialNumber { get; private set; }
         public GponProfile GponProfile { get; private set; }
 
@@ -43,7 +43,7 @@ namespace GPONMonitor.Models.Onu
             OltOnuId = oltOnuId;
 
             ModelType = new ModelType();
-            Description = new Description();
+            Description = new DescriptionName();
             GponSerialNumber = new GponSerialNumber();
             GponProfile = new GponProfile();
 
