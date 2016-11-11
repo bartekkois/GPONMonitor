@@ -64,7 +64,7 @@ namespace GPONMonitor.Services
                 throw new Exception(_localizerDataService["Error getting OLT firmware version number"]);
         }
 
-        public async Task<List<OnuShortDescription>> GetOnuListAsync(uint oltId)
+        public async Task<List<OnuShortDescription>> GetOnuDescriptionListAsync(uint oltId)
         {
             return await configuredOlts.Single(s => s.Id == oltId).GetOnuDescriptionListAsync();
         }

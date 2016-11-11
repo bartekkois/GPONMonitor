@@ -21,11 +21,11 @@ namespace GPONMonitor.Controllers.API
 
         // GET: api/Onu/?oltId=1
         [HttpGet]
-        public async Task<IActionResult> GetOnuListAsync(uint oltId)
+        public async Task<IActionResult> GetOnuDescriptionListAsync(uint oltId)
         {
             try
             {
-                return Json(await _snmpDataService.GetOnuListAsync(oltId));
+                return Json(await _snmpDataService.GetOnuDescriptionListAsync(oltId));
             }
             catch (Exception exception)
             {

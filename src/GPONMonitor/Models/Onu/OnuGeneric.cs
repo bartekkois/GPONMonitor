@@ -11,7 +11,7 @@ namespace GPONMonitor.Models.Onu
         public uint OltPortId { get; private set; }
         public uint OltOnuId { get; private set; }
         public ModelType ModelType { get; private set; }
-        public DescriptionName Description { get; private set; }
+        public DescriptionName DescriptionName { get; private set; }
         public GponSerialNumber GponSerialNumber { get; private set; }
         public GponProfile GponProfile { get; private set; }
 
@@ -43,7 +43,7 @@ namespace GPONMonitor.Models.Onu
             OltOnuId = oltOnuId;
 
             ModelType = new ModelType();
-            Description = new DescriptionName();
+            DescriptionName = new DescriptionName();
             GponSerialNumber = new GponSerialNumber();
             GponProfile = new GponProfile();
 
@@ -58,7 +58,7 @@ namespace GPONMonitor.Models.Onu
             BlockReason = new BlockReason(_responseDescriptionDictionaries);
 
             ModelType.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "."  + oltOnuId).Result;
-            Description.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuDescription + "." + oltPortId + "." + oltOnuId).Result;
+            DescriptionName.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuDescription + "." + oltPortId + "." + oltOnuId).Result;
             GponSerialNumber.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponSerialNumber + "." + oltPortId + "." + oltOnuId).Result;
             GponProfile.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponProfile + "." + oltPortId + "." + oltOnuId).Result;
 

@@ -28,7 +28,7 @@ namespace GPONMonitor.Controllers
             {
                 var description = await _snmpDataService.GetOltDescriptionAsync(2);
                 var uptime = await _snmpDataService.GetOltUptimeAsync(2);
-                var onulist = await _snmpDataService.GetOnuListAsync(2);
+                var onulist = await _snmpDataService.GetOnuDescriptionListAsync(2);
 
                 ViewData["Message"] = description + uptime;
                 ViewData["onulist"] = onulist;
