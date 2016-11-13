@@ -10,6 +10,7 @@ using GPONMonitor.Models;
 using GPONMonitor.Models.Onu;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Localization;
+using GPONMonitor.ViewModels;
 
 namespace GPONMonitor.Services
 {
@@ -43,6 +44,11 @@ namespace GPONMonitor.Services
             }
         }
 
+        public IEnumerable<OltConfigurationViewModel> GetConfiguredOltListAsync()
+        {
+            return configuredOlts.Select(o => new OltConfigurationViewModel { Id = o.Id, Name = o.Name });
+        }
+
         public async Task<string> GetOltDescriptionAsync(uint oltId)
         {
             return await configuredOlts.Single(s => s.Id == oltId).GetDescriptionAsync();
@@ -64,7 +70,7 @@ namespace GPONMonitor.Services
                 throw new Exception(_localizerDataService["Error getting OLT firmware version number"]);
         }
 
-        public async Task<List<OnuShortDescription>> GetOnuDescriptionListAsync(uint oltId)
+        public async Task<IEnumerable<OnuShortDescription>> GetOnuDescriptionListAsync(uint oltId)
         {
             return await configuredOlts.Single(s => s.Id == oltId).GetOnuDescriptionListAsync();
         }

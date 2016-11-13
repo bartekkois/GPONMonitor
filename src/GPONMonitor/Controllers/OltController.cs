@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using GPONMonitor.Models.Configuration;
 using Microsoft.Extensions.Options;
 using GPONMonitor.Services;
-using System;
-using GPONMonitor.Exceptions;
 using Microsoft.Extensions.Localization;
 
 namespace GPONMonitor.Controllers
@@ -12,41 +9,19 @@ namespace GPONMonitor.Controllers
     public class OltController : Controller
     {
         private readonly DevicesConfiguration _devicesConfiguration;
-        private IDataService _snmpDataService;
+        private IDataService _dataService;
         private readonly IStringLocalizer<OltController> _localizer;
 
-        public OltController(IOptions<DevicesConfiguration> devicesConfiguration, IDataService snmpDataService, IStringLocalizer<OltController> localizer)
+        public OltController(IOptions<DevicesConfiguration> devicesConfiguration, IDataService dataService, IStringLocalizer<OltController> localizer)
         {
             _devicesConfiguration = devicesConfiguration.Value;
-            _snmpDataService = snmpDataService;
+            _dataService = dataService;
             _localizer = localizer;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            try
-            {
-                var description = await _snmpDataService.GetOltDescriptionAsync(2);
-                var uptime = await _snmpDataService.GetOltUptimeAsync(2);
-                var onulist = await _snmpDataService.GetOnuDescriptionListAsync(2);
-
-                ViewData["Message"] = description + uptime;
-                ViewData["onulist"] = onulist;
-            }
-            catch (SnmpConnectionException ex)
-            {
-                ViewData["Message"] = ex.Message;
-            }
-            catch (SnmpTimeoutException ex)
-            {
-                ViewData["Message"] = ex.Message;
-            }
-            catch (Exception ex)
-            {
-                ViewData["Message"] = ex.Message;
-            }
-
-            return View();
+            return View(_dataService.GetConfiguredOltListAsync());
         }
 
         public IActionResult Error()
