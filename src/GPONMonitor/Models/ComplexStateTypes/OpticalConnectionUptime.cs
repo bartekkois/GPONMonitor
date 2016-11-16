@@ -15,10 +15,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
             {
                 if (value != null)
                 {
-                    TimeSpan timeSpan = TimeSpan.FromSeconds(Convert.ToDouble(value));
-                    string displayTimeSpan = timeSpan.ToString("dd, hh:mm:tt");
-
-                    Description = displayTimeSpan;
+                    Description = TimeSpan.FromSeconds(Convert.ToDouble(value)).ToString(@"d\d\ hh\:mm\:ss");
                     Severity = SeverityLevel.Default;
                     this.value = value;
                 }

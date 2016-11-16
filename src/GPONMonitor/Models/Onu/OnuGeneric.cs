@@ -69,8 +69,6 @@ namespace GPONMonitor.Models.Onu
 
             if (_snmpDataService.GetOltFirmwareVersionAsync(oltId).Result != "5.01")
             {
-                // Add timers update if necessary !!!
-
                 OpticalConnectionUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId,SnmpOIDCollection.snmpOIDOnuOpticalConnectionUptime + "." + oltPortId + "." + oltOnuId).Result;
                 OpticalConnectionInactiveTime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOpticalConnectionInactiveTime + "." + oltPortId + "." + oltOnuId).Result;
                 SystemUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDSystemUptime + "." + oltPortId + "." + oltOnuId).Result;
