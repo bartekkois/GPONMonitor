@@ -32,7 +32,7 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GPON Monitor</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     @foreach (var oltConfiguration in Model)
                     {
                         <li><a asp-area="" asp-controller="Home" asp-action="Index">@oltConfiguration.Name</a></li>

@@ -1,20 +1,125 @@
-﻿@using GPONMonitor.Models
-
-@{
+﻿@{
     ViewData["Title"] = "GPON Monitor";
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
 
-<h4>@ViewData["Message"]</h4>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-search" type="button"></button>
+                    </span>
+                </div>
+            </div>
 
-@{  var onuList = ViewData["onulist"] as List<OnuShortDescription>; }
+            <div class="list-group onu-list-menu">
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.2</span>
+                    <span class=" onu-list-item">WRZ 475 Test Descritpion 1 </span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.14</span>
+                    <span class=" onu-list-item">WRZ 475 Test Descritpion 2</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.120</span>
+                    <span class=" onu-list-item">WRZ 492 Test Descritpion 3</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.3</span>
+                    <span class=" onu-list-item">WRZ 527 Test Descritpion 4</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.9</span>
+                    <span class=" onu-list-item">WRZ 397 Test Descritpion 5</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.2</span>
+                    <span class=" onu-list-item">WRZ 475 Test Descritpion 6</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.70</span>
+                    <span class=" onu-list-item">WRZ 475 Test Descritpion 7</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">6.2</span>
+                    <span class=" onu-list-item">WRZ 492 Test Descritpion 8</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.2</span>
+                    <span class=" onu-list-item">WRZ 527 Test Descritpion 9</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.2</span>
+                    <span class=" onu-list-item">WRZ 397 Test Descritpion 10</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.2</span>
+                    <span class=" onu-list-item">WRZ 475  Test Descritpion 11</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">1.14</span>
+                    <span class=" onu-list-item">WRZ 475  Test Descritpion 12</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.100</span>
+                    <span class=" onu-list-item">WRZ 492  Test Descritpion 13</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.101</span>
+                    <span class=" onu-list-item">WRZ 527  Test Descritpion 14</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">2.102</span>
+                    <span class=" onu-list-item">WRZ 397  Test Descritpion 15</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">4.2</span>
+                    <span class=" onu-list-item">WRZ 475  Test Descritpion 16</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">4.5</span>
+                    <span class=" onu-list-item">WRZ 475  Test Descritpion 17</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">4.89</span>
+                    <span class=" onu-list-item">WRZ 492  Test Descritpion 18</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">4.102</span>
+                    <span class=" onu-list-item">WRZ 527  Test Descritpion 19</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+                <a class="list-group-item borderless">
+                    <span class=" onu-list-id">4.103</span>
+                    <span class=" onu-list-item">WRZ 397  Test Descritpion 20</span>
+                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
+                </a>
+            </div>
+        </div>
 
-<ul>
-    @if (onuList != null)
-    {
-        @foreach (var onu in onuList)
-        {
-            <li>@onu.OltPortId . @onu.OnuId - @onu.OnuDescription (@onu.OnuGponSerialNumber)</li>
-        }
-    }
-</ul>
+    </div>
+</div>
