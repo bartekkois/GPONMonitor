@@ -17,7 +17,7 @@ namespace GPONMonitor.Services
         readonly Dictionary<int, ResponseDescription> EthernetPortSpeedResponseDictionary;
         readonly Dictionary<int, ResponseDescription> VoIPLinestatusResponseDictionary;
 
-        private const int _uknownResponseCode = 255;
+        private const int _unknownResponseCode = 255;
 
 
         public ResponseDescriptionDictionaries(IStringLocalizer<ResponseDescriptionDictionaries> localizer)
@@ -183,116 +183,126 @@ namespace GPONMonitor.Services
         }
 
 
-        ResponseDescription IResponseDescriptionDictionaries.OpticalConnectionStateResponse(int responseCode)
+        ResponseDescription IResponseDescriptionDictionaries.OpticalConnectionStateResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (OpticalConnectionStateResponseDictionary.ContainsKey(responseCode))
+            if (OpticalConnectionStateResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                OpticalConnectionStateResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                OpticalConnectionStateResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                OpticalConnectionStateResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                OpticalConnectionStateResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
         }
 
-        ResponseDescription IResponseDescriptionDictionaries.OpticalConnectionDeactivationReasonResponse(int responseCode)
+
+
+        ResponseDescription IResponseDescriptionDictionaries.OpticalConnectionDeactivationReasonResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (OpticalConnectionDeactivationReasonResponseDictionary.ContainsKey(responseCode))
+            if (OpticalConnectionDeactivationReasonResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                OpticalConnectionDeactivationReasonResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                OpticalConnectionDeactivationReasonResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                OpticalConnectionDeactivationReasonResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                OpticalConnectionDeactivationReasonResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
         }
 
-        ResponseDescription IResponseDescriptionDictionaries.BlockStatusResponse(int responseCode)
+        ResponseDescription IResponseDescriptionDictionaries.BlockStatusResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (BlockStatusResponseDictionary.ContainsKey(responseCode))
+            if (BlockStatusResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                BlockStatusResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                BlockStatusResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                BlockStatusResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                BlockStatusResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
         }
 
-        ResponseDescription IResponseDescriptionDictionaries.BlockReasonResponse(int responseCode)
+        ResponseDescription IResponseDescriptionDictionaries.BlockReasonResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (BlockReasonResponseDictionary.ContainsKey(responseCode))
+            if (BlockReasonResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                BlockReasonResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                BlockReasonResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                BlockReasonResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                BlockReasonResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
         }
 
-        ResponseDescription IResponseDescriptionDictionaries.EthernetPortStateResponse(int responseCode)
+        ResponseDescription IResponseDescriptionDictionaries.EthernetPortStateResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (EthernetPortStateResponseDictionary.ContainsKey(responseCode))
+            if (EthernetPortStateResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                EthernetPortStateResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                EthernetPortStateResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                EthernetPortStateResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                EthernetPortStateResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
         }
 
-        ResponseDescription IResponseDescriptionDictionaries.EthernetPortSpeedResponse(int responseCode)
+        ResponseDescription IResponseDescriptionDictionaries.EthernetPortSpeedResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (EthernetPortSpeedResponseDictionary.ContainsKey(responseCode))
+            if (EthernetPortSpeedResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                EthernetPortSpeedResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                EthernetPortSpeedResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                EthernetPortSpeedResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                EthernetPortSpeedResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
         }
 
-        ResponseDescription IResponseDescriptionDictionaries.VoIPLinestatusResponse(int responseCode)
+        ResponseDescription IResponseDescriptionDictionaries.VoIPLinestatusResponse(int? responseCode)
         {
             ResponseDescription _responseDescription;
 
-            if (VoIPLinestatusResponseDictionary.ContainsKey(responseCode))
+            if (VoIPLinestatusResponseDictionary.ContainsKey(ToDictionaryCode(responseCode)))
             {
-                VoIPLinestatusResponseDictionary.TryGetValue(responseCode, out _responseDescription);
+                VoIPLinestatusResponseDictionary.TryGetValue(ToDictionaryCode(responseCode), out _responseDescription);
             }
             else
             {
-                VoIPLinestatusResponseDictionary.TryGetValue(_uknownResponseCode, out _responseDescription);
+                VoIPLinestatusResponseDictionary.TryGetValue(_unknownResponseCode, out _responseDescription);
             }
 
             return _responseDescription;
+        }
+
+        private static int ToDictionaryCode(int? responseCode)
+        {
+            if (responseCode.HasValue)
+                return responseCode.Value;
+            else
+                return _unknownResponseCode;
         }
     }
 }

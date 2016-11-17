@@ -123,9 +123,6 @@
   <data name="SNMP request error: no result has been returned" xml:space="preserve">
     <value>Błąd SNMP: zapytanie nie zwróciło wyniku</value>
   </data>
-  <data name="SNMP request error: wrong format result has been returned" xml:space="preserve">
-    <value>Błąd SNMP: zapytanie zwróciło niewłaściwy format wyniku</value>
-  </data>
   <data name="SNMP request timeout" xml:space="preserve">
     <value>Błąd SNMP: zapytanie przekroczyło limit czasu</value>
   </data>

@@ -99,7 +99,7 @@ namespace GPONMonitor.Models.Olt
             return snmpResponse.First().Data.ToString();
         }
 
-        public async Task<int> GetIntPropertyAsync(string snmpOid)
+        public async Task<int?> GetIntPropertyAsync(string snmpOid)
         {
             int parsedResult;
             List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
@@ -108,7 +108,7 @@ namespace GPONMonitor.Models.Olt
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
 
             if (int.TryParse(snmpResponse.First().Data.ToString(), out parsedResult) == false)
-                throw new SnmpConnectionException(_localizer["SNMP request error: wrong format result has been returned"]);
+                return null;
 
             return parsedResult; 
         }

@@ -80,7 +80,7 @@ namespace GPONMonitor.Services
             return await configuredOlts.Single(s => s.Id == oltId).GetStringPropertyAsync(snmpOid);
         }
 
-        public async Task<int> GetIntPropertyAsync(uint oltId, string snmpOid)
+        public async Task<int?> GetIntPropertyAsync(uint oltId, string snmpOid)
         {
             return await configuredOlts.Single(s => s.Id == oltId).GetIntPropertyAsync(snmpOid);
         }

@@ -13,7 +13,7 @@ namespace GPONMonitor.Models.ComplexStateTypes
             }
             set
             {
-                ResponseDescription responseDescription = _responseDescriptionDictionaries.EthernetPortStateResponse(value.Value);
+                ResponseDescription responseDescription = _responseDescriptionDictionaries.EthernetPortStateResponse(value);
                 Description = responseDescription.Description;
                 Severity = responseDescription.Severity;
                 this.value = value;
