@@ -2,124 +2,206 @@
     ViewData["Title"] = "GPON Monitor";
 }
 
-<div class="container">
+<div class="container body-container">
     <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-search" type="button"></button>
-                    </span>
+        <div class="col-lg-5 col-md-6 col-sm-6  col-xs-12">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <div class="form-group search-form-group has-feedback">
+                        <input class="form-control" id="search-form" type="text"><span class="glyphicon glyphicon-search form-control-feedback search-form-icon"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <i class="glyphicon glyphicon-refresh" id="refresh-onu-list"></i>
                 </div>
             </div>
-
-            <div class="list-group onu-list-menu">
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.2</span>
-                    <span class=" onu-list-item">WRZ 475 Test Descritpion 1 </span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.14</span>
-                    <span class=" onu-list-item">WRZ 475 Test Descritpion 2</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.120</span>
-                    <span class=" onu-list-item">WRZ 492 Test Descritpion 3</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.3</span>
-                    <span class=" onu-list-item">WRZ 527 Test Descritpion 4</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.9</span>
-                    <span class=" onu-list-item">WRZ 397 Test Descritpion 5</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.2</span>
-                    <span class=" onu-list-item">WRZ 475 Test Descritpion 6</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.70</span>
-                    <span class=" onu-list-item">WRZ 475 Test Descritpion 7</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">6.2</span>
-                    <span class=" onu-list-item">WRZ 492 Test Descritpion 8</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.2</span>
-                    <span class=" onu-list-item">WRZ 527 Test Descritpion 9</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.2</span>
-                    <span class=" onu-list-item">WRZ 397 Test Descritpion 10</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.2</span>
-                    <span class=" onu-list-item">WRZ 475  Test Descritpion 11</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">1.14</span>
-                    <span class=" onu-list-item">WRZ 475  Test Descritpion 12</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.100</span>
-                    <span class=" onu-list-item">WRZ 492  Test Descritpion 13</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.101</span>
-                    <span class=" onu-list-item">WRZ 527  Test Descritpion 14</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">2.102</span>
-                    <span class=" onu-list-item">WRZ 397  Test Descritpion 15</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">4.2</span>
-                    <span class=" onu-list-item">WRZ 475  Test Descritpion 16</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">4.5</span>
-                    <span class=" onu-list-item">WRZ 475  Test Descritpion 17</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">4.89</span>
-                    <span class=" onu-list-item">WRZ 492  Test Descritpion 18</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">4.102</span>
-                    <span class=" onu-list-item">WRZ 527  Test Descritpion 19</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-                <a class="list-group-item borderless">
-                    <span class=" onu-list-id">4.103</span>
-                    <span class=" onu-list-item">WRZ 397  Test Descritpion 20</span>
-                    <span class=" onu-list-sn glyphicon glyphicon-barcode pull-right"></span>
-                </a>
-            </div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-6"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+            <table class="onu-list table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
+                        <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.2</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 475 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.3</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 366 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.6</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 459 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.90</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 362 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.91</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 188 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.100</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 166 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">1.102</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 200 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">2.2</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 175 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">2.3</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 366 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">5.6</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 159 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">2.90</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 162 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">2.91</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 88 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">2.100</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 66 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">2.102</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 100 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.2</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 675 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.3</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 669 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.6</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 659 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.90</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 662 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.91</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 688 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.100</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 636 Test Descritpion 1</td>
+                    </tr>
+                    <tr class="clickable-row" data-href="url://">
+                        <td class="onu-list-id">22.102</td>
+                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
+                        <td class="onu-list-item">WRZ 600 Test Descritpion 1</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
+        <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
+            <table class="onu-details">
+                <tbody>
+                    <tr>
+                        <td class="onu-detail-description onu-detail-description-head"><i class="glyphicon glyphicon-refresh" id="refresh-onu-details"></i>4.102</td>
+                        <td class="onu-detail-item item-bold onu-detail-item-head">WRZ 397 Test Descritpion</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Typ modemu:</td>
+                        <td class="onu-detail-item info-indicator">H645G</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Numer seryjny:</td>
+                        <td class="onu-detail-item info-indicator">DSNWcbd38a9d</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Połączenie optyczne:</td>
+                        <td class="onu-detail-item success-indicator">aktywne</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Ostatnie rozłączenie:</td>
+                        <td class="onu-detail-item info-indicator">brak zasilania</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Moc optycza:</td>
+                        <td class="onu-detail-item warning-indicator">-21.5dBm</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Czas połączenia:</td>
+                        <td class="onu-detail-item info-indicator">0d, 10:12:42</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Czas pracy:</td>
+                        <td class="onu-detail-item info-indicator">0d, 10:12:52</td>
+                    </tr>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">Czas od rozłączenia:</td>
+                        <td class="onu-detail-item info-indicator">0d, 00:00:00</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Stan blokady:</td>
+                        <td class="onu-detail-item success-indicator">brak blokady</td>
+                    </tr>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">Powód blokady:</td>
+                        <td class="onu-detail-item danger-indicator">brak blokady</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Profil usługowy:</td>
+                        <td class="onu-detail-item info-indicator">INTERNET-H645G-100M-50M-VLAN2011</td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">Interfejs Ethernet:</td>
+                        <td class="onu-detail-item success-indicator">100 Mb/s - podniesiony</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="hidden-xs">
+                                <img src="~/images/ONU/H645G.png" class="img-responsive center-block" style="zoom:80%" alt="H645G">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
