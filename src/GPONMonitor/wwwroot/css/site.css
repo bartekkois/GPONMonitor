@@ -37,20 +37,20 @@ table.onu-list> tbody > tr:hover, table.onu-list > tbody > tr:focus {
 	background-color: #eef8fc;
 }
 
-onu-list-id {
+td.onu-list-id {
 	font-size: 1.3em;
 	font-weight: normal;
 	text-align: right;
 }
 
-onu-list-sn {
+td.onu-list-sn {
 	font-size: 1.2em;
 	font-weight: normal;
 	text-align: center;
 	color: #5bc0de;
 }
 
-onu-list-item {
+td.onu-list-item {
 	font-size: 1.3em;
 	font-weight: normal;
 }
@@ -75,23 +75,23 @@ table.onu-details > tbody > tr > td {
 	white-space: nowrap;
 }
 
-onu-detail-description {
+td.onu-detail-description {
 	font-size: 1.3em;
 	font-weight: normal;
 	text-align: right;
 }
 
-onu-detail-item {
+td.onu-detail-item {
 	font-size: 1.3em;
 	font-weight: bold;
 }
 
-onu-detail-description-head {
+td.onu-detail-description-head {
 	font-size: 2.0em;
 	font-weight: normal;
 }
 
-onu-detail-item-head {
+td.onu-detail-item-head {
 	font-size: 2.0em;
 	font-weight: normal;
 }
