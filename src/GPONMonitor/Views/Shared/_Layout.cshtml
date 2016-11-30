@@ -35,7 +35,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @foreach (var oltConfiguration in Model)
                     {
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">@oltConfiguration.Name</a></li>
+                        <li><a href="#" class="js-get-onu-list" data-olt-id="@oltConfiguration.Id">@oltConfiguration.Name</a></li>
                     }
                 </ul>
             </div>

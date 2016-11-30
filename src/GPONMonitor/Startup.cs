@@ -4,6 +4,7 @@ using GPONMonitor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -41,7 +42,8 @@ namespace GPONMonitor
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
             services.AddOptions();
             services.Configure<DevicesConfiguration>(Configuration.GetSection("DevicesConfiguration"));

@@ -3,7 +3,7 @@
     "Devices": [
       {
         "Name": "GPON OLT A",
-        "IpAddress": "10.2.1.11",
+        "IpAddress": "10.1.1.21",
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
@@ -19,7 +19,7 @@
       },
       {
         "Name": "GPON OLT C",
-        "IpAddress": "10.1.1.21",
+        "IpAddress": "10.2.1.11",
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",

@@ -19,7 +19,7 @@ namespace GPONMonitor.Controllers.API
             _snmpDataService = snmpDataService;
         }
 
-        // GET: api/Onu/?oltId=1
+        // GET: api/Olt/?oltId=1
         [HttpGet]
         public async Task<IActionResult> GetOnuDescriptionListAsync(uint oltId)
         {

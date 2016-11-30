@@ -125,8 +125,8 @@ namespace GPONMonitor.Services
 
             EthernetPortStateResponseDictionary = new Dictionary<int, ResponseDescription>()
             {
-                { 1, new ResponseDescription(_localizer["up"], SeverityLevel.Danger) },
-                { 2, new ResponseDescription(_localizer["down"], SeverityLevel.Success) },
+                { 1, new ResponseDescription(_localizer["up"], SeverityLevel.Success) },
+                { 2, new ResponseDescription(_localizer["down"], SeverityLevel.Danger) },
                 { 255, new ResponseDescription(_localizer["unknown"], SeverityLevel.Unknown) }
             };
 

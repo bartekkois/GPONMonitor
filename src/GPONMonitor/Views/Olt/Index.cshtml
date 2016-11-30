@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
     ViewData["Title"] = "GPON Monitor";
 }
 
@@ -12,7 +15,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    <i class="glyphicon glyphicon-refresh" id="refresh-onu-list"></i>
+                    <i class="glyphicon glyphicon-refresh" id="refresh-onu-list" data-olt-id="0"></i>
                 </div>
             </div>
         </div>
@@ -20,6 +23,10 @@
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+            <div class="alert alert-dismissible alert-warning hidden" id="onu-list-alert">
+                <h4>@Localizer["Error"]</h4>
+                <h5 id="onu-list-alert-description"></h5>
+            </div>
             <table class="onu-list table-hover">
                 <thead>
                     <tr>
@@ -28,175 +35,94 @@
                         <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.2</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 475 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.3</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 366 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.6</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 459 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.90</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 362 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.91</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 188 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.100</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 166 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">1.102</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 200 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">2.2</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 175 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">2.3</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 366 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">5.6</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 159 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">2.90</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 162 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">2.91</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 88 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">2.100</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 66 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">2.102</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 100 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.2</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 675 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.3</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 669 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.6</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 659 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.90</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 662 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.91</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 688 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.100</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 636 Test Descritpion 1</td>
-                    </tr>
-                    <tr class="clickable-row" data-href="url://">
-                        <td class="onu-list-id">22.102</td>
-                        <td class="onu-list-sn"><i class="glyphicon glyphicon-barcode" title="DSNWcbd36cdb"></i></td>
-                        <td class="onu-list-item">WRZ 600 Test Descritpion 1</td>
-                    </tr>
+                <tbody data-olt-id="0">
                 </tbody>
             </table>
         </div>
 
         <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
+            <div class="alert alert-dismissible alert-warning hidden" id="onu-details-alert">
+                <h4>@Localizer["Error"]</h4>
+                <h5 id="onu-details-alert-description"></h5>
+            </div>
             <table class="onu-details">
                 <tbody>
                     <tr>
-                        <td class="onu-detail-description onu-detail-description-head"><i class="glyphicon glyphicon-refresh" id="refresh-onu-details"></i>4.102</td>
-                        <td class="onu-detail-item item-bold onu-detail-item-head">WRZ 397 Test Descritpion</td>
+                        <td class="onu-detail-description onu-detail-description-head"><span id="onu-olt-port-id-onu-id"></span><i class="glyphicon glyphicon-refresh" id="refresh-onu-details"></i></td>
+                        <td class="onu-detail-item item-bold onu-detail-item-head" id="onu-description"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Typ modemu:</td>
-                        <td class="onu-detail-item info-indicator">H645G</td>
+                        <td class="onu-detail-description">@Localizer["Model type:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-model-type"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Numer seryjny:</td>
-                        <td class="onu-detail-item info-indicator">DSNWcbd38a9d</td>
+                        <td class="onu-detail-description">@Localizer["Serial number:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-gpon-serial-number"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Połączenie optyczne:</td>
-                        <td class="onu-detail-item success-indicator">aktywne</td>
+                        <td class="onu-detail-description">@Localizer["Optical connection:"]</td>
+                        <td class="onu-detail-item" id="onu-optical-connection-state"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Ostatnie rozłączenie:</td>
-                        <td class="onu-detail-item info-indicator">brak zasilania</td>
+                        <td class="onu-detail-description">@Localizer["Last deactivation reason:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-connection-deactivation-reason"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Moc optycza:</td>
-                        <td class="onu-detail-item warning-indicator">-21.5dBm</td>
+                        <td class="onu-detail-description">@Localizer["Optical power received:"]</td>
+                        <td class="onu-detail-item" id="onu-optical-power-received"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Czas połączenia:</td>
-                        <td class="onu-detail-item info-indicator">0d, 10:12:42</td>
+                        <td class="onu-detail-description">@Localizer["Connection uptime:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-optical-connection-uptime"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Czas pracy:</td>
-                        <td class="onu-detail-item info-indicator">0d, 10:12:52</td>
+                        <td class="onu-detail-description">@Localizer["System uptime:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-system-uptime"></td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">@Localizer["Inactive time:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-connection-inactive-time"></td>
+                    </tr>
+                    <tr>
+                        <td class="onu-detail-description">@Localizer["Block status:"]</td>
+                        <td class="onu-detail-item" id="onu-block-status"></td>
                     </tr>
                     <tr class="hidden">
-                        <td class="onu-detail-description">Czas od rozłączenia:</td>
-                        <td class="onu-detail-item info-indicator">0d, 00:00:00</td>
+                        <td class="onu-detail-description">@Localizer["Block reason:"]</td>
+                        <td class="onu-detail-item" id="onu-blok-reason"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">Stan blokady:</td>
-                        <td class="onu-detail-item success-indicator">brak blokady</td>
+                        <td class="onu-detail-description">@Localizer["Service profile:"]</td>
+                        <td class="onu-detail-item indicator-info" id="onu-gpon-profile"></td>
                     </tr>
                     <tr class="hidden">
-                        <td class="onu-detail-description">Powód blokady:</td>
-                        <td class="onu-detail-item danger-indicator">brak blokady</td>
+                        <td class="onu-detail-description">@Localizer["Interface Ethernet 1:"]</td>
+                        <td class="onu-detail-item" id="onu-ethernet-port-1-state-and-speed"></td>
                     </tr>
-                    <tr>
-                        <td class="onu-detail-description">Profil usługowy:</td>
-                        <td class="onu-detail-item info-indicator">INTERNET-H645G-100M-50M-VLAN2011</td>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">@Localizer["Interface Ethernet 2:"]</td>
+                        <td class="onu-detail-item" id="onu-ethernet-port-2-state-and-speed"></td>
                     </tr>
-                    <tr>
-                        <td class="onu-detail-description">Interfejs Ethernet:</td>
-                        <td class="onu-detail-item success-indicator">100 Mb/s - podniesiony</td>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">@Localizer["Interface Ethernet 3:"]</td>
+                        <td class="onu-detail-item" id="onu-ethernet-port-3-state-and-speed"></td>
                     </tr>
-                    <tr>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">@Localizer["Interface Ethernet 4:"]</td>
+                        <td class="onu-detail-item" id="onu-ethernet-port-4-state-and-speed"></td>
+                    </tr>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">@Localizer["Interface VoIP 1:"]</td>
+                        <td class="onu-detail-item" id="onu-voip-port-1-state"></td>
+                    </tr>
+                    <tr class="hidden">
+                        <td class="onu-detail-description">@Localizer["Interface VoIP 2:"]</td>
+                        <td class="onu-detail-item" id="onu-voip-port-2-state"></td>
+                    </tr>
+                    <tr class="hidden">
                         <td colspan="2">
                             <div class="hidden-xs">
-                                <img src="~/images/ONU/H645G.png" class="img-responsive center-block" style="zoom:80%" alt="H645G">
+                                <img src="" class="img-responsive center-block" id="onu-image" style="zoom:80%">
                             </div>
                         </td>
                     </tr>
@@ -211,6 +137,10 @@
     <script>
          $(document).ready(function() {
              TooltipWhenOverflow.init();
+             OnuDescriptionListSearch.init();
+             OltDescriptionListController.init('.navbar-right');
+             OltDescriptionListController.initializeOnuList(0);
+             OnuDetailsController.init();
          });
     </script>
 }
