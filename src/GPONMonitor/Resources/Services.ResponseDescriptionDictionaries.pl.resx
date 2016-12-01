@@ -258,7 +258,7 @@
     <comment>OpticalConnectionStateResponseDictionary 0</comment>
   </data>
   <data name="loss of frame (LOFI)" xml:space="preserve">
-    <value>uszk. kabel abonencki (LOFI)</value>
+    <value>uszkodzony kabel (LOFI)</value>
     <comment>OpticalConnectionDeactivationReasonResponseDictionary 4</comment>
   </data>
   <data name="loss of key sync (LOKI)" xml:space="preserve">
@@ -278,7 +278,7 @@
     <comment>OpticalConnectionDeactivationReasonResponseDictionary 100</comment>
   </data>
   <data name="loss of signal (LOSI)" xml:space="preserve">
-    <value>uszk. kabel abonencki (LOSI)</value>
+    <value>uszkodzony kabel (LOSI)</value>
     <comment>OpticalConnectionDeactivationReasonResponseDictionary 3</comment>
   </data>
   <data name="manual block" xml:space="preserve">

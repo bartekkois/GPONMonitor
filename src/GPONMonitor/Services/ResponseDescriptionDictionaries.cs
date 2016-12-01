@@ -70,8 +70,8 @@ namespace GPONMonitor.Services
             {
                 { 1, new ResponseDescription(_localizer["none"], SeverityLevel.Danger) },
                 { 2, new ResponseDescription(_localizer["dying gasp (DGI)"], SeverityLevel.Danger) },
-                { 3, new ResponseDescription(_localizer["loss of signal (LOSI)"], SeverityLevel.Success) },    // TO BE FIXED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                { 4, new ResponseDescription(_localizer["loss of frame (LOFI)"], SeverityLevel.Success) },      // TO BE FIXED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                { 3, new ResponseDescription(_localizer["loss of signal (LOSI)"], SeverityLevel.Success) },
+                { 4, new ResponseDescription(_localizer["loss of frame (LOFI)"], SeverityLevel.Success) },
                 { 5, new ResponseDescription(_localizer["signal fail (SFI)"], SeverityLevel.Danger) },
                 { 6, new ResponseDescription(_localizer["start-up failure (SUFI)"], SeverityLevel.Danger) },
                 { 7, new ResponseDescription(_localizer["loss of PLOAM (LOAI)"], SeverityLevel.Success) },
