@@ -1,4 +1,8 @@
-﻿{
+{
+  "title": "GPON Monitor",
+  "version": "0.9.0",
+  "copyright": "Bartek Kois",
+  "description": "GPON Monitor is an ASP.NET Core web application intended for quick diagnostic of Dasan Networks GPON OLTs and related ONTs.",
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",

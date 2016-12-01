@@ -28,7 +28,7 @@
             var searchTerm = $("#search-form").val().toLowerCase();
             if (searchTerm !== "") {
                 onuListTableTbody.find("tr").each(function () {
-                    if (~$(this).find("td.onu-list-item").text().toLowerCase().indexOf(searchTerm))
+                    if (~$(this).find("td.onu-list-item").text().toLowerCase().indexOf(searchTerm) || ~$(this).find("td.onu-list-sn").text().toLowerCase().indexOf(searchTerm))
                         $(this).removeClass("hidden");
                     else
                         $(this).addClass("hidden");

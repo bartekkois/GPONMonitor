@@ -28,7 +28,7 @@ var OnuDescriptionListSearch = (function () {
             var searchTerm = $("#search-form").val().toLowerCase();
             if (searchTerm !== "") {
                 onuListTableTbody.find("tr").each(function () {
-                    if (~$(this).find("td.onu-list-item").text().toLowerCase().indexOf(searchTerm))
+                    if (~$(this).find("td.onu-list-item").text().toLowerCase().indexOf(searchTerm) || ~$(this).find("td.onu-list-sn").text().toLowerCase().indexOf(searchTerm))
                         $(this).removeClass("hidden");
                     else
                         $(this).addClass("hidden");
@@ -48,12 +48,13 @@ var OnuDescriptionListSearch = (function () {
 }());
 var TooltipWhenOverflow = (function () {
     "use strict";
+
     var init = function () {
-        $(document).on('mouseenter', '.onu-list-id, .onu-list-item, .onu-detail-description, .onu-detail-item', function () {
+        $(document).on("mouseenter", ".onu-list-id, .onu-list-item, .onu-detail-description, .onu-detail-item", function () {
             var $this = $(this);
 
-            if (this.offsetWidth < this.scrollWidth && !$this.attr('title')) {
-                $this.attr('title', $this.text());
+            if (this.offsetWidth < this.scrollWidth && !$this.attr("title")) {
+                $this.attr("title", $this.text());
             }
         });
     };
@@ -344,6 +345,7 @@ var OnuDetailsController = function (onuDetailsService) {
         onuDetailsAlert.removeClass("hidden");
         onuDetailsAlertDescription.text(result.responseText);
         onuDetailsTbody.find("tr > td.onu-detail-item").empty();
+        $("#onu-image").parents().eq(2).addClass("hidden");
         onuDetailsRefreshButton.attr("data-olt-id", oltId).attr("data-olt-port-id", oltPortId).attr("data-onu-id", onuId);
         onuDetailsRefreshButton.removeClass("gly-spin");
     };

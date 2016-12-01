@@ -3,6 +3,7 @@ using GPONMonitor.Models.Configuration;
 using Microsoft.Extensions.Options;
 using GPONMonitor.Services;
 using Microsoft.Extensions.Localization;
+using System.Reflection;
 
 namespace GPONMonitor.Controllers
 {
@@ -21,6 +22,8 @@ namespace GPONMonitor.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Version"] = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+
             return View(_dataService.GetConfiguredOltListAsync());
         }
 

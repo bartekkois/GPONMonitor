@@ -184,6 +184,7 @@
         onuDetailsAlert.removeClass("hidden");
         onuDetailsAlertDescription.text(result.responseText);
         onuDetailsTbody.find("tr > td.onu-detail-item").empty();
+        $("#onu-image").parents().eq(2).addClass("hidden");
         onuDetailsRefreshButton.attr("data-olt-id", oltId).attr("data-olt-port-id", oltPortId).attr("data-onu-id", onuId);
         onuDetailsRefreshButton.removeClass("gly-spin");
     };
