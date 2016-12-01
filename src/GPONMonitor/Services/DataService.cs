@@ -98,7 +98,7 @@ namespace GPONMonitor.Services
                 case "H665G":
                     return new H665GOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 case "H640GW-02":
-                    return new H665GOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
+                    return new H640GW02Onu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 case "H660GW":
                     return new H660GWOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
                 case "H680GW":
