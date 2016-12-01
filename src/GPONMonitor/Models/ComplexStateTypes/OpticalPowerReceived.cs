@@ -17,11 +17,11 @@
                 {
                     decimal calculateddBmPower = parsedValue / 10;
 
-                    if (calculateddBmPower < -14.0m && calculateddBmPower > -26.0m)
+                    if (calculateddBmPower < -9.0m && calculateddBmPower > -26.0m)
                     {
                         Severity = SeverityLevel.Success;
                     }
-                    else if ((calculateddBmPower < -13.0m && calculateddBmPower >= -14.0m) || (calculateddBmPower <= -26.0m && calculateddBmPower > -27.0m))
+                    else if ((calculateddBmPower < -8.0m && calculateddBmPower >= -9.0m) || (calculateddBmPower <= -26.0m && calculateddBmPower > -27.0m))
                     {
                         Severity = SeverityLevel.Warning;
                     }
