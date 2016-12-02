@@ -162,9 +162,9 @@ namespace GPONMonitor.Services
 
             VoIPLinestatusResponseDictionary = new Dictionary<int, ResponseDescription>()
             {
-                { 1, new ResponseDescription(_localizer["none initial"], SeverityLevel.Default) },
+                { 1, new ResponseDescription(_localizer["none initial"], SeverityLevel.Warning) },
                 { 2, new ResponseDescription(_localizer["registered"], SeverityLevel.Success) },
-                { 3, new ResponseDescription(_localizer["in session"], SeverityLevel.Info) },
+                { 3, new ResponseDescription(_localizer["in session"], SeverityLevel.Success) },
                 { 4, new ResponseDescription(_localizer["failed registration (ICMP error)"], SeverityLevel.Danger) },
                 { 5, new ResponseDescription(_localizer["failed registration (failed TCP)"], SeverityLevel.Danger) },
                 { 6, new ResponseDescription(_localizer["failed registration (failed authentication)"], SeverityLevel.Danger) },
@@ -175,9 +175,9 @@ namespace GPONMonitor.Services
                 { 11, new ResponseDescription(_localizer["failed invite (failed authentication)"], SeverityLevel.Danger) },
                 { 12, new ResponseDescription(_localizer["failed invite (timeout)"], SeverityLevel.Danger) },
                 { 13, new ResponseDescription(_localizer["failed invite (server fail code)"], SeverityLevel.Danger) },
-                { 14, new ResponseDescription(_localizer["port not configured"], SeverityLevel.Default) },
-                { 15, new ResponseDescription(_localizer["config done"],  SeverityLevel.Default) },
-                { 255, new ResponseDescription(_localizer["unknown"], SeverityLevel.Success) }
+                { 14, new ResponseDescription(_localizer["port not configured"], SeverityLevel.Warning) },
+                { 15, new ResponseDescription(_localizer["config done"],  SeverityLevel.Success) },
+                { 255, new ResponseDescription(_localizer["unknown"], SeverityLevel.Unknown) }
             };
 
         }

@@ -43,7 +43,7 @@ namespace GPONMonitor.Models.Olt
             }
         }
 
-        private async Task<IList<Variable>> SnmpSetAsyncWithTimeout(VersionCode snmpVersion, string oid, string data, int snmpRequestTimeout)
+        private async Task<IList<Variable>> SnmpSetAsyncWithTimeout(VersionCode snmpVersion, string oid, ISnmpData data, int snmpRequestTimeout)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             Task timeoutTask = Task.Delay(snmpRequestTimeout);
@@ -58,14 +58,14 @@ namespace GPONMonitor.Models.Olt
             return await task;
         }
 
-        private async Task<IList<Variable>> SnmpSetAsync(VersionCode snmpVersion, string oid, string data)
+        private async Task<IList<Variable>> SnmpSetAsync(VersionCode snmpVersion, string oid, ISnmpData data)
         {
             try
             {
                 Task<IList<Variable>> task = Messenger.Set(snmpVersion,
                                     new IPEndPoint(SnmpIPAddress, SnmpPort),
                                     new OctetString(SnmpCommunity),
-                                    new List<Variable> { new Variable(new ObjectIdentifier(oid), new OctetString(data)) });
+                                    new List<Variable> { new Variable(new ObjectIdentifier(oid), data) });
 
                 return await task;
             }

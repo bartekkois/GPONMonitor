@@ -40,8 +40,14 @@ namespace GPONMonitor.Models.Onu
             EthernetPort4State.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortState + "." + oltPortId + "." + oltOnuId + ".1.4").Result;
             EthernetPort4Speed.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortSpeed + "." + oltPortId + "." + oltOnuId + ".1.4").Result;
 
-            VoIPLine1State.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDVoIPLineState + "." + oltPortId + "." + oltOnuId + ".1").Result;
-            VoIPLine2State.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDVoIPLineState + "." + oltPortId + "." + oltOnuId + ".2").Result;
+            // Update VoIP data
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate1, 1);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOltPortId, (int)oltPortId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOnuId, (int)oltOnuId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate0, 0);
+
+            VoIPLine1State.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineState + "." + oltPortId + "." + oltOnuId + ".1").Result;
+            VoIPLine2State.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineState + "." + oltPortId + "." + oltOnuId + ".2").Result;
         }
     }
 }

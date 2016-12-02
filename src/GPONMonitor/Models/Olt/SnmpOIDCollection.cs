@@ -18,8 +18,8 @@
         public const string snmpOIDOnuOpticalCabelDistance = "1.3.6.1.4.1.6296.101.23.3.1.1.10";                    // Optical cable distance (followed by OnuPortId and OnuId)
 
         public const string snmpOIDOnuOpticalConnectionUptime = "1.3.6.1.4.1.6296.101.23.3.1.1.23";                 // Optical connection uptime (the elapsed time after ont is up) (followed by OnuPortId and OnuId)
-        public const string snmpOIDOpticalConnectionInactiveTime = "1.3.6.1.4.1.6296.101.23.3.1.1.85";              // Optical connection inactive time (the elapsed time after ont Inactive) (followed by OnuPortId and OnuId)
-        public const string snmpOIDSystemUptime = "1.3.6.1.4.1.6296.101.23.3.1.1.61";                               // System uptime (followed by OnuPortId and OnuId)
+        public const string snmpOIDOnuOpticalConnectionInactiveTime = "1.3.6.1.4.1.6296.101.23.3.1.1.85";              // Optical connection inactive time (the elapsed time after ont Inactive) (followed by OnuPortId and OnuId)
+        public const string snmpOIDOnuSystemUptime = "1.3.6.1.4.1.6296.101.23.3.1.1.61";                               // System uptime (followed by OnuPortId and OnuId)
         public const string snmpOIDOnuTimersUpdate1 = "1.3.6.1.4.1.6296.101.23.3.2.1";                              // Timers update (set 21)
         public const string snmpOIDOnuTimersUpdate2 = "1.3.6.1.4.1.6296.101.23.3.2.6";                              // Timers update (set OltPortId)
         public const string snmpOIDOnuTimersUpdate3 = "1.3.6.1.4.1.6296.101.23.3.2.7";                              // Timers update (set OnuId)
@@ -31,10 +31,10 @@
         public const string snmpOIDOnuEthernetPortState = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";                      // ETH port state (followed by OnuPortId, OnuId, 1 and PortNumber)
         public const string snmpOIDOnuEthernetPortSpeed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";                      // ETH port speed (followed by OnuPortId, OnuId, 1 and PortNumber)
 
-        public const string snmpOIDVoIPLineState = "1.3.6.1.4.1.6296.101.23.6.5.1.1.4";                             // Voip line state (followed by OnuPortId and OnuId)
-        public const string snmpOIDVoIPLineStateUpdate1 = "1.3.6.1.4.1.6296.101.23.6.5.2.1";                        // Voip line state update (set 1)
-        public const string snmpOIDVoIPLineStateUpdate2 = "1.3.6.1.4.1.6296.101.23.6.5.2.6";                        // Voip line state update (set OltPortId)
-        public const string snmpOIDVoIPLineStateUpdate3 = "1.3.6.1.4.1.6296.101.23.6.5.2.7";                        // Voip line state update (set OnuId)
-        public const string snmpOIDVoIPLineStateUpdate4 = "1.3.6.1.4.1.6296.101.23.6.5.2.3";                        // Voip line state (set 0)
+        public const string snmpOIDOnuVoIPLineState = "1.3.6.1.4.1.6296.101.23.6.5.1.1.4";                          // Voip line state (followed by OnuPortId and OnuId)
+        public const string snmpOIDOnuVoIPLineStateUpdate1 = "1.3.6.1.4.1.6296.101.23.6.5.2.1";                     // Voip line state update (set 1)
+        public const string snmpOIDOnuVoIPLineStateUpdateOltPortId = "1.3.6.1.4.1.6296.101.23.6.5.2.6";             // Voip line state update (set OltPortId)
+        public const string snmpOIDOnuVoIPLineStateUpdateOnuId = "1.3.6.1.4.1.6296.101.23.6.5.2.7";                 // Voip line state update (set OnuId)
+        public const string snmpOIDOnuVoIPLineStateUpdate0 = "1.3.6.1.4.1.6296.101.23.6.5.2.3";                     // Voip line state (set 0)
     }
 }

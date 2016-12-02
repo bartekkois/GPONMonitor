@@ -11,6 +11,7 @@ using GPONMonitor.Models.Onu;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Localization;
 using GPONMonitor.ViewModels;
+using Lextm.SharpSnmpLib;
 
 namespace GPONMonitor.Services
 {
@@ -106,6 +107,16 @@ namespace GPONMonitor.Services
                 default:
                     return new UnknownOnu(oltId, oltPortId, onuId, _responseDescriptionDictionaries, this);
             }
+        }
+
+        public async Task<IList<Variable>> SetStringPropertyAsync(uint oltId, string snmpOid, string data)
+        {
+            return await configuredOlts.Single(s => s.Id == oltId).SetStringPropertyAsync(snmpOid, data);
+        }
+
+        public async Task<IList<Variable>> SetIntPropertyAsync(uint oltId, string snmpOid, int data)
+        {
+            return await configuredOlts.Single(s => s.Id == oltId).SetIntPropertyAsync(snmpOid, data);
         }
     }
 }

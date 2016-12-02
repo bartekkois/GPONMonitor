@@ -112,5 +112,25 @@ namespace GPONMonitor.Models.Olt
 
             return parsedResult; 
         }
+
+        public async Task<IList<Variable>> SetStringPropertyAsync(string snmpOid, string data)
+        {
+            List<Variable> snmpResponse = await SnmpSetAsyncWithTimeout(SnmpVersion, snmpOid, new OctetString(data), SnmpTimeout) as List<Variable>;
+
+            if (snmpResponse.Count == 0)
+                throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
+
+            return snmpResponse;
+        }
+
+        public async Task<IList<Variable>> SetIntPropertyAsync(string snmpOid, int data)
+        {
+            List<Variable> snmpResponse = await SnmpSetAsyncWithTimeout(SnmpVersion, snmpOid, new Integer32(data), SnmpTimeout) as List<Variable>;
+
+            if (snmpResponse.Count == 0)
+                throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
+
+            return snmpResponse;
+        }
     }
 }

@@ -346,7 +346,7 @@ var OnuDetailsController = function (onuDetailsService) {
         // Onu VoIP Line 2 State
         if (result.hasOwnProperty("voIPLine2State")) {
             $("#onu-voip-port-2-state").text(result.voIPLine2State.description).parent("tr").removeClass("hidden");
-            $("#onu-voip-port-1-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine2State.severity));
+            $("#onu-voip-port-2-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine2State.severity));
         }
         else {
             $("#onu-voip-port-2-state").empty().parent("tr").addClass("hidden");
