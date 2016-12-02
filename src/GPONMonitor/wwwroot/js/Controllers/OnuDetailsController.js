@@ -110,7 +110,13 @@
 
         // Onu Ethernet Port 1 State and Speed
         if (result.hasOwnProperty("ethernetPort1State") && result.hasOwnProperty("ethernetPort1Speed")) {
-            $("#onu-ethernet-port-1-state-and-speed").text(result.ethernetPort1State.description + " - " + result.ethernetPort1Speed.description).parent("tr").removeClass("hidden");
+            var ethernetPort1StateAndSpeed;
+            if (result.ethernetPort1State.value === 1)
+                ethernetPort1StateAndSpeed = result.ethernetPort1State.description + " - " + result.ethernetPort1Speed.description;
+            else
+                ethernetPort1StateAndSpeed = result.ethernetPort1State.description;
+
+            $("#onu-ethernet-port-1-state-and-speed").text(ethernetPort1StateAndSpeed).parent("tr").removeClass("hidden");
             $("#onu-ethernet-port-1-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort1State.severity));
         }
         else {
@@ -120,7 +126,13 @@
 
         // Onu Ethernet Port 2 State and Speed
         if (result.hasOwnProperty("ethernetPort2State") && result.hasOwnProperty("ethernetPort2Speed")) {
-            $("#onu-ethernet-port-2-state-and-speed").text(result.ethernetPort2State.description + " - " + result.ethernetPort2Speed.description).parent("tr").removeClass("hidden");
+            var ethernetPort2StateAndSpeed;
+            if (result.ethernetPort2State.value === 1)
+                ethernetPort2StateAndSpeed = result.ethernetPort2State.description + " - " + result.ethernetPort2Speed.description;
+            else
+                ethernetPort2StateAndSpeed = result.ethernetPort2State.description;
+
+            $("#onu-ethernet-port-2-state-and-speed").text(ethernetPort2StateAndSpeed).parent("tr").removeClass("hidden");
             $("#onu-ethernet-port-2-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort2State.severity));
         }
         else {
@@ -130,7 +142,13 @@
 
         // Onu Ethernet Port 3 State and Speed
         if (result.hasOwnProperty("ethernetPort3State") && result.hasOwnProperty("ethernetPort3Speed")) {
-            $("#onu-ethernet-port-3-state-and-speed").text(result.ethernetPort3State.description + " - " + result.ethernetPort3Speed.description).parent("tr").removeClass("hidden");
+            var ethernetPort3StateAndSpeed;
+            if (result.ethernetPort3State.value === 1)
+                ethernetPort3StateAndSpeed = result.ethernetPort3State.description + " - " + result.ethernetPort3Speed.description;
+            else
+                ethernetPort3StateAndSpeed = result.ethernetPort3State.description;
+
+            $("#onu-ethernet-port-3-state-and-speed").text(ethernetPort3StateAndSpeed).parent("tr").removeClass("hidden");
             $("#onu-ethernet-port-3-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort3State.severity));
         }
         else {
@@ -140,6 +158,12 @@
 
         // Onu Ethernet Port 4 State and Speed
         if (result.hasOwnProperty("ethernetPort4State") && result.hasOwnProperty("ethernetPort4Speed")) {
+            var ethernetPort4StateAndSpeed;
+            if (result.ethernetPort4State.value === 1)
+                ethernetPort4StateAndSpeed = result.ethernetPort4State.description + " - " + result.ethernetPort4Speed.description;
+            else
+                ethernetPort4StateAndSpeed = result.ethernetPort4State.description;
+
             $("#onu-ethernet-port-4-state-and-speed").text(result.ethernetPort4State.description + " - " + result.ethernetPort4Speed.description).parent("tr").removeClass("hidden");
             $("#onu-ethernet-port-4-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort4State.severity));
         }
