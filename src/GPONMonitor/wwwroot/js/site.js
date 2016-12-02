@@ -325,7 +325,7 @@ var OnuDetailsController = function (onuDetailsService) {
             else
                 ethernetPort4StateAndSpeed = result.ethernetPort4State.description;
 
-            $("#onu-ethernet-port-4-state-and-speed").text(result.ethernetPort4State.description + " - " + result.ethernetPort4Speed.description).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-4-state-and-speed").text(ethernetPort4StateAndSpeed).parent("tr").removeClass("hidden");
             $("#onu-ethernet-port-4-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort4State.severity));
         }
         else {
@@ -345,8 +345,8 @@ var OnuDetailsController = function (onuDetailsService) {
 
         // Onu VoIP Line 2 State
         if (result.hasOwnProperty("voIPLine2State")) {
-            $("#onu-voip-port-2-state").text(result.voIPLine1State.description).parent("tr").removeClass("hidden");
-            $("#onu-voip-port-1-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine1State.severity));
+            $("#onu-voip-port-2-state").text(result.voIPLine2State.description).parent("tr").removeClass("hidden");
+            $("#onu-voip-port-1-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine2State.severity));
         }
         else {
             $("#onu-voip-port-2-state").empty().parent("tr").addClass("hidden");
