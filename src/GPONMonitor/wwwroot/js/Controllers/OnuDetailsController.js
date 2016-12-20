@@ -16,8 +16,8 @@
         var onuLink = $(e.target);
 
         var oltId = onuListTableTbody.attr("data-olt-id");
-        var oltPortId = onuLink.parent().attr("data-olt-port-id");
-        var onuId = onuLink.parent().attr("data-onu-id");
+        var oltPortId = onuLink.closest("tr").attr("data-olt-port-id");
+        var onuId = onuLink.closest("tr").attr("data-onu-id");
 
         onuDetailsRefreshButton.addClass("gly-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
@@ -83,6 +83,9 @@
         // Onu Optical Power Received
         $("#onu-optical-power-received").text(result.opticalPowerReceived.description);
         $("#onu-optical-power-received").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.opticalPowerReceived.severity));
+
+        // Onu Optical Cable Distance
+        $("#onu-optical-cable-distance").text(result.opticalCableDistance.description);
 
         // Onu Optical Connection Uptime
         $("#onu-optical-connection-uptime").text(result.opticalConnectionUptime.description);

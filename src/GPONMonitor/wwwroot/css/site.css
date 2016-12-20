@@ -24,6 +24,7 @@
 
 table.onu-list {
 	width: 100%;
+	cursor: pointer;
 }
 
 table.onu-list > tbody > tr > td {

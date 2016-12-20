@@ -156,6 +156,9 @@
   <data name="Model type:" xml:space="preserve">
     <value>Typ modemu:</value>
   </data>
+  <data name="Optical cable distance:" xml:space="preserve">
+    <value>Odległość:</value>
+  </data>
   <data name="Optical connection:" xml:space="preserve">
     <value>Połączenie optyczne:</value>
   </data>
