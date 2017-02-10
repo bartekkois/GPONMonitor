@@ -5941,7 +5941,7 @@
       ]
     },
     "SharpSnmpLib/10.0.0-beta1": {
-      "sha512": "N3Myl/F8xCc2UUTfpcuh9L1Ci1sUfi0nPkcLAqLrBbHo0hG8f1VUeabE68KRjpzADrnXJiGFV/ueGyjLoj802Q==",
+      "sha512": "5b1H3oVyLYmqHACEvnhDtWdDDAP96g3TfLvsj5ubdMzK9NH4oq1zrgXc9JuyYMUlMHoaJycWh8jP4s+vXMyI/A==",
       "type": "package",
       "path": "SharpSnmpLib/10.0.0-beta1",
       "files": [
