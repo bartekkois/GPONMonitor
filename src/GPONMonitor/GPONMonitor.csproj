@@ -17,6 +17,7 @@
   <ItemGroup>
     <Content Include="wwwroot\images\ONU\H660GW.png" />
     <Content Include="wwwroot\images\ONU\H665.png" />
+    <Content Include="wwwroot\js\Services\NavbarMediaResize.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +39,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="SharpSnmpLib" Version="10.0.0-beta1" />
-    <PackageReference Include="BundlerMinifier.Core" Version="2.2.306" />
+    <PackageReference Include="BundlerMinifier.Core" Version="2.4.337" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration.Tools" Version="1.1.0-preview4-final" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
