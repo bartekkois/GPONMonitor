@@ -58,7 +58,7 @@ namespace GPONMonitor
 
             services.AddSingleton<IDataService, DataService>();
             services.AddSingleton<IOltFormatChecks, OltFormatChecks>();
-            services.AddScoped<IResponseDescriptionDictionaries, ResponseDescriptionDictionaries>();
+            services.AddSingleton<IResponseDescriptionDictionaries, ResponseDescriptionDictionaries>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,8 +81,6 @@ namespace GPONMonitor
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -92,8 +90,6 @@ namespace GPONMonitor
             {
                 app.UseExceptionHandler("/Olt/Error");
             }
-
-            app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
 

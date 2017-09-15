@@ -61,8 +61,8 @@ namespace GPONMonitor.Models.Olt
         {
             List<OnuShortDescription> onuList = new List<OnuShortDescription>();
 
-            List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuGponSerialNumber, SnmpTimeout, WalkMode.WithinSubtree, SnmpTimeout);
-            List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuDescription, SnmpTimeout, WalkMode.WithinSubtree, SnmpTimeout);
+            List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuGponSerialNumber, WalkMode.WithinSubtree, SnmpTimeout);
+            List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuDescription, WalkMode.WithinSubtree, SnmpTimeout);
 
             foreach (Variable variable in snmpOnuGponSerialNumberList)
             {

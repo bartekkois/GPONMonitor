@@ -17,7 +17,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+    @Html.Raw(snippet.FullScript)
 </head>
 <body>
     <div id="main-navbar" class="navbar navbar-default navbar-fixed-top">

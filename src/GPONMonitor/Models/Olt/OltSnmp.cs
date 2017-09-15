@@ -62,7 +62,7 @@ namespace GPONMonitor.Models.Olt
         {
             try
             {
-                Task<IList<Variable>> task = Messenger.Set(snmpVersion,
+                Task<IList<Variable>> task = Messenger.SetAsync(snmpVersion,
                                     new IPEndPoint(SnmpIPAddress, SnmpPort),
                                     new OctetString(SnmpCommunity),
                                     new List<Variable> { new Variable(new ObjectIdentifier(oid), data) });
@@ -75,13 +75,13 @@ namespace GPONMonitor.Models.Olt
             }
         }
 
-        private async Task<List<Variable>> SnmpWalkAsyncWithTimeout(VersionCode snmpVersion, string oid, int timeout, WalkMode walkMode, int snmpRequestTimeout)
+        private async Task<List<Variable>> SnmpWalkAsyncWithTimeout(VersionCode snmpVersion, string oid, WalkMode walkMode, int snmpRequestTimeout)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             Task timeoutTask = Task.Delay(snmpRequestTimeout);
             Task<List<Variable>> task;
 
-            if (await Task.WhenAny(task = SnmpWalkAsync(snmpVersion, oid, timeout, walkMode), timeoutTask) == timeoutTask)
+            if (await Task.WhenAny(task = SnmpWalkAsync(snmpVersion, oid, walkMode), timeoutTask) == timeoutTask)
             {
                 cancellationTokenSource.Cancel();
                 throw new SnmpTimeoutException(_localizer["SNMP request timeout"]);
@@ -90,7 +90,7 @@ namespace GPONMonitor.Models.Olt
             return await task;
         }
 
-        private async Task<List<Variable>> SnmpWalkAsync(VersionCode snmpVersion, string oid, int timeout, WalkMode walkMode)
+        private async Task<List<Variable>> SnmpWalkAsync(VersionCode snmpVersion, string oid, WalkMode walkMode)
         {
             List<Variable> snmpWalkResult = new List<Variable>();
 
@@ -101,7 +101,6 @@ namespace GPONMonitor.Models.Olt
                                     new OctetString(SnmpCommunity),
                                     new ObjectIdentifier(oid),
                                     snmpWalkResult,
-                                    timeout,
                                     walkMode);
 
                 await taskWalk;
