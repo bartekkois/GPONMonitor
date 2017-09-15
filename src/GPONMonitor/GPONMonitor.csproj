@@ -15,12 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\images\ONU\H660GW.png" />
-    <Content Include="wwwroot\images\ONU\H665.png" />
-    <Content Include="wwwroot\js\Services\NavbarMediaResize.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
