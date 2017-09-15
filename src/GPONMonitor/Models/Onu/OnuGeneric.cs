@@ -67,12 +67,9 @@ namespace GPONMonitor.Models.Onu
             OpticalPowerReceived.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalPowerReceived + "." + oltPortId + "." + oltOnuId).Result;
             OpticalCableDistance.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalCabelDistance + "." + oltPortId + "." + oltOnuId).Result;
 
-            if (_snmpDataService.GetOltFirmwareVersionAsync(oltId).Result != "5.01")
-            {
-                OpticalConnectionUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId,SnmpOIDCollection.snmpOIDOnuOpticalConnectionUptime + "." + oltPortId + "." + oltOnuId).Result;
-                OpticalConnectionInactiveTime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionInactiveTime + "." + oltPortId + "." + oltOnuId).Result;
-                SystemUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuSystemUptime + "." + oltPortId + "." + oltOnuId).Result;
-            }
+            OpticalConnectionUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId,SnmpOIDCollection.snmpOIDOnuOpticalConnectionUptime + "." + oltPortId + "." + oltOnuId).Result;
+            OpticalConnectionInactiveTime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionInactiveTime + "." + oltPortId + "." + oltOnuId).Result;
+            SystemUptime.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuSystemUptime + "." + oltPortId + "." + oltOnuId).Result;
 
             BlockStatus.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockStatus + "." + oltPortId + "." + oltOnuId).Result;
             BlockReason.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockReason + "." + oltPortId + "." + oltOnuId).Result;
