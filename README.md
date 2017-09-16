@@ -8,4 +8,4 @@ GPON Monitor is an ASP.NET Core web application intended for quick diagnostic of
 The GPON Monitor documentation is avaible at [GPON Monitor Wiki](https://github.com/bartekkois/GPONMonitor/wiki/Home)
 
 ## License
-This software is distributed under the BSD License (see [LICENSE](https://github.com/bartekkois/GPONMonitor/blob/master/LICENSE) file)  file.
+This software is distributed under the BSD License (see [LICENSE](https://github.com/bartekkois/GPONMonitor/blob/master/LICENSE) file).
