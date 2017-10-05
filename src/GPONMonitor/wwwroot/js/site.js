@@ -303,6 +303,9 @@ var OnuDetailsController = function (onuDetailsService) {
         else
             $("#onu-block-reason").parent("tr").addClass("hidden");
 
+        // Onu firmware version
+        $("#onu-firmware-version").text(result.firmwareVersion.description);
+
         // Onu GPON Profile
         $("#onu-gpon-profile").text(result.gponProfile.description);
 

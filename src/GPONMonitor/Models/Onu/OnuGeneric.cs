@@ -14,6 +14,7 @@ namespace GPONMonitor.Models.Onu
         public DescriptionName DescriptionName { get; private set; }
         public GponSerialNumber GponSerialNumber { get; private set; }
         public GponProfile GponProfile { get; private set; }
+        public FirmwareVersion FirmwareVersion { get; set; }
 
         public OpticalConnectionState OpticalConnectionState { get; private set; }
         public OpticalConnectionDeactivationReason OpticalConnectionDeactivationReason { get; private set; }
@@ -46,6 +47,7 @@ namespace GPONMonitor.Models.Onu
             DescriptionName = new DescriptionName();
             GponSerialNumber = new GponSerialNumber();
             GponProfile = new GponProfile();
+            FirmwareVersion = new FirmwareVersion();
 
             OpticalConnectionState = new OpticalConnectionState(_responseDescriptionDictionaries);
             OpticalConnectionDeactivationReason = new OpticalConnectionDeactivationReason(_responseDescriptionDictionaries);
@@ -61,6 +63,7 @@ namespace GPONMonitor.Models.Onu
             DescriptionName.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuDescription + "." + oltPortId + "." + oltOnuId).Result;
             GponSerialNumber.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponSerialNumber + "." + oltPortId + "." + oltOnuId).Result;
             GponProfile.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuGponProfile + "." + oltPortId + "." + oltOnuId).Result;
+            FirmwareVersion.Value = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuFirmwareVersion + "." + oltPortId + "." + oltOnuId).Result;
 
             OpticalConnectionState.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState + "." + oltPortId + "." + oltOnuId).Result;
             OpticalConnectionDeactivationReason.Value = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionDeactivationReason + "." + oltPortId + "." + oltOnuId).Result;

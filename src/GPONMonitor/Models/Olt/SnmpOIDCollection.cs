@@ -11,6 +11,7 @@
         public const string snmpOIDOnuDescription = "1.3.6.1.4.1.6296.101.23.3.1.1.18";                             // Description (followed by OnuPortId and OnuId)
         public const string snmpOIDOnuGponSerialNumber = "1.3.6.1.4.1.6296.101.23.3.1.1.4";                         // Gpon Serial Number (followed by OnuPortId and OnuId)
         public const string snmpOIDOnuGponProfile = "1.3.6.1.4.1.6296.101.23.3.1.1.8";                              // Gpon profile (followed by OnuPortId and OnuId)
+        public const string snmpOIDOnuFirmwareVersion = "1.3.6.1.4.1.6296.101.23.3.1.1.12";                         // Onu active firmware version (followed by OnuPortId and OnuId)
 
         public const string snmpOIDOnuOpticalConnectionState = "1.3.6.1.4.1.6296.101.23.3.1.1.2";                   // Optical connection state (followed by OnuPortId and OnuId)
         public const string snmpOIDOnuOpticalConnectionDeactivationReason = "1.3.6.1.4.1.6296.101.23.3.1.1.45";     // Deactivation Reason (followed by OnuPortId and OnuId)

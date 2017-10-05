@@ -129,6 +129,9 @@
   <data name="Error" xml:space="preserve">
     <value>Błąd</value>
   </data>
+  <data name="Firmware version:" xml:space="preserve">
+    <value>Wersja oprogramowania:</value>
+  </data>
   <data name="Inactive time:" xml:space="preserve">
     <value>Czas od rozłączenia:</value>
   </data>
