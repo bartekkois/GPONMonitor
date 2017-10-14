@@ -63,6 +63,7 @@ namespace GPONMonitor.Models.Olt
 
             List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuGponSerialNumber, WalkMode.WithinSubtree, SnmpTimeout);
             List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuDescription, WalkMode.WithinSubtree, SnmpTimeout);
+            List<Variable> snmpOnuOpticalConnectionState = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState, WalkMode.WithinSubtree, SnmpTimeout);
 
             foreach (Variable variable in snmpOnuGponSerialNumberList)
             {
@@ -83,7 +84,22 @@ namespace GPONMonitor.Models.Olt
                 else
                     onuDescription = _localizer["undefined"];
 
-                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription, onuGponSerialNumber));
+                var relatedOnuOpticalConnectionState = snmpOnuOpticalConnectionState.FirstOrDefault(x => x.Id.ToNumerical().ToArray().ElementAt(13) == oltPortId && x.Id.ToNumerical().ToArray().ElementAt(14) == onuId);
+
+                string onuOpticalConnectionState;
+                if (relatedOnuOpticalConnectionState != null)
+                {
+                    if (relatedOnuOpticalConnectionState.Data.ToString() == "2")
+                        onuOpticalConnectionState = "up";
+                    else
+                        onuOpticalConnectionState = "down";
+                }
+                else
+                {
+                    onuOpticalConnectionState = "down";
+                }
+
+                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription, onuGponSerialNumber, onuOpticalConnectionState));
             }
 
             return onuList;

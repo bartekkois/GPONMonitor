@@ -164,16 +164,21 @@ var OltDescriptionListController = function (oltDescriptionListService) {
             var onuId = result[i].onuId;
             var onuGponSerialNumber = result[i].onuGponSerialNumber;
             var onuDescription;
-
             if (result[i].onuDescription !== "")
                 onuDescription = result[i].onuDescription;
             else
                 onuDescription = "(" + result[i].onuGponSerialNumber + ")";
 
+            var onuOpticalConnectionStateStyle;
+            if (result[i].onuOpticalConnectionState == "up")
+                onuOpticalConnectionStateStyle = "text-default";
+            else
+                onuOpticalConnectionStateStyle = "text-danger";
+
             onuListTableTbody.append(
             "<tr class='clickable-row' data-olt-port-id='" + oltPortId + "' data-onu-id='" + onuId + "' data-href='#'>" +
             "<td class='onu-list-id'>" + oltPortId + "." + onuId + "</td>" +
-            "<td class='onu-list-sn'><i class='glyphicon glyphicon-barcode' title='" + onuGponSerialNumber + "'></i></td>" +
+                "<td class='onu-list-sn'><i class='glyphicon glyphicon-barcode " + onuOpticalConnectionStateStyle + "' title='" + onuGponSerialNumber + "'></i></td>" +
             "<td class='onu-list-item'>" + onuDescription + "</td>" +
             "</tr>");
         }
