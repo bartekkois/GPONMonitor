@@ -5,7 +5,7 @@
     <Copyright>Bartek Kois</Copyright>
     <AssemblyTitle>GPON Monitor</AssemblyTitle>
     <VersionPrefix>1.0.2</VersionPrefix>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>GPONMonitor</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="Lextm.SharpSnmpLib" Version="10.0.0" />
-	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+	<PackageReference Include="Lextm.SharpSnmpLib" Version="10.0.11" />
+	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.0-preview1-35029" />
   </ItemGroup>
 
   <ItemGroup>
