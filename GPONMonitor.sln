@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPONMonitor", "src\GPONMonitor\GPONMonitor.csproj", "{DF0C9E45-CF8E-4C9E-B5C7-1DF1B62E1ADE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tests", "tests\tests.csproj", "{A959D1F7-CFDB-43D3-9DF9-A113351725E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,18 @@ Global
 		{DF0C9E45-CF8E-4C9E-B5C7-1DF1B62E1ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF0C9E45-CF8E-4C9E-B5C7-1DF1B62E1ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF0C9E45-CF8E-4C9E-B5C7-1DF1B62E1ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A959D1F7-CFDB-43D3-9DF9-A113351725E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A959D1F7-CFDB-43D3-9DF9-A113351725E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A959D1F7-CFDB-43D3-9DF9-A113351725E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A959D1F7-CFDB-43D3-9DF9-A113351725E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DF0C9E45-CF8E-4C9E-B5C7-1DF1B62E1ADE} = {2A5B93E3-AC3B-4080-BE8B-DDF2AC907D6C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B1CA605-7ABF-4FF9-85A3-17338699528E}
 	EndGlobalSection
 EndGlobal
