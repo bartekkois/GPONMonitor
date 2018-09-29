@@ -1,11 +1,8 @@
-﻿using GPONMonitor.Services;
+﻿using GPONMonitor.Models.OnuFactory;
 
 namespace GPONMonitor.Models.Onu
 {
-    public class UnknownOnu : OnuGeneric
+    public class UnknownOnu : GenericOnu, IOnuFactory
     {
-        public UnknownOnu(uint oltId, uint oltPortId, uint oltOnuId, IResponseDescriptionDictionaries responseDescriptionDictionaries, IDataService snmpDataService) : base(oltId, oltPortId, oltOnuId, responseDescriptionDictionaries, snmpDataService)
-        {
-        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GPONMonitor.Models;
+using GPONMonitor.Models.Onu;
+using GPONMonitor.Models.OnuFactory;
 using GPONMonitor.ViewModels;
 using Lextm.SharpSnmpLib;
 
@@ -13,7 +15,7 @@ namespace GPONMonitor.Services
         Task<string> GetOltUptimeAsync(uint oltId);
         Task<string> GetOltFirmwareVersionAsync(uint oltId);
         Task<IEnumerable<OnuShortDescription>> GetOnuDescriptionListAsync(uint oltId);
-        Task<object> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId);
+        Task<IOnuFactory> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId);
         Task<string> GetStringPropertyAsync(uint oltId, string snmpOid);
         Task<int?> GetIntPropertyAsync(uint oltId, string snmpOid);
         Task<IList<Variable>> SetStringPropertyAsync(uint oltId, string oid, string data);

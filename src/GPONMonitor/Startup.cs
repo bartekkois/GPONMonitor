@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
 using System.Linq;
+using AutoMapper;
 
 namespace GPONMonitor
 {
@@ -56,7 +57,8 @@ namespace GPONMonitor
                 }
             });
 
-            services.AddSingleton<IDataService, DataService>();
+            services.AddAutoMapper();
+            services.AddScoped<IDataService, DataService>();
             services.AddSingleton<IOltFormatChecks, OltFormatChecks>();
             services.AddSingleton<IResponseDescriptionDictionaries, ResponseDescriptionDictionaries>();
         }
