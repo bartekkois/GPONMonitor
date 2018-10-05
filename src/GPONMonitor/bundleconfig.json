@@ -18,13 +18,13 @@
   {
     "outputFileName": "wwwroot/js/site.js",
     "inputFiles": [
-      "wwwroot/js/services/OnuDescriptionListSearch.js",
+      "wwwroot/js/Services/OnuDescriptionListSearch.js",
       "wwwroot/js/Services/TooltipWhenOverflow.js",
-      "wwwroot/js/services/NavbarMediaResize.js",
+      "wwwroot/js/Services/NavbarMediaResize.js",
       "wwwroot/js/Services/OltDescriptionListService.js",
       "wwwroot/js/Services/OnuDetailsService.js",
       "wwwroot/js/Controllers/OltDescriptionListController.js",
-      "wwwroot/js/controllers/OnuDetailsController.js"
+      "wwwroot/js/Controllers/OnuDetailsController.js"
     ]
   }
 ]
