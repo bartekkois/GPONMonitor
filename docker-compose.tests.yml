@@ -4,7 +4,7 @@ services:
   gponmonitor.tests:
     image: ${DOCKER_REGISTRY}gponmonitor.tests:1.0.4
     volumes:
-      - /opt/vsts/work/_temp:/var/temp
+      - ./temp:/var/temp
     build:
       context: .
       dockerfile: ./Dockerfile.tests
