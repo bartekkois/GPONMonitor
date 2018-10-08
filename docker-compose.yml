@@ -1,13 +1,13 @@
-version: '3.4'
+version: '3.5'
 
 services:
   gponmonitor:
-    image: ${DOCKER_REGISTRY}gponmonitor
+    image: ${DOCKER_REGISTRY}gponmonitor:1.0.4
     restart: always
     volumes:
-      - /docker/GPONMonitor/devicesconfiguration.json:/app/devicesconfiguration.json
+      - /docker/GPONMonitor/devicesconfiguration.json:/app/devicesconfiguration.json:ro
     ports:
       - "5001:80"
     build:
       context: .
-      dockerfile: src/GPONMonitor/Dockerfile
+      dockerfile: ./Dockerfile
