@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+  gponmonitor:
+    image: bartekkois/gponmonitor:1.0.4
+    restart: always
+    volumes:
+      - /docker/GPONMonitor/devicesconfiguration.json:/app/devicesconfiguration.json:ro
+    ports:
+      - "5001:80"

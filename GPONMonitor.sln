@@ -8,9 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C887CC0A-2091-43DB-B212-88A41716B257}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
+		docker-compose.build.yml = docker-compose.build.yml
+		docker-compose.deploy.yml = docker-compose.deploy.yml
 		docker-compose.override.yml = docker-compose.override.yml
 		docker-compose.tests.yml = docker-compose.tests.yml
-		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 		Dockerfile.tests = Dockerfile.tests
 	EndProjectSection
