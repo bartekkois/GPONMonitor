@@ -44,7 +44,7 @@ namespace tests
                 FirmwareVersion = new ComplexStringType("2.45", "2.45", SeverityLevel.Default),
 
                 OpticalConnectionState = new ComplexIntType(2, "aktywny", SeverityLevel.Success),
-                OpticalConnectionDeactivationReason = new ComplexIntType(1, "zanik zasilania (DGi)", SeverityLevel.Danger),
+                OpticalConnectionDeactivationReason = new ComplexIntType(1, "zanik zasilania (DGi)", SeverityLevel.Info),
                 OpticalPowerReceived = new ComplexStringType("-215", "-21,5 dBm", SeverityLevel.Success),
                 OpticalCableDistance = new ComplexIntType(1115, "1115 m", SeverityLevel.Default),
 
@@ -89,7 +89,7 @@ namespace tests
             onu.FirmwareVersion.Should().BeEquivalentTo(new ComplexStringType("2.45", "2.45", SeverityLevel.Default));
 
             onu.OpticalConnectionState.Should().BeEquivalentTo(new ComplexIntType(2, "aktywny", SeverityLevel.Success));
-            onu.OpticalConnectionDeactivationReason.Should().BeEquivalentTo(new ComplexIntType(1, "zanik zasilania (DGi)", SeverityLevel.Danger));
+            onu.OpticalConnectionDeactivationReason.Should().BeEquivalentTo(new ComplexIntType(1, "zanik zasilania (DGi)", SeverityLevel.Info));
             onu.OpticalPowerReceived.Should().BeEquivalentTo(new ComplexStringType("-215", "-21,5 dBm", SeverityLevel.Success));
             onu.OpticalCableDistance.Should().BeEquivalentTo(new ComplexIntType(1115, "1115 m", SeverityLevel.Default));
 
