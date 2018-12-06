@@ -21,10 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="AutoMapper" Version="7.0.1" />
-	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+	<PackageReference Include="AutoMapper" Version="8.0.0" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
 	<PackageReference Include="Lextm.SharpSnmpLib" Version="10.0.11" />
-	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.0-preview1-35029" />
+	<PackageReference Include="Microsoft.AspNetCore.All" />
   </ItemGroup>
 
   <ItemGroup>
