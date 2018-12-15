@@ -65,10 +65,14 @@ namespace GPONMonitor.Models.OnuFactory
             int? voipPort1State = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineState + "." + oltPortId + "." + onuId + ".1").Result;
             onu.VoIPLine1State = new ComplexIntType(voipPort1State, _responseDescriptionDictionaries.VoIPLinestatusResponse(voipPort1State));
 
-
             // VoIP port 2 state
-            int? voipPort2State = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineState + "." + oltPortId + "." + onuId + ".2").Result;
-            onu.VoIPLine2State = new ComplexIntType(voipPort2State, _responseDescriptionDictionaries.VoIPLinestatusResponse(voipPort2State));
+            onu.VoIPLine2State = null;
+
+            if (_snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineCheckIfPresent + "." + oltPortId + "." + onuId + ".2" + ".2").Result == 5)
+            {
+                int? voipPort2State = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineState + "." + oltPortId + "." + onuId + ".2").Result;
+                onu.VoIPLine2State = new ComplexIntType(voipPort2State, _responseDescriptionDictionaries.VoIPLinestatusResponse(voipPort2State));
+            }
 
             return onu;
         }
