@@ -57,7 +57,7 @@ namespace GPONMonitor.Models.OnuFactory
             // Update VoIP data
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate1, 1);
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOltPortId, (int)oltPortId);
-            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOnuId, (int)oltId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOnuId, (int)onuId);
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate0, 0);
 
 
