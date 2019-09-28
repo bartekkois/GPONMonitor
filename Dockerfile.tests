@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk AS testrunner
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-sdk AS testrunner
 WORKDIR /src
 COPY *.sln .
 COPY src/GPONMonitor/*.csproj ./src/GPONMonitor/

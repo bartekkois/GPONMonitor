@@ -10,12 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Linq;
 using AutoMapper;
+using Microsoft.Extensions.Hosting;
 
 namespace GPONMonitor
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -24,11 +25,6 @@ namespace GPONMonitor
                 .AddJsonFile("devicesconfiguration.json", optional: false, reloadOnChange: false)
                 .AddEnvironmentVariables();
 
-            if (env.IsDevelopment())
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
             Configuration = builder.Build();
         }
 
@@ -38,20 +34,17 @@ namespace GPONMonitor
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
-
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-            services.AddMvc()
+            services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddJsonOptions(o =>
+                .AddNewtonsoftJson(o =>
                 {
                     o.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                 });
 
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             services.AddOptions();
             services.Configure<DevicesConfiguration>(Configuration.GetSection("DevicesConfiguration"));
-
             services.Configure<DevicesConfiguration>(devicesConfigurationOptions =>
             {
                 foreach (var device in devicesConfigurationOptions.Devices.Select((value, index) => new { value, index }))
@@ -60,14 +53,14 @@ namespace GPONMonitor
                 }
             });
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IDataService, DataService>();
             services.AddSingleton<IOltFormatChecks, OltFormatChecks>();
             services.AddSingleton<IResponseDescriptionDictionaries, ResponseDescriptionDictionaries>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var supportedCultures = new[]
             {
@@ -92,13 +85,15 @@ namespace GPONMonitor
                 app.UseExceptionHandler("/Olt/Error");
             }
 
+            app.UseRouting();
+
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Olt}/{action=Index}/{id?}");
+                    pattern: "{controller=Olt}/{action=Index}/{id?}");
             });
         }
     }

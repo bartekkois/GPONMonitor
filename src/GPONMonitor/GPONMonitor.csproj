@@ -5,13 +5,14 @@
     <Copyright>Bartek Kois</Copyright>
     <AssemblyTitle>GPON Monitor</AssemblyTitle>
     <VersionPrefix></VersionPrefix>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>GPONMonitor</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>GPONMonitor</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);dotnet5.6;portable-net45+win8</AssetTargetFallback>
     <Version>1.0.6</Version>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,10 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="AutoMapper" Version="8.0.0" />
-	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-	<PackageReference Include="Lextm.SharpSnmpLib" Version="10.0.11" />
-	<PackageReference Include="Microsoft.AspNetCore.All" />
+	<PackageReference Include="AutoMapper" Version="9.0.0" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+	<PackageReference Include="Lextm.SharpSnmpLib" Version="11.3.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
