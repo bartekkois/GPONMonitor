@@ -99,6 +99,8 @@ namespace GPONMonitor.Services
                     return new H645GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
                 case "H665":
                     return new H665OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
+                case "H665-C":
+                    return new H665COnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
                 case "H665G":
                     return new H665GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
                 case "H640G":
