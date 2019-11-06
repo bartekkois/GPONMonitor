@@ -200,7 +200,7 @@
 
         // Onu Image
         if (result.modelType.description !== "") {
-            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").parents().eq(2).removeClass("hidden");
+            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").on("error", function () { $(this).hide(); }).parents().eq(2).removeClass("hidden");
         }
         else {
             $("#onu-image").parents().eq(2).addClass("hidden");
