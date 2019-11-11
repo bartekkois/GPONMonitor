@@ -4,7 +4,7 @@
     {
         public int? Value { get; private set; }
 
-        public ComplexIntType(int? value, string description, SeverityLevel severity) : base (description, severity)
+        public ComplexIntType(int? value, string description, SeverityLevel severity) : base(description, severity)
         {
             Value = value;
         }

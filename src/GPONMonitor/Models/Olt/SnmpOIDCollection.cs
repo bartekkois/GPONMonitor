@@ -38,6 +38,6 @@
         public const string snmpOIDOnuVoIPLineStateUpdateOnuId = "1.3.6.1.4.1.6296.101.23.6.5.2.7";                 // Voip line state update (set OnuId)
         public const string snmpOIDOnuVoIPLineStateUpdate0 = "1.3.6.1.4.1.6296.101.23.6.5.2.3";                     // Voip line state (set 0)
         public const string snmpOIDOnuVoIPLineCheckIfPresent = "1.3.6.1.4.1.6296.101.23.6.1.1.1.3";                 // Voip check if line is present
-        
+
     }
 }

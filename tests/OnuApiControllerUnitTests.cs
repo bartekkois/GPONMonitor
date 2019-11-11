@@ -1,17 +1,17 @@
 using FluentAssertions;
 using GPONMonitor.Controllers;
+using GPONMonitor.Models;
 using GPONMonitor.Models.ComplexStateTypes;
 using GPONMonitor.Models.Configuration;
 using GPONMonitor.Models.Onu;
-using GPONMonitor.Models;
 using GPONMonitor.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using System;
 
 namespace tests
 {
@@ -103,7 +103,7 @@ namespace tests
             onu.EthernetPort1State.Should().BeEquivalentTo(new ComplexIntType(1, "up", SeverityLevel.Success));
             onu.EthernetPort1Speed.Should().BeEquivalentTo(new ComplexIntType(3, "1000 Mb/s", SeverityLevel.Success));
         }
-        
+
 
         [Fact]
         public async Task GetH645GOnuStateAsync_ShouldReturnNotFoundIfOnuDoesntExists_Async()

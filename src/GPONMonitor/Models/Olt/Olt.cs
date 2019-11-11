@@ -1,12 +1,12 @@
-﻿using Lextm.SharpSnmpLib;
+﻿using GPONMonitor.Exceptions;
+using GPONMonitor.Services;
+using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
+using Microsoft.Extensions.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using GPONMonitor.Exceptions;
-using GPONMonitor.Services;
-using Microsoft.Extensions.Localization;
 
 namespace GPONMonitor.Models.Olt
 {
@@ -126,7 +126,7 @@ namespace GPONMonitor.Models.Olt
             if (int.TryParse(snmpResponse.First().Data.ToString(), out parsedResult) == false)
                 return null;
 
-            return parsedResult; 
+            return parsedResult;
         }
 
         public async Task<IList<Variable>> SetStringPropertyAsync(string snmpOid, string data)

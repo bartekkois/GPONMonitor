@@ -1,18 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using GPONMonitor.Models;
+using GPONMonitor.Models.Configuration;
+using GPONMonitor.Models.Olt;
+using GPONMonitor.Models.OnuFactory;
+using GPONMonitor.ViewModels;
+using Lextm.SharpSnmpLib;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using GPONMonitor.Models.Configuration;
-using GPONMonitor.Models.Olt;
-using GPONMonitor.Models;
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.Localization;
-using GPONMonitor.ViewModels;
-using Lextm.SharpSnmpLib;
-using GPONMonitor.Models.OnuFactory;
-using AutoMapper;
+using System.Threading.Tasks;
 
 namespace GPONMonitor.Services
 {
@@ -91,33 +91,21 @@ namespace GPONMonitor.Services
 
         public async Task<IOnuFactory> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId)
         {
-            switch (await GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId))
+            return (await GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDGetOnuModelType + "." + oltPortId + "." + onuId)) switch
             {
-                case "H645B":
-                    return new H645BOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H645G":
-                    return new H645GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H665":
-                    return new H665OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H665-C":
-                    return new H665COnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H665G":
-                    return new H665GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H640G":
-                    return new H640GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H640GW-02":
-                    return new H640GW02OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H660GW":
-                    return new H660GWOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H660GM":
-                    return new H660GMOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H660RM":
-                    return new H660RMOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                case "H680GW":
-                    return new H680GWOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-                default:
-                    return new UnknownOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId);
-            }
+                "H645B" => new H645BOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H645G" => new H645GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H665" => new H665OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H665-C" => new H665COnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H665G" => new H665GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H640G" => new H640GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H640GW-02" => new H640GW02OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H660GW" => new H660GWOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H660GM" => new H660GMOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H660RM" => new H660RMOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "H680GW" => new H680GWOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                _ => new UnknownOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+            };
         }
 
         public async Task<IList<Variable>> SetStringPropertyAsync(uint oltId, string snmpOid, string data)

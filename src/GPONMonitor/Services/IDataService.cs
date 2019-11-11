@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using GPONMonitor.Models;
-using GPONMonitor.Models.Onu;
+﻿using GPONMonitor.Models;
 using GPONMonitor.Models.OnuFactory;
 using GPONMonitor.ViewModels;
 using Lextm.SharpSnmpLib;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GPONMonitor.Services
 {

@@ -5,7 +5,7 @@
         public string Description { get; private set; }
         public SeverityLevel Severity { get; private set; }
 
-        public ComplexType( string description, SeverityLevel severity)
+        public ComplexType(string description, SeverityLevel severity)
         {
             Description = description;
             Severity = severity;

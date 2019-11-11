@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using GPONMonitor.Models.Configuration;
+﻿using GPONMonitor.Models.Configuration;
 using GPONMonitor.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
+using System.Threading.Tasks;
 
 namespace GPONMonitor.Controllers.API
 {

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using GPONMonitor.Models.Configuration;
-using Microsoft.Extensions.Options;
+﻿using GPONMonitor.Models.Configuration;
 using GPONMonitor.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 namespace GPONMonitor.Controllers

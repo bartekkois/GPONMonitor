@@ -1,4 +1,5 @@
-﻿using GPONMonitor.Models.Configuration;
+﻿using AutoMapper;
+using GPONMonitor.Models.Configuration;
 using GPONMonitor.Models.Olt;
 using GPONMonitor.Services;
 using Microsoft.AspNetCore.Builder;
@@ -7,10 +8,9 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.Linq;
-using AutoMapper;
-using Microsoft.Extensions.Hosting;
 
 namespace GPONMonitor
 {
@@ -73,7 +73,9 @@ namespace GPONMonitor
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("en-US"), SupportedCultures = supportedCultures, SupportedUICultures = supportedCultures
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
             });
 
             if (env.IsDevelopment())
