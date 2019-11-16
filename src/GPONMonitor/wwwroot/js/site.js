@@ -135,11 +135,13 @@ var OltDescriptionListController = function (oltDescriptionListService) {
     var searchForm = $("#search-form");
 
     var init = function (container) {
-        $(container).on("click", ".js-get-onu-list", refreshOnuList);
-        $(document).on("click", "#refresh-onu-list", refreshOnuList);
+        $(container).on("click", "li:not(.disabled) > .js-get-onu-list", refreshOnuList);
+        $(document).on("click", "#refresh-onu-list:not(:disabled)", refreshOnuList);
     };
 
     var initializeOnuList = function (oltId) {
+        markActiveNavbarLink(oltId);
+        onuListTableRefreshButton.addClass("disabled");
         onuListTableRefreshButton.addClass("gly-spin");
         oltDescriptionListService.getOltDescriptionList(oltId, done, fail);
     };
@@ -147,6 +149,8 @@ var OltDescriptionListController = function (oltDescriptionListService) {
     var refreshOnuList = function (e) {
         var oltId = $(e.target).attr("data-olt-id");
 
+        markActiveNavbarLink(oltId);
+        onuListTableRefreshButton.addClass("disabled");
         onuListTableRefreshButton.addClass("gly-spin");
         onuListTableTbody.empty();
         searchForm.val("");
@@ -183,6 +187,8 @@ var OltDescriptionListController = function (oltDescriptionListService) {
             "</tr>");
         }
         onuListTableRefreshButton.removeClass("gly-spin");
+        onuListTableRefreshButton.removeClass("disabled");
+        removeDisabledPropertyFromNavbarLink();
     };
 
     var fail = function (oltId, result) {
@@ -191,6 +197,19 @@ var OltDescriptionListController = function (oltDescriptionListService) {
         onuListTableTbody.attr("data-olt-id", oltId);
         onuListTableRefreshButton.attr("data-olt-id", oltId);
         onuListTableRefreshButton.removeClass("gly-spin");
+        onuListTableRefreshButton.removeClass("disabled");
+        removeDisabledPropertyFromNavbarLink();
+    };
+
+    var markActiveNavbarLink = function (oltId) {
+        $("a.js-get-onu-list").parent().removeClass("active");
+        $("a.js-get-onu-list").parent().removeClass("disabled");
+        $(`a.js-get-onu-list[data-olt-id="${oltId}"]`).parent().addClass("active");
+        $(`a.js-get-onu-list[data-olt-id!="${oltId}"]`).parent().addClass("disabled");
+    };
+
+    var removeDisabledPropertyFromNavbarLink = function () {
+        $("a.js-get-onu-list").parent().removeClass("disabled");
     };
 
     return {
@@ -400,7 +419,7 @@ var OnuDetailsController = function (onuDetailsService) {
 
         // Onu Image
         if (result.modelType.description !== "") {
-            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").parents().eq(2).removeClass("hidden");
+            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").on("error", function () { $(this).hide(); }).parents().eq(2).removeClass("hidden");
         }
         else {
             $("#onu-image").parents().eq(2).addClass("hidden");
