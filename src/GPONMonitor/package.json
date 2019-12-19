@@ -9,6 +9,8 @@
     "gulp-cssmin": "^0.2.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-uglify": "^3.0.2",
-    "merge-stream": "^2.0.0"
+    "merge-stream": "^2.0.0",
+    "lodash.template": ">=4.5.0",
+    "clean-css": ">=4.1.11"
   }
 }
