@@ -36,9 +36,9 @@ namespace GPONMonitor
             // Add framework services.
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddNewtonsoftJson(o =>
+                .AddJsonOptions(o =>
                 {
-                    o.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    o.JsonSerializerOptions.IgnoreNullValues = true;
                 });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
