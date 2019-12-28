@@ -1,4 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS testrunner
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 WORKDIR /src
 COPY *.sln .
 COPY src/GPONMonitor/*.csproj ./src/GPONMonitor/
