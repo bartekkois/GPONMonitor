@@ -28,7 +28,7 @@
   <ItemGroup>
 	<PackageReference Include="AutoMapper" Version="9.0.0" />
 	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-	<PackageReference Include="Lextm.SharpSnmpLib" Version="11.3.0" />
+	<PackageReference Include="Lextm.SharpSnmpLib" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>
