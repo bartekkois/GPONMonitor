@@ -7,7 +7,7 @@
 
 <div class="container body-container">
     <div class="row">
-        <div class="col-lg-5 col-md-6 col-sm-6  col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="row">
                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                     <div class="form-group search-form-group has-feedback">
@@ -19,20 +19,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 col-md-6 col-sm-6"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6"></div>
     </div>
     <div class="row">
-        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="alert alert-dismissible alert-warning hidden" id="onu-list-alert">
                 <h4>@Localizer["Error"]</h4>
-                <h5 id="onu-list-alert-description"></h5>
+                <h5 id="onu-list-alert-description"></h5>            
             </div>
             <table class="onu-list table-hover">
                 <thead>
                     <tr>
-                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
+                        <th class="col-lg-3 col-md-3 col-sm-4 col-xs-4"></th>
                         <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
-                        <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></th>
+                        <th class="col-lg-8 col-md-8 col-sm-7 col-xs-7"></th>
                     </tr>
                 </thead>
                 <tbody data-olt-id="0">
@@ -40,12 +40,18 @@
             </table>
         </div>
 
-        <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="alert alert-dismissible alert-warning hidden" id="onu-details-alert">
                 <h4>@Localizer["Error"]</h4>
                 <h5 id="onu-details-alert-description"></h5>
             </div>
             <table class="onu-details">
+                <thead>
+                    <tr>
+                        <th class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></th>
+                        <th class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <td class="onu-detail-description onu-detail-description-head"><span id="onu-olt-port-id-onu-id"></span><i class="glyphicon glyphicon-refresh" id="refresh-onu-details"></i></td>
