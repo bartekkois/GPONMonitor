@@ -6,7 +6,7 @@
             $('body').css({ paddingTop: $('#main-navbar').height() + 15 });
         }
 
-        $(document).on('ready', autocollapse);
+        $(autocollapse);
         $(window).on('resize', autocollapse);
     };
 

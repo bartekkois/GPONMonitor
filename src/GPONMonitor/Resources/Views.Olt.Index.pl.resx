@@ -126,9 +126,6 @@
   <data name="Connection uptime:" xml:space="preserve">
     <value>Czas połączenia:</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Błąd</value>
-  </data>
   <data name="Firmware version:" xml:space="preserve">
     <value>Wersja oprogramowania:</value>
   </data>
@@ -167,6 +164,9 @@
   </data>
   <data name="Optical power received:" xml:space="preserve">
     <value>Moc optycza:</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Szukaj</value>
   </data>
   <data name="Serial number:" xml:space="preserve">
     <value>Numer seryjny:</value>

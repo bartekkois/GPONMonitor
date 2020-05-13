@@ -8,58 +8,71 @@
     <title>@ViewData["Title"] - GPON Monitor</title>
 
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootswatch-dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootswatch/yeti/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome-animation/font-awesome-animation.css"  />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootswatch-dist/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/yeti/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootswatch/yeti/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+              asp-fallback-href="~/lib/font-awesome/css/all.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.3.0/font-awesome-animation.min.css"
+              asp-fallback-href="~/lib/font-awesome-animation/font-awesome-animation.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
-    <div id="main-navbar" class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    <header>
+        <div id="main-navbar" class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
+            <div class="container">
                 <a href="#" class="navbar-brand">GPON Monitor</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    @foreach (var oltConfiguration in Model)
-                    {
-                        <li><a href="#" class="js-get-onu-list" data-olt-id="@oltConfiguration.Id">@oltConfiguration.Name</a></li>
-                    }
-                </ul>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        @foreach (var oltConfiguration in Model)
+                        {
+                            <li class="nav-item">
+                                <a href="#" class="nav-link js-get-onu-list" data-olt-id="@oltConfiguration.Id">@oltConfiguration.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - GPON Monitor - ver. @ViewData["Version"]</p>
-        </footer>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
 
+    <footer class="footer text-muted">
+        <div class="container">
+            <hr />
+            <p>&copy; 2020 - GPON Monitor - ver. @ViewData["Version"]</p>
+        </div>
+    </footer>
+
     <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
                 asp-fallback-test="window.jQuery">
         </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.js"
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/twitter-bootstrap/js/bootstrap.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>

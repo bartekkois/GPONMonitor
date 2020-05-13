@@ -2,7 +2,7 @@ var OnuDescriptionListSearch = (function () {
     "use strict";
 
     var onuListTableTbody = $(".onu-list > tbody");
-    var searchForm = $("#search-form");
+    var searchForm = $("#search-input");
 
     var init = function () {
         $.event.special.inputchange = {
@@ -25,7 +25,7 @@ var OnuDescriptionListSearch = (function () {
         };
 
         searchForm.on("inputchange", function () {
-            var searchTerm = $("#search-form").val().toLowerCase();
+            var searchTerm = $("#search-input").val().toLowerCase();
             if (searchTerm !== "") {
                 var searchTermOnuId = "";
                 var searchTermOnuName = "";
@@ -42,16 +42,16 @@ var OnuDescriptionListSearch = (function () {
                     searchTermOnuName = searchTermsArray[0];
                 }
 
-                onuListTableTbody.find("tr").each(function () {
+                onuListTableTbody.find("tr.clickable-row").each(function () {
                     if (~$(this).find("td.onu-list-id").text().toLowerCase().indexOf(searchTermOnuId) && (~$(this).find("td.onu-list-item").text().toLowerCase().indexOf(searchTermOnuName) || ~$(this).find("td.onu-list-sn > i").attr("title").toLowerCase().indexOf(searchTermOnuName)))
-                        $(this).removeClass("hidden");
+                        $(this).removeClass("d-none");
                     else
-                        $(this).addClass("hidden");
+                        $(this).addClass("d-none");
                 });
             }
             else {
-                onuListTableTbody.find("tr").each(function () {
-                    $(this).removeClass("hidden");
+                onuListTableTbody.find("tr.clickable-row").each(function () {
+                    $(this).removeClass("d-none");
                 });
             }
         });
@@ -89,7 +89,7 @@ var NavbarMediaResize = (function () {
             $('body').css({ paddingTop: $('#main-navbar').height() + 15 });
         }
 
-        $(document).on('ready', autocollapse);
+        $(autocollapse);
         $(window).on('resize', autocollapse);
     };
 
@@ -103,8 +103,8 @@ var OltDescriptionListService = function () {
     // GET: api/Olt/?oltId=1
     var getOltDescriptionList = function (oltId, done, fail) {
         $.get("api/Olt/", { oltId: oltId }, "json")
-        .success(function (result) { done(oltId, result); })
-        .error(function (result) { fail(oltId, result); });
+        .done(function (result) { done(oltId, result); })
+        .fail(function (result) { fail(oltId, result); });
     };
 
     return {
@@ -117,8 +117,8 @@ var OnuDetailsService = function () {
     // GET: api/Onu/?oltId=1&oltPortId=2&onuId=3
     var getOnuDetails = function (oltId, oltPortId, onuId, done, fail) {
         $.get("api/Onu/", { oltId: oltId, oltPortId: oltPortId, onuId: onuId }, "json")
-        .success(function (result) { done(oltId, oltPortId, onuId, result); })
-        .error(function (result) { fail(oltId, oltPortId, onuId, result); });
+        .done(function (result) { done(oltId, oltPortId, onuId, result); })
+        .fail(function (result) { fail(oltId, oltPortId, onuId, result); });
     };
 
     return {
@@ -130,19 +130,19 @@ var OltDescriptionListController = function (oltDescriptionListService) {
 
     var onuListTableTbody = $(".onu-list > tbody");
     var onuListTableRefreshButton = $("#refresh-onu-list");
-    var onuListTableAlert = $("#onu-list-alert");
-    var onuListTableAlertDescription = $("#onu-list-alert-description");
+    var alertIndicator = $("#alert-indicator");
+    var alertDescription = $("#alert-description");
     var searchForm = $("#search-form");
 
-    var init = function (container) {
-        $(container).on("click", "li:not(.disabled) > .js-get-onu-list", refreshOnuList);
-        $(document).on("click", "#refresh-onu-list:not(:disabled)", refreshOnuList);
+    var init = function () {
+        $(document).on("click", ".js-get-onu-list:not(.disabled)", refreshOnuList);
+        $(document).on("click", "#refresh-onu-list:not(.disabled)", refreshOnuList);
     };
 
     var initializeOnuList = function (oltId) {
         markActiveNavbarLink(oltId);
         onuListTableRefreshButton.addClass("disabled");
-        onuListTableRefreshButton.addClass("gly-spin");
+        onuListTableRefreshButton.addClass("fa-spin");
         oltDescriptionListService.getOltDescriptionList(oltId, done, fail);
     };
 
@@ -151,15 +151,15 @@ var OltDescriptionListController = function (oltDescriptionListService) {
 
         markActiveNavbarLink(oltId);
         onuListTableRefreshButton.addClass("disabled");
-        onuListTableRefreshButton.addClass("gly-spin");
+        onuListTableRefreshButton.addClass("fa-spin");
         onuListTableTbody.empty();
         searchForm.val("");
         oltDescriptionListService.getOltDescriptionList(oltId, done, fail);
     };
 
     var done = function (oltId, result) {
-        onuListTableAlert.addClass("hidden");
-        onuListTableAlertDescription.empty();
+        alertIndicator.addClass("d-none");
+        alertDescription.empty();
         onuListTableTbody.attr("data-olt-id", oltId);
         onuListTableRefreshButton.attr("data-olt-id", oltId);
 
@@ -181,35 +181,59 @@ var OltDescriptionListController = function (oltDescriptionListService) {
 
             onuListTableTbody.append(
             "<tr class='clickable-row' data-olt-port-id='" + oltPortId + "' data-onu-id='" + onuId + "' data-href='#'>" +
-            "<td class='onu-list-id'>" + oltPortId + "." + onuId + "</td>" +
-                "<td class='onu-list-sn'><i class='glyphicon glyphicon-barcode " + onuOpticalConnectionStateStyle + "' title='" + onuGponSerialNumber + "'></i></td>" +
-            "<td class='onu-list-item'>" + onuDescription + "</td>" +
+            "<td class='onu-list-id'><span>" + oltPortId + "." + onuId + "</span></td>" +
+            "<td class='onu-list-sn'><i class='fa fa-hdd " + onuOpticalConnectionStateStyle + "' title='" + onuGponSerialNumber + "'></i></td>" +
+            "<td class='onu-list-item'><span>" + onuDescription + "</span></td>" +
             "</tr>");
         }
-        onuListTableRefreshButton.removeClass("gly-spin");
+
+        var dummyOltPortIdOnuIDWidth = 0;
+        var dummyOltPortIdOnuID = "";
+        var dummyOnuDescriptionWidth = 0;
+        var dummyOnuDescription = "";
+
+        onuListTableTbody.find("tr.clickable-row").each(function () {
+            var oltPortIdOnuId = $(this).find("td.onu-list-id>span");
+            var onuDescription = $(this).find("td.onu-list-item>span");
+
+            if (oltPortIdOnuId.outerWidth() > dummyOltPortIdOnuIDWidth) dummyOltPortIdOnuID = oltPortIdOnuId.text();
+            if (onuDescription.outerWidth() > dummyOnuDescriptionWidth) {
+                dummyOnuDescriptionWidth = onuDescription.outerWidth();
+                dummyOnuDescription = onuDescription.text();
+            }
+        });
+
+        onuListTableTbody.append(
+            "<tr class='dummy-row invisible'>" +
+            "<td class='onu-list-id'><span>" + dummyOltPortIdOnuID + "</span></td>" +
+            "<td class='onu-list-sn'><i class='fa fa-hdd'></i></td>" +
+            "<td class='onu-list-item'><span>" + dummyOnuDescription + "</span></td>" +
+            "</tr>");
+
+        onuListTableRefreshButton.removeClass("fa-spin");
         onuListTableRefreshButton.removeClass("disabled");
         removeDisabledPropertyFromNavbarLink();
     };
 
     var fail = function (oltId, result) {
-        onuListTableAlert.removeClass("hidden");
-        onuListTableAlertDescription.text(result.responseText);
+        alertIndicator.removeClass("d-none");
+        alertDescription.text(result.responseText);
         onuListTableTbody.attr("data-olt-id", oltId);
         onuListTableRefreshButton.attr("data-olt-id", oltId);
-        onuListTableRefreshButton.removeClass("gly-spin");
+        onuListTableRefreshButton.removeClass("fa-spin");
         onuListTableRefreshButton.removeClass("disabled");
         removeDisabledPropertyFromNavbarLink();
     };
 
     var markActiveNavbarLink = function (oltId) {
-        $("a.js-get-onu-list").parent().removeClass("active");
-        $("a.js-get-onu-list").parent().removeClass("disabled");
-        $(`a.js-get-onu-list[data-olt-id="${oltId}"]`).parent().addClass("active");
-        $(`a.js-get-onu-list[data-olt-id!="${oltId}"]`).parent().addClass("disabled");
+        $("a.js-get-onu-list").removeClass("active");
+        $("a.js-get-onu-list").removeClass("disabled");
+        $(`a.js-get-onu-list[data-olt-id="${oltId}"]`).addClass("active");
+        $(`a.js-get-onu-list[data-olt-id!="${oltId}"]`).addClass("disabled");
     };
 
     var removeDisabledPropertyFromNavbarLink = function () {
-        $("a.js-get-onu-list").parent().removeClass("disabled");
+        $("a.js-get-onu-list").removeClass("disabled");
     };
 
     return {
@@ -223,8 +247,8 @@ var OnuDetailsController = function (onuDetailsService) {
     var onuListTableTbody = $(".onu-list > tbody");
     var onuDetailsTbody = $(".onu-details > tbody");
     var onuDetailsRefreshButton = $("#refresh-onu-details");
-    var onuDetailsAlert = $("#onu-details-alert");
-    var onuDetailsAlertDescription = $("#onu-details-alert-description");
+    var alertIndicator = $("#alert-indicator");
+    var alertDescription = $("#alert-description");
 
     var init = function () {
         onuListTableTbody.on("click", "tr.clickable-row", getOnuDetails);
@@ -238,7 +262,7 @@ var OnuDetailsController = function (onuDetailsService) {
         var oltPortId = onuLink.closest("tr").attr("data-olt-port-id");
         var onuId = onuLink.closest("tr").attr("data-onu-id");
 
-        onuDetailsRefreshButton.addClass("gly-spin");
+        onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
     };
 
@@ -247,7 +271,7 @@ var OnuDetailsController = function (onuDetailsService) {
         var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
         var onuId = onuDetailsRefreshButton.attr("data-onu-id");
 
-        onuDetailsRefreshButton.addClass("gly-spin");
+        onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
     };
 
@@ -271,8 +295,8 @@ var OnuDetailsController = function (onuDetailsService) {
     };
 
     var done = function (oltId, oltPortId, onuId, result) {
-        onuDetailsAlert.addClass("hidden");
-        onuDetailsAlertDescription.empty();
+        alertIndicator.addClass("d-none");
+        alertDescription.empty();
 
         // Onu Olt Port Id and Onu Id
         $("#onu-olt-port-id-onu-id").text(result.oltPortId + "." + result.oltOnuId);
@@ -323,9 +347,9 @@ var OnuDetailsController = function (onuDetailsService) {
         $("#onu-block-reason").text(result.blockReason.description);
         $("#onu-block-reason").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.blockReason.severity));
         if (result.blockStatus.value !== "255")
-            $("#onu-block-reason").parent("tr").removeClass("hidden");
+            $("#onu-block-reason").parent("tr").removeClass("d-none");
         else
-            $("#onu-block-reason").parent("tr").addClass("hidden");
+            $("#onu-block-reason").parent("tr").addClass("d-none");
 
         // Onu firmware version
         $("#onu-firmware-version").text(result.firmwareVersion.description);
@@ -341,11 +365,11 @@ var OnuDetailsController = function (onuDetailsService) {
             else
                 ethernetPort1StateAndSpeed = result.ethernetPort1State.description;
 
-            $("#onu-ethernet-port-1-state-and-speed").text(ethernetPort1StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-1-state-and-speed").text(ethernetPort1StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-1-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort1State.severity));
         }
         else {
-            $("#onu-ethernet-port-1-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-1-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-1-state-and-speed").attr("class", "onu-detail-item");
         }
 
@@ -357,11 +381,11 @@ var OnuDetailsController = function (onuDetailsService) {
             else
                 ethernetPort2StateAndSpeed = result.ethernetPort2State.description;
 
-            $("#onu-ethernet-port-2-state-and-speed").text(ethernetPort2StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-2-state-and-speed").text(ethernetPort2StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-2-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort2State.severity));
         }
         else {
-            $("#onu-ethernet-port-2-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-2-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-2-state-and-speed").attr("class", "onu-detail-item");
         }
 
@@ -373,11 +397,11 @@ var OnuDetailsController = function (onuDetailsService) {
             else
                 ethernetPort3StateAndSpeed = result.ethernetPort3State.description;
 
-            $("#onu-ethernet-port-3-state-and-speed").text(ethernetPort3StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-3-state-and-speed").text(ethernetPort3StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-3-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort3State.severity));
         }
         else {
-            $("#onu-ethernet-port-3-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-3-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-3-state-and-speed").attr("class", "onu-detail-item");
         }
 
@@ -389,53 +413,53 @@ var OnuDetailsController = function (onuDetailsService) {
             else
                 ethernetPort4StateAndSpeed = result.ethernetPort4State.description;
 
-            $("#onu-ethernet-port-4-state-and-speed").text(ethernetPort4StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-4-state-and-speed").text(ethernetPort4StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-4-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort4State.severity));
         }
         else {
-            $("#onu-ethernet-port-4-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-4-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-4-state-and-speed").attr("class", "onu-detail-item");
         }
 
         // Onu VoIP Line 1 State
         if (result.hasOwnProperty("voIPLine1State")) {
-            $("#onu-voip-port-1-state").text(result.voIPLine1State.description).parent("tr").removeClass("hidden");
+            $("#onu-voip-port-1-state").text(result.voIPLine1State.description).parent("tr").removeClass("d-none");
             $("#onu-voip-port-1-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine1State.severity));
         }
         else {
-            $("#onu-voip-port-1-state").empty().parent("tr").addClass("hidden");
+            $("#onu-voip-port-1-state").empty().parent("tr").addClass("d-none");
             $("#onu-voip-port-1-state").attr("class", "onu-detail-item");
         }
 
         // Onu VoIP Line 2 State
         if (result.hasOwnProperty("voIPLine2State")) {
-            $("#onu-voip-port-2-state").text(result.voIPLine2State.description).parent("tr").removeClass("hidden");
+            $("#onu-voip-port-2-state").text(result.voIPLine2State.description).parent("tr").removeClass("d-none");
             $("#onu-voip-port-2-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine2State.severity));
         }
         else {
-            $("#onu-voip-port-2-state").empty().parent("tr").addClass("hidden");
+            $("#onu-voip-port-2-state").empty().parent("tr").addClass("d-none");
             $("#onu-voip-port-2-state").attr("class", "onu-detail-item");
         }
 
         // Onu Image
         if (result.modelType.description !== "") {
-            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").on("error", function () { $(this).hide(); }).parents().eq(2).removeClass("hidden");
+            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").on("error", function () { $(this).hide(); }).parents().eq(2).removeClass("d-none");
         }
         else {
-            $("#onu-image").parents().eq(2).addClass("hidden");
+            $("#onu-image").parents().eq(2).addClass("d-none");
         }
 
         onuDetailsRefreshButton.attr("data-olt-id", oltId).attr("data-olt-port-id", oltPortId).attr("data-onu-id", onuId);
-        onuDetailsRefreshButton.removeClass("gly-spin");
+        onuDetailsRefreshButton.removeClass("fa-spin");
     };
 
     var fail = function (oltId, oltPortId, onuId, result) {
-        onuDetailsAlert.removeClass("hidden");
-        onuDetailsAlertDescription.text(result.responseText);
+        alertIndicator.removeClass("d-none");
+        alertDescription.text(result.responseText);
         onuDetailsTbody.find("tr > td.onu-detail-item").empty();
-        $("#onu-image").parents().eq(2).addClass("hidden");
+        $("#onu-image").parents().eq(2).addClass("d-none");
         onuDetailsRefreshButton.attr("data-olt-id", oltId).attr("data-olt-port-id", oltPortId).attr("data-onu-id", onuId);
-        onuDetailsRefreshButton.removeClass("gly-spin");
+        onuDetailsRefreshButton.removeClass("fa-spin");
     };
 
     return {

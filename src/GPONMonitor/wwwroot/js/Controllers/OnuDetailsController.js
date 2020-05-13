@@ -4,8 +4,8 @@
     var onuListTableTbody = $(".onu-list > tbody");
     var onuDetailsTbody = $(".onu-details > tbody");
     var onuDetailsRefreshButton = $("#refresh-onu-details");
-    var onuDetailsAlert = $("#onu-details-alert");
-    var onuDetailsAlertDescription = $("#onu-details-alert-description");
+    var alertIndicator = $("#alert-indicator");
+    var alertDescription = $("#alert-description");
 
     var init = function () {
         onuListTableTbody.on("click", "tr.clickable-row", getOnuDetails);
@@ -19,7 +19,7 @@
         var oltPortId = onuLink.closest("tr").attr("data-olt-port-id");
         var onuId = onuLink.closest("tr").attr("data-onu-id");
 
-        onuDetailsRefreshButton.addClass("gly-spin");
+        onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
     };
 
@@ -28,7 +28,7 @@
         var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
         var onuId = onuDetailsRefreshButton.attr("data-onu-id");
 
-        onuDetailsRefreshButton.addClass("gly-spin");
+        onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
     };
 
@@ -52,8 +52,8 @@
     };
 
     var done = function (oltId, oltPortId, onuId, result) {
-        onuDetailsAlert.addClass("hidden");
-        onuDetailsAlertDescription.empty();
+        alertIndicator.addClass("d-none");
+        alertDescription.empty();
 
         // Onu Olt Port Id and Onu Id
         $("#onu-olt-port-id-onu-id").text(result.oltPortId + "." + result.oltOnuId);
@@ -104,9 +104,9 @@
         $("#onu-block-reason").text(result.blockReason.description);
         $("#onu-block-reason").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.blockReason.severity));
         if (result.blockStatus.value !== "255")
-            $("#onu-block-reason").parent("tr").removeClass("hidden");
+            $("#onu-block-reason").parent("tr").removeClass("d-none");
         else
-            $("#onu-block-reason").parent("tr").addClass("hidden");
+            $("#onu-block-reason").parent("tr").addClass("d-none");
 
         // Onu firmware version
         $("#onu-firmware-version").text(result.firmwareVersion.description);
@@ -122,11 +122,11 @@
             else
                 ethernetPort1StateAndSpeed = result.ethernetPort1State.description;
 
-            $("#onu-ethernet-port-1-state-and-speed").text(ethernetPort1StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-1-state-and-speed").text(ethernetPort1StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-1-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort1State.severity));
         }
         else {
-            $("#onu-ethernet-port-1-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-1-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-1-state-and-speed").attr("class", "onu-detail-item");
         }
 
@@ -138,11 +138,11 @@
             else
                 ethernetPort2StateAndSpeed = result.ethernetPort2State.description;
 
-            $("#onu-ethernet-port-2-state-and-speed").text(ethernetPort2StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-2-state-and-speed").text(ethernetPort2StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-2-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort2State.severity));
         }
         else {
-            $("#onu-ethernet-port-2-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-2-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-2-state-and-speed").attr("class", "onu-detail-item");
         }
 
@@ -154,11 +154,11 @@
             else
                 ethernetPort3StateAndSpeed = result.ethernetPort3State.description;
 
-            $("#onu-ethernet-port-3-state-and-speed").text(ethernetPort3StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-3-state-and-speed").text(ethernetPort3StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-3-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort3State.severity));
         }
         else {
-            $("#onu-ethernet-port-3-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-3-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-3-state-and-speed").attr("class", "onu-detail-item");
         }
 
@@ -170,53 +170,53 @@
             else
                 ethernetPort4StateAndSpeed = result.ethernetPort4State.description;
 
-            $("#onu-ethernet-port-4-state-and-speed").text(ethernetPort4StateAndSpeed).parent("tr").removeClass("hidden");
+            $("#onu-ethernet-port-4-state-and-speed").text(ethernetPort4StateAndSpeed).parent("tr").removeClass("d-none");
             $("#onu-ethernet-port-4-state-and-speed").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.ethernetPort4State.severity));
         }
         else {
-            $("#onu-ethernet-port-4-state-and-speed").empty().parent("tr").addClass("hidden");
+            $("#onu-ethernet-port-4-state-and-speed").empty().parent("tr").addClass("d-none");
             $("#onu-ethernet-port-4-state-and-speed").attr("class", "onu-detail-item");
         }
 
         // Onu VoIP Line 1 State
         if (result.hasOwnProperty("voIPLine1State")) {
-            $("#onu-voip-port-1-state").text(result.voIPLine1State.description).parent("tr").removeClass("hidden");
+            $("#onu-voip-port-1-state").text(result.voIPLine1State.description).parent("tr").removeClass("d-none");
             $("#onu-voip-port-1-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine1State.severity));
         }
         else {
-            $("#onu-voip-port-1-state").empty().parent("tr").addClass("hidden");
+            $("#onu-voip-port-1-state").empty().parent("tr").addClass("d-none");
             $("#onu-voip-port-1-state").attr("class", "onu-detail-item");
         }
 
         // Onu VoIP Line 2 State
         if (result.hasOwnProperty("voIPLine2State")) {
-            $("#onu-voip-port-2-state").text(result.voIPLine2State.description).parent("tr").removeClass("hidden");
+            $("#onu-voip-port-2-state").text(result.voIPLine2State.description).parent("tr").removeClass("d-none");
             $("#onu-voip-port-2-state").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.voIPLine2State.severity));
         }
         else {
-            $("#onu-voip-port-2-state").empty().parent("tr").addClass("hidden");
+            $("#onu-voip-port-2-state").empty().parent("tr").addClass("d-none");
             $("#onu-voip-port-2-state").attr("class", "onu-detail-item");
         }
 
         // Onu Image
         if (result.modelType.description !== "") {
-            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").on("error", function () { $(this).hide(); }).parents().eq(2).removeClass("hidden");
+            $("#onu-image").attr("src", "images/ONU/" + result.modelType.description + ".png").on("error", function () { $(this).hide(); }).parents().eq(2).removeClass("d-none");
         }
         else {
-            $("#onu-image").parents().eq(2).addClass("hidden");
+            $("#onu-image").parents().eq(2).addClass("d-none");
         }
 
         onuDetailsRefreshButton.attr("data-olt-id", oltId).attr("data-olt-port-id", oltPortId).attr("data-onu-id", onuId);
-        onuDetailsRefreshButton.removeClass("gly-spin");
+        onuDetailsRefreshButton.removeClass("fa-spin");
     };
 
     var fail = function (oltId, oltPortId, onuId, result) {
-        onuDetailsAlert.removeClass("hidden");
-        onuDetailsAlertDescription.text(result.responseText);
+        alertIndicator.removeClass("d-none");
+        alertDescription.text(result.responseText);
         onuDetailsTbody.find("tr > td.onu-detail-item").empty();
-        $("#onu-image").parents().eq(2).addClass("hidden");
+        $("#onu-image").parents().eq(2).addClass("d-none");
         onuDetailsRefreshButton.attr("data-olt-id", oltId).attr("data-olt-port-id", oltPortId).attr("data-onu-id", onuId);
-        onuDetailsRefreshButton.removeClass("gly-spin");
+        onuDetailsRefreshButton.removeClass("fa-spin");
     };
 
     return {

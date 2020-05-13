@@ -7,54 +7,49 @@
 
 <div class="container body-container">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="row">
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                    <div class="form-group search-form-group has-feedback">
-                        <input class="form-control" id="search-form" type="text"><span class="glyphicon glyphicon-search form-control-feedback search-form-icon"></span>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-first">
+            <div class="row h-100">
+                <div class="col my-auto">
+                    <div class="form-group mt-3">
+                        <input class="form-control" id="search-input" type="text" placeholder="@Localizer["Search"]">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    <i class="glyphicon glyphicon-refresh" id="refresh-onu-list" data-olt-id="0"></i>
+                <div class="col-auto my-auto">
+                    <a class="fas fa-sync" id="refresh-onu-list" data-olt-id="0"></a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6"></div>
+        <div class="col-lg-6 col-xl-6">
+            <div class="alert alert-warning d-none mt-3 m-0 p-0" id="alert-indicator">
+                <h5 class="m-2" id="alert-description"></h5>
+            </div>
+        </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="alert alert-dismissible alert-warning hidden" id="onu-list-alert">
-                <h4>@Localizer["Error"]</h4>
-                <h5 id="onu-list-alert-description"></h5>            
-            </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-first">
             <table class="onu-list table-hover">
                 <thead>
                     <tr>
-                        <th class="col-lg-3 col-md-3 col-sm-4 col-xs-4"></th>
-                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
-                        <th class="col-lg-8 col-md-8 col-sm-7 col-xs-7"></th>
+                        <th class="w-auto"></th>
+                        <th class="w-10"></th>
+                        <th class="w-auto"></th>
                     </tr>
                 </thead>
                 <tbody data-olt-id="0">
                 </tbody>
             </table>
         </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="alert alert-dismissible alert-warning hidden" id="onu-details-alert">
-                <h4>@Localizer["Error"]</h4>
-                <h5 id="onu-details-alert-description"></h5>
-            </div>
+        <div class="col-lg-6 col-xl-6">
             <table class="onu-details">
                 <thead>
                     <tr>
-                        <th class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></th>
-                        <th class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></th>
+                        <th class="w-50"></th>
+                        <th class="w-50"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="onu-detail-description onu-detail-description-head"><span id="onu-olt-port-id-onu-id"></span><i class="glyphicon glyphicon-refresh" id="refresh-onu-details"></i></td>
+                        <td class="onu-detail-description onu-detail-description-head"><span id="onu-olt-port-id-onu-id"></span><i class="fas fa-sync" id="refresh-onu-details"></i></td>
                         <td class="onu-detail-item item-bold onu-detail-item-head" id="onu-description"></td>
                     </tr>
                     <tr>
@@ -97,7 +92,7 @@
                         <td class="onu-detail-description">@Localizer["Block status:"]</td>
                         <td class="onu-detail-item" id="onu-block-status"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Block reason:"]</td>
                         <td class="onu-detail-item" id="onu-blok-reason"></td>
                     </tr>
@@ -109,33 +104,33 @@
                         <td class="onu-detail-description">@Localizer["Service profile:"]</td>
                         <td class="onu-detail-item indicator-info" id="onu-gpon-profile"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Interface Ethernet 1:"]</td>
                         <td class="onu-detail-item" id="onu-ethernet-port-1-state-and-speed"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Interface Ethernet 2:"]</td>
                         <td class="onu-detail-item" id="onu-ethernet-port-2-state-and-speed"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Interface Ethernet 3:"]</td>
                         <td class="onu-detail-item" id="onu-ethernet-port-3-state-and-speed"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Interface Ethernet 4:"]</td>
                         <td class="onu-detail-item" id="onu-ethernet-port-4-state-and-speed"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Interface VoIP 1:"]</td>
                         <td class="onu-detail-item" id="onu-voip-port-1-state"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td class="onu-detail-description">@Localizer["Interface VoIP 2:"]</td>
                         <td class="onu-detail-item" id="onu-voip-port-2-state"></td>
                     </tr>
-                    <tr class="hidden">
+                    <tr class="d-none">
                         <td colspan="2">
-                            <div class="hidden-xs">
+                            <div class="d-none d-sm-block">
                                 <img src="" class="img-responsive center-block" id="onu-image" style="zoom:80%">
                             </div>
                         </td>

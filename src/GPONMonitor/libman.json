@@ -1,5 +1,30 @@
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
-  "libraries": []
+  "libraries": [
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "twitter-bootstrap@4.4.1",
+      "destination": "wwwroot/lib/twitter-bootstrap/"
+    },
+    {
+      "library": "bootswatch@4.4.1",
+      "destination": "wwwroot/lib/bootswatch/",
+      "files": [
+        "yeti/bootstrap.css",
+        "yeti/bootstrap.min.css"
+      ]
+    },
+    {
+      "library": "font-awesome@5.13.0",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "font-awesome-animation@0.3.0",
+      "destination": "wwwroot/lib/font-awesome-animation/"
+    }
+  ]
 }
