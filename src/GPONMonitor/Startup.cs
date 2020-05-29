@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.Linq;
+using Microsoft.OpenApi.Models;
 
 namespace GPONMonitor
 {
@@ -40,6 +41,11 @@ namespace GPONMonitor
                 {
                     o.JsonSerializerOptions.IgnoreNullValues = true;
                 });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GPON Monitor API", Version = "v1" });
+            });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -86,6 +92,12 @@ namespace GPONMonitor
             {
                 app.UseExceptionHandler("/Olt/Error");
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "GPON Monitor API v1");
+            });
 
             app.UseRouting();
 
