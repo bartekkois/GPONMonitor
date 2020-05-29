@@ -28,6 +28,10 @@
         var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
         var onuId = onuDetailsRefreshButton.attr("data-onu-id");
 
+        if (oltId == undefined || oltId == "") oltId = 0;
+        if (oltPortId == undefined || oltPortId == "") oltPortId = 0;
+        if (onuId == undefined || onuId == "") onuId = 0;
+
         onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
     };

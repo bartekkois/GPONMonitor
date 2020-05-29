@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GPONMonitor.Controllers.API
 {
-    [Route("api/Olt")]
+    [Route("api")]
     public class OltApiController : Controller
     {
         private readonly DevicesConfiguration _devicesConfiguration;
@@ -19,9 +19,9 @@ namespace GPONMonitor.Controllers.API
             _snmpDataService = snmpDataService;
         }
 
-        // GET: api/Olt/?oltId=1
-        [HttpGet]
-        public async Task<IActionResult> GetOnuDescriptionListAsync(uint oltId)
+        // GET: api/OltOnuDescriptionList?oltId=1
+        [HttpGet("OltOnuDescriptionList")]
+        public async Task<IActionResult> GetOltOnuDescriptionListAsync(uint oltId)
         {
             try
             {

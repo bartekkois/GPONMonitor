@@ -32,6 +32,13 @@ namespace tests
             });
 
             dataServiceMock = new Mock<IDataService>();
+            dataServiceMock.Setup(x => x.GetOnuDescriptionListAsync(0)).ReturnsAsync(() => new List<OnuShortDescription>()
+            {
+                new OnuShortDescription(1, 1, "ONU_B", "DSNW23456789", "inactive"),
+                new OnuShortDescription(1, 2, "ONU_A", "DSNWcbd38d4e", "active"),
+                new OnuShortDescription(1, 3, "ONU_C", "DSNW34567890", "active"),
+            });
+
             dataServiceMock.Setup(x => x.GetOnuStateAsync(0, 1, 2)).ReturnsAsync(() => new H645GOnu()
             {
                 OltId = 0,
@@ -64,7 +71,7 @@ namespace tests
 
 
         [Fact]
-        public async Task GetH645GOnuStateAsync_ShouldReturnOnuStateIfOnuExists_Async()
+        public async Task GetH645GOnuStateByOltPortIdAndOnuIdAsync_ShouldReturnOnuStateIfOnuExists_Async()
         {
             // Arrange
             ArrangeOltConfigurationsWithOnusState(out Mock<IOptions<DevicesConfiguration>> devicesConfigurationMock, out Mock<IDataService> dataServiceMock);
@@ -72,7 +79,7 @@ namespace tests
             var controller = new OnuApiController(devicesConfigurationMock.Object, dataServiceMock.Object);
 
             // Act
-            var result = await controller.GetOnuStateAsync(0, 1, 2);
+            var result = await controller.GetOnuStateByOltPortIdAndOnuIdAsync(0, 1, 2);
 
             // Assert
             var okResult = result.Should().BeOfType<JsonResult>().Subject;
@@ -106,7 +113,7 @@ namespace tests
 
 
         [Fact]
-        public async Task GetH645GOnuStateAsync_ShouldReturnNotFoundIfOnuDoesntExists_Async()
+        public async Task GetH645GOnuStateByOltPortIdAndOnuIdAsync_ShouldReturnNotFoundIfOnuDoesntExists_Async()
         {
             // Arrange
             ArrangeOltConfigurationsWithOnusState(out Mock<IOptions<DevicesConfiguration>> devicesConfigurationMock, out Mock<IDataService> dataServiceMock);
@@ -114,10 +121,52 @@ namespace tests
             var controller = new OnuApiController(devicesConfigurationMock.Object, dataServiceMock.Object);
 
             // Act
-            var result = await controller.GetOnuStateAsync(0, 1, 1);
+            var result = await controller.GetOnuStateByOltPortIdAndOnuIdAsync(0, 1, 1);
 
             // Assert
             var okResult = result.Should().BeOfType<NotFoundObjectResult>();
+        }
+
+
+        [Fact]
+        public async Task GetH645GOnuStateByOnuSerialNumberAsync_ShouldReturnOnuStateIfOnuExists_Async()
+        {
+            // Arrange
+            ArrangeOltConfigurationsWithOnusState(out Mock<IOptions<DevicesConfiguration>> devicesConfigurationMock, out Mock<IDataService> dataServiceMock);
+
+            var controller = new OnuApiController(devicesConfigurationMock.Object, dataServiceMock.Object);
+
+            // Act
+            var result = await controller.GetOnuStateByOnuSerialNumberAsync(0, "DSNWcbd38d4e");
+
+            // Assert
+            var okResult = result.Should().BeOfType<JsonResult>().Subject;
+            var onu = okResult.Value.Should().BeAssignableTo<H645GOnu>().Subject;
+
+            onu.OltId.Should().Be(0);
+            onu.OltPortId.Should().Be(1);
+            onu.OltOnuId.Should().Be(1);
+
+            onu.ModelType.Should().BeEquivalentTo(new ComplexStringType("H645G", "H645G", SeverityLevel.Default));
+            onu.DescriptionName.Should().BeEquivalentTo(new ComplexStringType("ONU_A", "ONU_A", SeverityLevel.Default));
+            onu.GponSerialNumber.Should().BeEquivalentTo(new ComplexStringType("DSNWcbd38d4e", "DSNWcbd38d4e", SeverityLevel.Default));
+            onu.GponProfile.Should().BeEquivalentTo(new ComplexStringType("ONU-PROFILE-INT-VLAN100", "ONU-PROFILE-INT-VLAN100", SeverityLevel.Default));
+            onu.FirmwareVersion.Should().BeEquivalentTo(new ComplexStringType("2.45", "2.45", SeverityLevel.Default));
+
+            onu.OpticalConnectionState.Should().BeEquivalentTo(new ComplexIntType(2, "aktywny", SeverityLevel.Success));
+            onu.OpticalConnectionDeactivationReason.Should().BeEquivalentTo(new ComplexIntType(1, "zanik zasilania (DGi)", SeverityLevel.Info));
+            onu.OpticalPowerReceived.Should().BeEquivalentTo(new ComplexStringType("-215", "-21,5 dBm", SeverityLevel.Success));
+            onu.OpticalCableDistance.Should().BeEquivalentTo(new ComplexIntType(1115, "1115 m", SeverityLevel.Default));
+
+            onu.OpticalConnectionUptime.Should().BeEquivalentTo(new ComplexIntType(18844321, "218d 02:32:01", SeverityLevel.Default));
+            onu.OpticalConnectionInactiveTime.Should().BeEquivalentTo(new ComplexIntType(0, "0d 00:00:00", SeverityLevel.Default));
+            onu.SystemUptime.Should().BeEquivalentTo(new ComplexIntType(18844372, "218d 02:32:52", SeverityLevel.Default));
+
+            onu.BlockStatus.Should().BeEquivalentTo(new ComplexIntType(255, "brak blokady", SeverityLevel.Success));
+            onu.BlockReason.Should().BeEquivalentTo(new ComplexIntType(255, "brak blokady", SeverityLevel.Success));
+
+            onu.EthernetPort1State.Should().BeEquivalentTo(new ComplexIntType(1, "up", SeverityLevel.Success));
+            onu.EthernetPort1Speed.Should().BeEquivalentTo(new ComplexIntType(3, "1000 Mb/s", SeverityLevel.Success));
         }
     }
 }

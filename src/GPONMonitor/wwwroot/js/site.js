@@ -100,9 +100,9 @@ var NavbarMediaResize = (function () {
 var OltDescriptionListService = function () {
     "use strict";
 
-    // GET: api/Olt/?oltId=1
+    // GET: api/OltOnuDescriptionList?oltId=1
     var getOltDescriptionList = function (oltId, done, fail) {
-        $.get("api/Olt/", { oltId: oltId }, "json")
+        $.get("api/OltOnuDescriptionList", { oltId: oltId }, "json")
         .done(function (result) { done(oltId, result); })
         .fail(function (result) { fail(oltId, result); });
     };
@@ -114,9 +114,9 @@ var OltDescriptionListService = function () {
 var OnuDetailsService = function () {
     "use strict";
 
-    // GET: api/Onu/?oltId=1&oltPortId=2&onuId=3
+    // GET: api/OnuStateByOltPortIdAndOnuId?oltId=1&oltPortId=2&onuId=3
     var getOnuDetails = function (oltId, oltPortId, onuId, done, fail) {
-        $.get("api/Onu/", { oltId: oltId, oltPortId: oltPortId, onuId: onuId }, "json")
+        $.get("api/OnuStateByOltPortIdAndOnuId", { oltId: oltId, oltPortId: oltPortId, onuId: onuId }, "json")
         .done(function (result) { done(oltId, oltPortId, onuId, result); })
         .fail(function (result) { fail(oltId, oltPortId, onuId, result); });
     };
@@ -270,6 +270,10 @@ var OnuDetailsController = function (onuDetailsService) {
         var oltId = onuDetailsRefreshButton.attr("data-olt-id");
         var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
         var onuId = onuDetailsRefreshButton.attr("data-onu-id");
+
+        if (oltId == undefined || oltId == "") oltId = 0;
+        if (oltPortId == undefined || oltPortId == "") oltPortId = 0;
+        if (onuId == undefined || onuId == "") onuId = 0;
 
         onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);

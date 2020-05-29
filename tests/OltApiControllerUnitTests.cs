@@ -57,7 +57,7 @@ namespace tests
             var controller = new OltApiController(devicesConfigurationMock.Object, dataServiceMock.Object);
 
             // Act
-            var result = await controller.GetOnuDescriptionListAsync(0);
+            var result = await controller.GetOltOnuDescriptionListAsync(0);
 
             // Assert
             var okResult = result.Should().BeOfType<JsonResult>().Subject;
@@ -74,7 +74,7 @@ namespace tests
             var controller = new OltApiController(devicesConfigurationMock.Object, dataServiceMock.Object);
 
             // Act
-            var result = await controller.GetOnuDescriptionListAsync(2);
+            var result = await controller.GetOltOnuDescriptionListAsync(2);
 
             // Assert
             var okResult = result.Should().BeOfType<JsonResult>().Subject;
