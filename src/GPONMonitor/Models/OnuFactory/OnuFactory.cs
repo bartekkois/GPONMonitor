@@ -3,6 +3,7 @@ using GPONMonitor.Models.ComplexStateTypes;
 using GPONMonitor.Models.Olt;
 using GPONMonitor.Models.Onu;
 using GPONMonitor.Services;
+using GPONMonitor.Utils;
 using System;
 
 namespace GPONMonitor.Models.OnuFactory
@@ -121,7 +122,7 @@ namespace GPONMonitor.Models.OnuFactory
             // Optical connection uptime
             int? opticalConnectionUptime = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionUptime + "." + oltPortId + "." + onuId).Result;
             if (opticalConnectionUptime != null)
-                onu.OpticalConnectionUptime = new ComplexIntType(opticalConnectionUptime, TimeSpan.FromSeconds(Convert.ToDouble(opticalConnectionUptime)).ToString(@"d\d\ hh\:mm\:ss"), SeverityLevel.Default);
+                onu.OpticalConnectionUptime = new ComplexIntType(opticalConnectionUptime, TimeSpanConverter.CalculateTimeSpanAndDateTimeFormSeconds(opticalConnectionUptime), SeverityLevel.Default);
             else
                 onu.OpticalConnectionUptime = new ComplexIntType(null, null, SeverityLevel.Unknown);
 
@@ -129,7 +130,7 @@ namespace GPONMonitor.Models.OnuFactory
             // Optical connection inactive time
             int? opticalConnectionInactiveTime = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuOpticalConnectionInactiveTime + "." + oltPortId + "." + onuId).Result;
             if (opticalConnectionInactiveTime != null)
-                onu.OpticalConnectionInactiveTime = new ComplexIntType(opticalConnectionInactiveTime, TimeSpan.FromSeconds(Convert.ToDouble(opticalConnectionInactiveTime)).ToString(@"d\d\ hh\:mm\:ss"), SeverityLevel.Default);
+                onu.OpticalConnectionInactiveTime = new ComplexIntType(opticalConnectionInactiveTime, TimeSpanConverter.CalculateTimeSpanAndDateTimeFormSeconds(opticalConnectionInactiveTime), SeverityLevel.Default);
             else
                 onu.OpticalConnectionInactiveTime = new ComplexIntType(null, null, SeverityLevel.Unknown);
 
@@ -137,7 +138,7 @@ namespace GPONMonitor.Models.OnuFactory
             // System uptime
             int? systemUptime = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuSystemUptime + "." + oltPortId + "." + onuId).Result;
             if (systemUptime != null)
-                onu.SystemUptime = new ComplexIntType(systemUptime, TimeSpan.FromSeconds(Convert.ToDouble(systemUptime)).ToString(@"d\d\ hh\:mm\:ss"), SeverityLevel.Default);
+                onu.SystemUptime = new ComplexIntType(systemUptime, TimeSpanConverter.CalculateTimeSpanAndDateTimeFormSeconds(systemUptime), SeverityLevel.Default);
             else
                 onu.SystemUptime = new ComplexIntType(null, null, SeverityLevel.Unknown);
 

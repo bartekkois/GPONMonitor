@@ -5,6 +5,7 @@ services:
     image: bartekkois/gponmonitor.tests:1.0.7
     volumes:
       - ./temp:/var/temp
+      - /etc/localtime:/etc/localtime:ro
     build:
       context: .
       dockerfile: ./Dockerfile.tests

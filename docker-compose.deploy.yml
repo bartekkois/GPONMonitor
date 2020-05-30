@@ -6,5 +6,6 @@ services:
     restart: always
     volumes:
       - /docker/GPONMonitor/devicesconfiguration.json:/app/devicesconfiguration.json:ro
+      - /etc/localtime:/etc/localtime:ro
     ports:
       - "5001:80"

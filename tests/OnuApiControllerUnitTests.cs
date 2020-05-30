@@ -55,9 +55,9 @@ namespace tests
                 OpticalPowerReceived = new ComplexStringType("-215", "-21,5 dBm", SeverityLevel.Success),
                 OpticalCableDistance = new ComplexIntType(1115, "1115 m", SeverityLevel.Default),
 
-                OpticalConnectionUptime = new ComplexIntType(18844321, "218d 02:32:01", SeverityLevel.Default),
+                OpticalConnectionUptime = new ComplexIntType(18844321, "218d 02:32:01 (12:50:02 1.01)", SeverityLevel.Default),
                 OpticalConnectionInactiveTime = new ComplexIntType(0, "0d 00:00:00", SeverityLevel.Default),
-                SystemUptime = new ComplexIntType(18844372, "218d 02:32:52", SeverityLevel.Default),
+                SystemUptime = new ComplexIntType(18844372, "218d 02:32:52 (12:50:53 1.01)", SeverityLevel.Default),
 
                 BlockStatus = new ComplexIntType(255, "brak blokady", SeverityLevel.Success),
                 BlockReason = new ComplexIntType(255, "brak blokady", SeverityLevel.Success),
@@ -100,9 +100,9 @@ namespace tests
             onu.OpticalPowerReceived.Should().BeEquivalentTo(new ComplexStringType("-215", "-21,5 dBm", SeverityLevel.Success));
             onu.OpticalCableDistance.Should().BeEquivalentTo(new ComplexIntType(1115, "1115 m", SeverityLevel.Default));
 
-            onu.OpticalConnectionUptime.Should().BeEquivalentTo(new ComplexIntType(18844321, "218d 02:32:01", SeverityLevel.Default));
+            onu.OpticalConnectionUptime.Should().BeEquivalentTo(new ComplexIntType(18844321, "218d 02:32:01 (12:50:02 1.01)", SeverityLevel.Default));
             onu.OpticalConnectionInactiveTime.Should().BeEquivalentTo(new ComplexIntType(0, "0d 00:00:00", SeverityLevel.Default));
-            onu.SystemUptime.Should().BeEquivalentTo(new ComplexIntType(18844372, "218d 02:32:52", SeverityLevel.Default));
+            onu.SystemUptime.Should().BeEquivalentTo(new ComplexIntType(18844372, "218d 02:32:52 (12:50:53 1.01)", SeverityLevel.Default));
 
             onu.BlockStatus.Should().BeEquivalentTo(new ComplexIntType(255, "brak blokady", SeverityLevel.Success));
             onu.BlockReason.Should().BeEquivalentTo(new ComplexIntType(255, "brak blokady", SeverityLevel.Success));
@@ -158,9 +158,9 @@ namespace tests
             onu.OpticalPowerReceived.Should().BeEquivalentTo(new ComplexStringType("-215", "-21,5 dBm", SeverityLevel.Success));
             onu.OpticalCableDistance.Should().BeEquivalentTo(new ComplexIntType(1115, "1115 m", SeverityLevel.Default));
 
-            onu.OpticalConnectionUptime.Should().BeEquivalentTo(new ComplexIntType(18844321, "218d 02:32:01", SeverityLevel.Default));
+            onu.OpticalConnectionUptime.Should().BeEquivalentTo(new ComplexIntType(18844321, "218d 02:32:01 (12:50:02 1.01)", SeverityLevel.Default));
             onu.OpticalConnectionInactiveTime.Should().BeEquivalentTo(new ComplexIntType(0, "0d 00:00:00", SeverityLevel.Default));
-            onu.SystemUptime.Should().BeEquivalentTo(new ComplexIntType(18844372, "218d 02:32:52", SeverityLevel.Default));
+            onu.SystemUptime.Should().BeEquivalentTo(new ComplexIntType(18844372, "218d 02:32:52 (12:50:53 1.01)", SeverityLevel.Default));
 
             onu.BlockStatus.Should().BeEquivalentTo(new ComplexIntType(255, "brak blokady", SeverityLevel.Success));
             onu.BlockReason.Should().BeEquivalentTo(new ComplexIntType(255, "brak blokady", SeverityLevel.Success));
