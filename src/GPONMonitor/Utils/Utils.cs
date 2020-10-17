@@ -9,7 +9,7 @@ namespace GPONMonitor.Utils
             var calculatedTimeSpanAndDateTime = TimeSpan.FromSeconds(Convert.ToDouble(timeSpanInSeconds)).ToString(@"d\d\ hh\:mm\:ss");
 
             if (timeSpanInSeconds != 0)
-                calculatedTimeSpanAndDateTime = calculatedTimeSpanAndDateTime + " " + (DateTime.Now - TimeSpan.FromSeconds(Convert.ToDouble(timeSpanInSeconds))).ToString("(hh:mm:ss d.MM)");
+                calculatedTimeSpanAndDateTime = calculatedTimeSpanAndDateTime + " " + (DateTime.Now - TimeSpan.FromSeconds(Convert.ToDouble(timeSpanInSeconds))).ToString("(d.MM HH:mm:ss)");
 
             return calculatedTimeSpanAndDateTime;
         }
