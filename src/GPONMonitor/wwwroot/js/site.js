@@ -132,7 +132,7 @@ var OltDescriptionListController = function (oltDescriptionListService) {
     var onuListTableRefreshButton = $("#refresh-onu-list");
     var alertIndicator = $("#alert-indicator");
     var alertDescription = $("#alert-description");
-    var searchForm = $("#search-form");
+    var searchForm = $("#search-input");
 
     var init = function () {
         $(document).on("click", ".js-get-onu-list:not(.disabled)", refreshOnuList);
