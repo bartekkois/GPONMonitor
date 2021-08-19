@@ -1,0 +1,51 @@
+﻿using AutoMapper;
+using GPONMonitor.Models.ComplexStateTypes;
+using GPONMonitor.Models.Olt;
+using GPONMonitor.Models.Onu;
+using GPONMonitor.Services;
+
+namespace GPONMonitor.Models.OnuFactory
+{
+    public class HL2GRVOnuFactory : OnuFactory
+    {
+        public HL2GRVOnuFactory(IResponseDescriptionDictionaries responseDescriptionDictionaries, IMapper mapper, IDataService snmpDataService) : base(responseDescriptionDictionaries, mapper, snmpDataService) { }
+
+        public override IOnuFactory BuildOnu(uint oltId, uint oltPortId, uint onuId)
+        {
+            HL2GRVOnu onu = _mapper.Map<HL2GRVOnu>(base.BuildOnu(oltId, oltPortId, onuId));
+
+            // Ethernet port 1 state
+            int? ethernetPort1State = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortState + "." + oltPortId + "." + onuId + ".1.1").Result;
+            onu.EthernetPort1State = new ComplexIntType(ethernetPort1State, _responseDescriptionDictionaries.EthernetPortStateResponse(ethernetPort1State));
+
+
+            // Ethernet port 1 speed
+            int? ethernetPort1Speed = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortSpeed + "." + oltPortId + "." + onuId + ".1.1").Result;
+            onu.EthernetPort1Speed = new ComplexIntType(ethernetPort1Speed, _responseDescriptionDictionaries.EthernetPortSpeedResponse(ethernetPort1Speed));
+
+
+            // Ethernet port 2 state
+            int? ethernetPort2State = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortState + "." + oltPortId + "." + onuId + ".1.2").Result;
+            onu.EthernetPort2State = new ComplexIntType(ethernetPort2State, _responseDescriptionDictionaries.EthernetPortStateResponse(ethernetPort2State));
+
+
+            // Ethernet port 2 speed
+            int? ethernetPort2Speed = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuEthernetPortSpeed + "." + oltPortId + "." + onuId + ".1.2").Result;
+            onu.EthernetPort2Speed = new ComplexIntType(ethernetPort2Speed, _responseDescriptionDictionaries.EthernetPortSpeedResponse(ethernetPort2Speed));
+
+
+            // Update VoIP data
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate1, 1);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOltPortId, (int)oltPortId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOnuId, (int)onuId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate0, 0);
+
+
+            // VoIP port 1 state
+            int? voipPort1State = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineState + "." + oltPortId + "." + onuId + ".1").Result;
+            onu.VoIPLine1State = new ComplexIntType(voipPort1State, _responseDescriptionDictionaries.VoIPLinestatusResponse(voipPort1State));
+
+            return onu;
+        }
+    }
+}
