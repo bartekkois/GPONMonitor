@@ -28,8 +28,8 @@
   <ItemGroup>
 	<PackageReference Include="AutoMapper" Version="10.1.1" />
 	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-	<PackageReference Include="Lextm.SharpSnmpLib" Version="12.3.0" />
-	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+	<PackageReference Include="Lextm.SharpSnmpLib" Version="12.4.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
