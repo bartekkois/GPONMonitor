@@ -5,7 +5,7 @@
     <Copyright>Bartek Kois</Copyright>
     <AssemblyTitle>GPON Monitor</AssemblyTitle>
     <VersionPrefix></VersionPrefix>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>GPONMonitor</AssemblyName>
     <OutputType>Exe</OutputType>
