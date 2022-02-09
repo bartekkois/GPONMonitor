@@ -115,6 +115,7 @@ namespace GPONMonitor.Services
                 "HL-4GMV4" => new HL4GMV4OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-1GR" => new HL1GROnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-1GE" => new HL1GEOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "HL-1GE2" => new HL1GE2OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-4G" => new HL4GOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-GSFP" => new HLGSFPOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "LXT-010G-D" => new LXT010GDOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
