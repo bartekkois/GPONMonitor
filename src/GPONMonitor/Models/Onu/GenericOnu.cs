@@ -26,5 +26,7 @@ namespace GPONMonitor.Models.Onu
 
         public ComplexIntType BlockStatus { get; set; }
         public ComplexIntType BlockReason { get; set; }
+
+        public ComplexStringType IpHost1 { get; set; }
     }
 }

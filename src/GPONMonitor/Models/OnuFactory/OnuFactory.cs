@@ -152,6 +152,17 @@ namespace GPONMonitor.Models.OnuFactory
             int? blockReason = _snmpDataService.GetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuBlockReason + "." + oltPortId + "." + onuId).Result;
             onu.BlockReason = new ComplexIntType(blockReason, _responseDescriptionDictionaries.BlockReasonResponse(blockReason));
 
+
+            // Update ip-host-1
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1Update1, 2);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1UpdateOltPortId, (int)oltPortId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1UpdateOnuId, (int)onuId);
+            _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1Update0, 0);
+
+            // ip-host-1
+            string ipHost1 = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1 + "." + oltPortId + "." + onuId + ".1").Result;
+            onu.IpHost1 = new ComplexStringType(ipHost1.ToString(), ipHost1.ToString(), SeverityLevel.Default);
+
             return onu;
         }
     }

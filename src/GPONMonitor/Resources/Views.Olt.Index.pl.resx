@@ -150,6 +150,9 @@
   <data name="Interface VoIP 2:" xml:space="preserve">
     <value>Interfejs VoIP 2:</value>
   </data>
+  <data name="IP Host 1:" xml:space="preserve">
+    <value>IP Host 1:</value>
+  </data>
   <data name="Last deactivation reason:" xml:space="preserve">
     <value>Ostatnie rozłączenie:</value>
   </data>

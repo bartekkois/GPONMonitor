@@ -118,6 +118,16 @@
         // Onu GPON Profile
         $("#onu-gpon-profile").text(result.gponProfile.description);
 
+        // Onu IP Host 1
+        $("#onu-ip-host-1").empty();
+        if (result.ipHost1.description !== "0.0.0.0" && result.ipHost1.description != "NoSuchInstance") {
+            $("#onu-ip-host-1").parent("tr").removeClass("d-none");
+            $("#onu-ip-host-1").append("<a href=http://" + result.ipHost1.description + " target=\"_blank\" rel=\"noopener noreferrer\">" + result.ipHost1.description + "</a>");
+        }
+        else {
+            $("#onu-ip-host-1").parent("tr").addClass("d-none");
+        }
+
         // Onu Ethernet Port 1 State and Speed
         if (result.hasOwnProperty("ethernetPort1State") && result.hasOwnProperty("ethernetPort1Speed")) {
             var ethernetPort1StateAndSpeed;

@@ -32,6 +32,12 @@
         public const string snmpOIDOnuEthernetPortState = "1.3.6.1.4.1.6296.101.23.6.1.1.1.5";                      // ETH port state (followed by OnuPortId, OnuId, 1 and PortNumber)
         public const string snmpOIDOnuEthernetPortSpeed = "1.3.6.1.4.1.6296.101.23.6.1.1.1.8";                      // ETH port speed (followed by OnuPortId, OnuId, 1 and PortNumber)
 
+        public const string snmpOIDOnuIpHost1 = "1.3.6.1.4.1.6296.101.23.12.1.1.13";                                // Voip line state (followed by OnuPortId, OnuId and 1 fo ip-host-1)
+        public const string snmpOIDOnuIpHost1Update1 = "1.3.6.1.4.1.6296.101.23.12.2.1";                            // Voip line state update (set 2)
+        public const string snmpOIDOnuIpHost1UpdateOltPortId = "1.3.6.1.4.1.6296.101.23.12.2.6";                    // Voip line state update (set OltPortId)
+        public const string snmpOIDOnuIpHost1UpdateOnuId = "1.3.6.1.4.1.6296.101.23.12.2.7";                        // Voip line state update (set OnuId)
+        public const string snmpOIDOnuIpHost1Update0 = "1.3.6.1.4.1.6296.101.23.12.2.3";                            // Voip line state (set 0)
+
         public const string snmpOIDOnuVoIPLineState = "1.3.6.1.4.1.6296.101.23.6.5.1.1.4";                          // Voip line state (followed by OnuPortId and OnuId)
         public const string snmpOIDOnuVoIPLineStateUpdate1 = "1.3.6.1.4.1.6296.101.23.6.5.2.1";                     // Voip line state update (set 1)
         public const string snmpOIDOnuVoIPLineStateUpdateOltPortId = "1.3.6.1.4.1.6296.101.23.6.5.2.6";             // Voip line state update (set OltPortId)
