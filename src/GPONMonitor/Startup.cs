@@ -60,7 +60,7 @@ namespace GPONMonitor
             });
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IDataService, DataService>();
+            services.AddSingleton<IDataService, DataService>();
             services.AddSingleton<IOltFormatChecks, OltFormatChecks>();
             services.AddSingleton<IResponseDescriptionDictionaries, ResponseDescriptionDictionaries>();
         }
