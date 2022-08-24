@@ -20,6 +20,7 @@ namespace GPONMonitor.Models
             CreateMap<IOnuFactory, H665COnu>();
             CreateMap<IOnuFactory, H680GWOnu>();
             CreateMap<IOnuFactory, HL4GQVSOnu>();
+            CreateMap<IOnuFactory, HL4GQVS2Onu>();
             CreateMap<IOnuFactory, HL2GRVOnu>();
             CreateMap<IOnuFactory, HL4GQVOnu>();
             CreateMap<IOnuFactory, HL4GMVOnu>();
