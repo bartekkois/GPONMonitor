@@ -122,6 +122,9 @@ namespace GPONMonitor.Services
                 "HL-GSFP" => new HLGSFPOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "LXT-010G-D" => new LXT010GDOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "LXT-011G-D" => new LXT011GDOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "LXT-240G-C1" => new LXT240GC1OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "LXT-010S-H" => new LXT010SHOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "LXT-010H-D" => new LXT010HDOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 _ => new UnknownOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
             };
         }
