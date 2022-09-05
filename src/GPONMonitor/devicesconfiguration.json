@@ -7,7 +7,7 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 3000
+        "SnmpTimeout": 6000
       },
       {
         "Name": "GPON OLT B",
@@ -15,7 +15,7 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 3000
+        "SnmpTimeout": 6000
       },
       {
         "Name": "GPON OLT C",
@@ -23,7 +23,7 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 3000
+        "SnmpTimeout": 6000
       }
     ]
   }
