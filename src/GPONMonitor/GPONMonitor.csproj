@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>GPONMonitor</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);dotnet5.6;portable-net45+win8</AssetTargetFallback>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
     <StartupObject></StartupObject>
   </PropertyGroup>
 
