@@ -5,7 +5,7 @@
     <Copyright>Bartek Kois</Copyright>
     <AssemblyTitle>GPON Monitor</AssemblyTitle>
     <VersionPrefix></VersionPrefix>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>GPONMonitor</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="AutoMapper" Version="11.0.1" />
-	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-	<PackageReference Include="Lextm.SharpSnmpLib" Version="12.4.0" />
-	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	<PackageReference Include="AutoMapper" Version="12.0.0" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+	<PackageReference Include="Lextm.SharpSnmpLib" Version="12.5.1" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
