@@ -112,6 +112,7 @@ namespace GPONMonitor.Services
                 "HL-4GMV" => new HL4GMVOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-4GMVR" => new HL4GMVROnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-4GXV" => new HL4GXVOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
+                "HL-4GXV-F" => new HL4GXVFOnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-4GMV2" => new HL4GMV2OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-4GMV3" => new HL4GMV3OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
                 "HL-4GMV4" => new HL4GMV4OnuFactory(_responseDescriptionDictionaries, _mapper, this).BuildOnu(oltId, oltPortId, onuId),
