@@ -7,7 +7,8 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 6000
+        "SnmpTimeout": 6000,
+        "IpHostWebManagementPort": 80
       },
       {
         "Name": "GPON OLT B",
@@ -15,7 +16,8 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 6000
+        "SnmpTimeout": 6000,
+        "IpHostWebManagementPort": 80
       },
       {
         "Name": "GPON OLT C",
@@ -23,7 +25,8 @@
         "SnmpPort": "161",
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
-        "SnmpTimeout": 6000
+        "SnmpTimeout": 6000,
+        "IpHostWebManagementPort": 80
       }
     ]
   }

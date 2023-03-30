@@ -12,5 +12,6 @@ namespace GPONMonitor.Services
         VersionCode CheckOltSnmpVersionFormat(string snmpVersion);
         string CheckOltSnmpCommunityFormat(string snmpCommunity);
         int CheckOltSnmpTimeoutFormat(string snmpTimeout);
+        int CheckIpHostWebManagementPortFormat(string ipHostWebManagementPort);
     }
 }

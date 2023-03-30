@@ -19,11 +19,12 @@ namespace GPONMonitor.Models.Olt
         public VersionCode SnmpVersion { get; private set; }
         public string SnmpCommunity { get; private set; }
         public int SnmpTimeout { get; private set; }
+        public int IpHostWebManagementPort { get; private set; }
 
         private readonly IOltFormatChecks _oltFormatChecks;
         private readonly IStringLocalizer<Olt> _localizer;
 
-        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, IOltFormatChecks oltFormatChecks, IStringLocalizer<Olt> localizer)
+        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, string ipHostWebManagementPort, IOltFormatChecks oltFormatChecks, IStringLocalizer<Olt> localizer)
         {
             _oltFormatChecks = oltFormatChecks;
             _localizer = localizer;
@@ -35,6 +36,7 @@ namespace GPONMonitor.Models.Olt
             SnmpVersion = oltFormatChecks.CheckOltSnmpVersionFormat(snmpVersion);
             SnmpCommunity = oltFormatChecks.CheckOltSnmpCommunityFormat(snmpCommunity);
             SnmpTimeout = oltFormatChecks.CheckOltSnmpTimeoutFormat(snmpTimeout);
+            IpHostWebManagementPort = oltFormatChecks.CheckIpHostWebManagementPortFormat(ipHostWebManagementPort);
         }
 
         public async Task<string> GetDescriptionAsync()

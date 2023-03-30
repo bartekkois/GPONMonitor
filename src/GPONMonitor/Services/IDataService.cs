@@ -13,6 +13,7 @@ namespace GPONMonitor.Services
         Task<string> GetOltDescriptionAsync(uint oltId);
         Task<string> GetOltUptimeAsync(uint oltId);
         Task<string> GetOltFirmwareVersionAsync(uint oltId);
+        int GetOltIpHostWebManagementPort(uint oltId);
         Task<IEnumerable<OnuShortDescription>> GetOnuDescriptionListAsync(uint oltId);
         Task<IOnuFactory> GetOnuStateAsync(uint oltId, uint oltPortId, uint onuId);
         Task<string> GetStringPropertyAsync(uint oltId, string snmpOid);

@@ -39,7 +39,7 @@ namespace GPONMonitor.Services
             {
                 foreach (var device in _devicesConfiguration.Devices)
                 {
-                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, oltFormatChecks, localizerOlt));
+                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, device.IpHostWebManagementPort, oltFormatChecks, localizerOlt));
                 }
             }
             catch (Exception exception)
@@ -72,6 +72,11 @@ namespace GPONMonitor.Services
                 return firmwareVersionMatch.Value;
             else
                 throw new Exception(_localizerDataService["Error getting OLT firmware version number"]);
+        }
+
+        public int GetOltIpHostWebManagementPort(uint oltId)
+        {
+            return configuredOlts.Single(s => s.Id == oltId).IpHostWebManagementPort;
         }
 
         public async Task<IEnumerable<OnuShortDescription>> GetOnuDescriptionListAsync(uint oltId)

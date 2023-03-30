@@ -161,7 +161,7 @@ namespace GPONMonitor.Models.OnuFactory
 
             // ip-host-1
             string ipHost1 = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1 + "." + oltPortId + "." + onuId + ".1").Result;
-            onu.IpHost1 = new ComplexStringType(ipHost1.ToString(), ipHost1.ToString(), SeverityLevel.Default);
+            onu.IpHost1 = new ComplexStringType(ipHost1.ToString() + ":" + _snmpDataService.GetOltIpHostWebManagementPort(oltId).ToString(), ipHost1.ToString() + ":" + _snmpDataService.GetOltIpHostWebManagementPort(oltId).ToString(), SeverityLevel.Default);
 
             return onu;
         }

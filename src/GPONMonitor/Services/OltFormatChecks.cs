@@ -80,5 +80,14 @@ namespace GPONMonitor.Models.Olt
             else
                 throw new ArgumentException(_localizer["Incorrect OLT SNMP timeout"]);
         }
+
+        public int CheckIpHostWebManagementPortFormat(string ipHostWebManagementPort)
+        {
+            int tryParseIpHostWebManagementPort;
+            if (int.TryParse(ipHostWebManagementPort, out tryParseIpHostWebManagementPort) && (tryParseIpHostWebManagementPort > 0 && tryParseIpHostWebManagementPort < 65535))
+                return tryParseIpHostWebManagementPort;
+            else
+                throw new ArgumentException(_localizer["Incorrect IP Host web management port port number"]);
+        }
     }
 }

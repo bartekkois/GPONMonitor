@@ -9,5 +9,6 @@
         public string SnmpVersion { get; set; }
         public string SnmpCommunity { get; set; }
         public string SnmpTimeout { get; set; }
+        public string IpHostWebManagementPort { get; set; }
     }
 }
