@@ -4,7 +4,6 @@ using GPONMonitor.Models.Olt;
 using GPONMonitor.Models.Onu;
 using GPONMonitor.Services;
 using GPONMonitor.Utils;
-using System;
 
 namespace GPONMonitor.Models.OnuFactory
 {

@@ -65,7 +65,7 @@ namespace GPONMonitor.Services
 
         public async Task<string> GetOltFirmwareVersionAsync(uint oltId)
         {
-            Regex firmwareVersionRegex = new Regex(@"([0-9]+)\.([A-Za-z0-9\-]+)");
+            Regex firmwareVersionRegex = new(@"([0-9]+)\.([A-Za-z0-9\-]+)");
             Match firmwareVersionMatch = firmwareVersionRegex.Match(await GetOltDescriptionAsync(oltId));
 
             if (firmwareVersionMatch.Success)

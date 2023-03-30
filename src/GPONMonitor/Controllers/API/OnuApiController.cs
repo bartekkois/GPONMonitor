@@ -42,7 +42,7 @@ namespace GPONMonitor.Controllers
             {
                 var onu = (await _snmpDataService.GetOnuDescriptionListAsync(oltId)).SingleOrDefault(s => s.OnuGponSerialNumber == onuSerialNumber);
 
-                if (onu == null) 
+                if (onu == null)
                     return NotFound();
 
                 return Json(await _snmpDataService.GetOnuStateAsync(oltId, onu.OltPortId, onu.OnuId));

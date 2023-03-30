@@ -1,5 +1,4 @@
-﻿using GPONMonitor.Models.ComplexStateTypes;
-using GPONMonitor.Models.OnuFactory;
+﻿using GPONMonitor.Models.OnuFactory;
 
 namespace GPONMonitor.Models.Onu
 {

@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using GPONMonitor.Models.ComplexStateTypes;
-using GPONMonitor.Models.Olt;
 using GPONMonitor.Models.Onu;
 using GPONMonitor.Services;
 

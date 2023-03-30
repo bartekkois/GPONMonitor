@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GPONMonitor.Models.Configuration;
+﻿using GPONMonitor.Models.Configuration;
 using GPONMonitor.Models.Olt;
 using GPONMonitor.Services;
 using Microsoft.AspNetCore.Builder;
@@ -9,9 +8,9 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System.Globalization;
 using System.Linq;
-using Microsoft.OpenApi.Models;
 
 namespace GPONMonitor
 {
