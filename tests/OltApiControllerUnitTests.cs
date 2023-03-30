@@ -23,9 +23,9 @@ namespace tests
             {
                 Devices = new List<OltConfiguration>()
                 {
-                    new OltConfiguration{ Id = 0, Name ="GPON OLT A", IpAddress="10.1.1.21",SnmpPort ="161", SnmpVersion="2", SnmpCommunity="public", SnmpTimeout="3000"},
-                    new OltConfiguration{ Id = 1, Name ="GPON OLT B", IpAddress="10.1.1.11",SnmpPort ="161", SnmpVersion="2", SnmpCommunity="public", SnmpTimeout="3000"},
-                    new OltConfiguration{ Id = 2, Name ="GPON OLT C", IpAddress="10.2.1.11",SnmpPort ="161", SnmpVersion="2", SnmpCommunity="public", SnmpTimeout="3000"}
+                    new OltConfiguration{ Id = 0, Name ="GPON OLT A", IpAddress="10.1.1.21",SnmpPort ="161", SnmpVersion="2", SnmpCommunity="public", SnmpTimeout="3000", IpHostWebManagementPort="80"},
+                    new OltConfiguration{ Id = 1, Name ="GPON OLT B", IpAddress="10.1.1.11",SnmpPort ="161", SnmpVersion="2", SnmpCommunity="public", SnmpTimeout="3000", IpHostWebManagementPort="80"},
+                    new OltConfiguration{ Id = 2, Name ="GPON OLT C", IpAddress="10.2.1.11",SnmpPort ="161", SnmpVersion="2", SnmpCommunity="public", SnmpTimeout="3000", IpHostWebManagementPort="80"}
                 }
             });
 
