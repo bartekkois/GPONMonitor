@@ -1,4 +1,5 @@
-﻿using Lextm.SharpSnmpLib;
+﻿using GPONMonitor.Models.Configuration;
+using Lextm.SharpSnmpLib;
 using System.Net;
 
 namespace GPONMonitor.Services
@@ -12,6 +13,7 @@ namespace GPONMonitor.Services
         VersionCode CheckOltSnmpVersionFormat(string snmpVersion);
         string CheckOltSnmpCommunityFormat(string snmpCommunity);
         int CheckOltSnmpTimeoutFormat(string snmpTimeout);
+        SnmpV3Credentials CheckSnmpV3Credentials(string snmpVersion, SnmpV3Credentials snmpV3Credentials);
         int CheckIpHostWebManagementPortFormat(string ipHostWebManagementPort);
     }
 }

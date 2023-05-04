@@ -132,4 +132,7 @@
   <data name="unknown" xml:space="preserve">
     <value>nieznany</value>
   </data>
+  <data name="unsupported SNMP version" xml:space="preserve">
+    <value>niewspierana wersja SNMP</value>
+  </data>
 </root>

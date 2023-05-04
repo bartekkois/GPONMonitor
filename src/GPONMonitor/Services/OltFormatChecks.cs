@@ -1,4 +1,5 @@
-﻿using GPONMonitor.Services;
+﻿using GPONMonitor.Models.Configuration;
+using GPONMonitor.Services;
 using Lextm.SharpSnmpLib;
 using Microsoft.Extensions.Localization;
 using System;
@@ -81,13 +82,38 @@ namespace GPONMonitor.Models.Olt
                 throw new ArgumentException(_localizer["Incorrect OLT SNMP timeout"]);
         }
 
+        public SnmpV3Credentials CheckSnmpV3Credentials(string snmpVersion, SnmpV3Credentials snmpV3Credentials)
+        {
+            if (snmpVersion == "3")
+            {
+                if (string.IsNullOrWhiteSpace(snmpV3Credentials.AuthenticationUsername))
+                    throw new ArgumentException(_localizer["Incorrect SNMPv3 credentials authentication username"]);
+
+                if (string.IsNullOrWhiteSpace(snmpV3Credentials.AuthenticationType) || !(snmpV3Credentials.AuthenticationType == "SHA1" || snmpV3Credentials.AuthenticationType == "MD5"))
+                    throw new ArgumentException(_localizer["Incorrect SNMPv3 credentials authentication type"]);
+
+                if (string.IsNullOrWhiteSpace(snmpV3Credentials.AuthenticationPassword))
+                    throw new ArgumentException(_localizer["Incorrect SNMPv3 credentials authentication password"]);
+
+                if (string.IsNullOrWhiteSpace(snmpV3Credentials.EncryptionType) || !(snmpV3Credentials.EncryptionType == "DES" || snmpV3Credentials.EncryptionType == "AES"))
+                    throw new ArgumentException(_localizer["Incorrect SNMPv3 credentials encryption type"]);
+
+                if (string.IsNullOrWhiteSpace(snmpV3Credentials.EncryptionPassword))
+                    throw new ArgumentException(_localizer["Incorrect SNMPv3 credentials encryption password"]);
+
+                return snmpV3Credentials;
+            }
+
+            return snmpV3Credentials;
+        }
+
         public int CheckIpHostWebManagementPortFormat(string ipHostWebManagementPort)
         {
             int tryParseIpHostWebManagementPort;
             if (int.TryParse(ipHostWebManagementPort, out tryParseIpHostWebManagementPort) && (tryParseIpHostWebManagementPort > 0 && tryParseIpHostWebManagementPort < 65535))
                 return tryParseIpHostWebManagementPort;
             else
-                throw new ArgumentException(_localizer["Incorrect IP Host web management port port number"]);
+                throw new ArgumentException(_localizer["Incorrect IP Host web management port number"]);
         }
     }
 }

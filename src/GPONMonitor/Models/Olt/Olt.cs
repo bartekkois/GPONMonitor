@@ -1,4 +1,5 @@
 ﻿using GPONMonitor.Exceptions;
+using GPONMonitor.Models.Configuration;
 using GPONMonitor.Services;
 using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
@@ -19,12 +20,13 @@ namespace GPONMonitor.Models.Olt
         public VersionCode SnmpVersion { get; private set; }
         public string SnmpCommunity { get; private set; }
         public int SnmpTimeout { get; private set; }
+        public SnmpV3Credentials SnmpV3Credentials { get; private set; }
         public int IpHostWebManagementPort { get; private set; }
 
         private readonly IOltFormatChecks _oltFormatChecks;
         private readonly IStringLocalizer<Olt> _localizer;
 
-        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, string ipHostWebManagementPort, IOltFormatChecks oltFormatChecks, IStringLocalizer<Olt> localizer)
+        public Olt(int id, string name, string snmpIPAddress, string snmpPort, string snmpVersion, string snmpCommunity, string snmpTimeout, SnmpV3Credentials snmpV3Credentials, string ipHostWebManagementPort, IOltFormatChecks oltFormatChecks, IStringLocalizer<Olt> localizer)
         {
             _oltFormatChecks = oltFormatChecks;
             _localizer = localizer;
@@ -36,12 +38,13 @@ namespace GPONMonitor.Models.Olt
             SnmpVersion = oltFormatChecks.CheckOltSnmpVersionFormat(snmpVersion);
             SnmpCommunity = oltFormatChecks.CheckOltSnmpCommunityFormat(snmpCommunity);
             SnmpTimeout = oltFormatChecks.CheckOltSnmpTimeoutFormat(snmpTimeout);
+            SnmpV3Credentials = oltFormatChecks.CheckSnmpV3Credentials(snmpVersion, snmpV3Credentials);
             IpHostWebManagementPort = oltFormatChecks.CheckIpHostWebManagementPortFormat(ipHostWebManagementPort);
         }
 
         public async Task<string> GetDescriptionAsync()
         {
-            List<Variable> snmpResponseDescription = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOltDescription, SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponseDescription = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOltDescription, SnmpTimeout, SnmpV3Credentials) as List<Variable>;
 
             if (snmpResponseDescription.Count == 0)
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
@@ -51,7 +54,7 @@ namespace GPONMonitor.Models.Olt
 
         public async Task<string> GetUptimeAsync()
         {
-            List<Variable> snmpResponseUptime = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOltUptime, SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponseUptime = await SnmpGetAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOltUptime, SnmpTimeout, SnmpV3Credentials) as List<Variable>;
 
             if (snmpResponseUptime.Count == 0)
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
@@ -63,9 +66,9 @@ namespace GPONMonitor.Models.Olt
         {
             List<OnuShortDescription> onuList = new List<OnuShortDescription>();
 
-            List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuGponSerialNumber, WalkMode.WithinSubtree, SnmpTimeout);
-            List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuDescription, WalkMode.WithinSubtree, SnmpTimeout);
-            List<Variable> snmpOnuOpticalConnectionState = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState, WalkMode.WithinSubtree, SnmpTimeout);
+            List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuGponSerialNumber, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
+            List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuDescription, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
+            List<Variable> snmpOnuOpticalConnectionState = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
 
             foreach (Variable variable in snmpOnuGponSerialNumberList)
             {
@@ -109,7 +112,7 @@ namespace GPONMonitor.Models.Olt
 
         public async Task<string> GetStringPropertyAsync(string snmpOid)
         {
-            List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout, SnmpV3Credentials) as List<Variable>;
 
             if (snmpResponse.Count == 0)
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
@@ -120,7 +123,7 @@ namespace GPONMonitor.Models.Olt
         public async Task<int?> GetIntPropertyAsync(string snmpOid)
         {
             int parsedResult;
-            List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponse = await SnmpGetAsyncWithTimeout(SnmpVersion, snmpOid, SnmpTimeout, SnmpV3Credentials) as List<Variable>;
 
             if (snmpResponse.Count == 0)
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
@@ -133,7 +136,7 @@ namespace GPONMonitor.Models.Olt
 
         public async Task<IList<Variable>> SetStringPropertyAsync(string snmpOid, string data)
         {
-            List<Variable> snmpResponse = await SnmpSetAsyncWithTimeout(SnmpVersion, snmpOid, new OctetString(data), SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponse = await SnmpSetAsyncWithTimeout(SnmpVersion, snmpOid, new OctetString(data), SnmpTimeout, SnmpV3Credentials) as List<Variable>;
 
             if (snmpResponse.Count == 0)
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);
@@ -143,7 +146,7 @@ namespace GPONMonitor.Models.Olt
 
         public async Task<IList<Variable>> SetIntPropertyAsync(string snmpOid, int data)
         {
-            List<Variable> snmpResponse = await SnmpSetAsyncWithTimeout(SnmpVersion, snmpOid, new Integer32(data), SnmpTimeout) as List<Variable>;
+            List<Variable> snmpResponse = await SnmpSetAsyncWithTimeout(SnmpVersion, snmpOid, new Integer32(data), SnmpTimeout, SnmpV3Credentials) as List<Variable>;
 
             if (snmpResponse.Count == 0)
                 throw new SnmpConnectionException(_localizer["SNMP request error: no result has been returned"]);

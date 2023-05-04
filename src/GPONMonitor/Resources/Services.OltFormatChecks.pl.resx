@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Incorrect IP Host web management port number" xml:space="preserve">
+    <value>Błędny numer portu zarządznia IP Host</value>
+  </data>
   <data name="Incorrect OLT name" xml:space="preserve">
     <value>Błędna nazwa OLTa</value>
   </data>
@@ -134,5 +137,20 @@
   </data>
   <data name="Incorrect OLT SNMP version" xml:space="preserve">
     <value>Błędna wersja protokołu SNMP</value>
+  </data>
+  <data name="Incorrect SNMPv3 credentials authentication password" xml:space="preserve">
+    <value>Błędne hasło autentykacji protokołu SNMPv3</value>
+  </data>
+  <data name="Incorrect SNMPv3 credentials authentication type" xml:space="preserve">
+    <value>Błędny rodzaj autentykacji protokołu SNMPv3</value>
+  </data>
+  <data name="Incorrect SNMPv3 credentials authentication username" xml:space="preserve">
+    <value>Błędna nazwa użytkownika protokołu SNMPv3</value>
+  </data>
+  <data name="Incorrect SNMPv3 credentials encryption password" xml:space="preserve">
+    <value>Błędny hasło szyfrowania protokołu SNMPv3</value>
+  </data>
+  <data name="Incorrect SNMPv3 credentials encryption type" xml:space="preserve">
+    <value>Błędny rodzaj szyfrowania protokołu SNMPv3</value>
   </data>
 </root>

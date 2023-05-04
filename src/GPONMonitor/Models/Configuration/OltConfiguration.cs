@@ -1,4 +1,6 @@
-﻿namespace GPONMonitor.Models.Configuration
+﻿using System.Collections.Generic;
+
+namespace GPONMonitor.Models.Configuration
 {
     public class OltConfiguration
     {
@@ -9,6 +11,7 @@
         public string SnmpVersion { get; set; }
         public string SnmpCommunity { get; set; }
         public string SnmpTimeout { get; set; }
+        public SnmpV3Credentials SnmpV3Credentials { get; set; }
         public string IpHostWebManagementPort { get; set; }
     }
 }

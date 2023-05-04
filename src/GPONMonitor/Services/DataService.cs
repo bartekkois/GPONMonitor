@@ -39,7 +39,7 @@ namespace GPONMonitor.Services
             {
                 foreach (var device in _devicesConfiguration.Devices)
                 {
-                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, device.IpHostWebManagementPort, oltFormatChecks, localizerOlt));
+                    configuredOlts.Add(new Olt(device.Id, device.Name, device.IpAddress, device.SnmpPort, device.SnmpVersion, device.SnmpCommunity, device.SnmpTimeout, device.SnmpV3Credentials, device.IpHostWebManagementPort, oltFormatChecks, localizerOlt));
                 }
             }
             catch (Exception exception)

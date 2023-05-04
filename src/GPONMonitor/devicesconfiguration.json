@@ -8,6 +8,13 @@
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
         "SnmpTimeout": 6000,
+        "SnmpV3Credentials": {
+          "AuthenticationUsername": "",
+          "AuthenticationType": "",   // supported types: SHA1, MD5
+          "AuthenticationPassword": "",
+          "EncryptionType": "",        // supported types: DES, AES
+          "EncryptionPassword": ""
+        },
         "IpHostWebManagementPort": 80
       },
       {
@@ -17,15 +24,29 @@
         "SnmpVersion": "2",
         "SnmpCommunity": "public",
         "SnmpTimeout": 6000,
+        "SnmpV3Credentials": {
+          "AuthenticationUsername": "",
+          "AuthenticationType": "",   // supported types: SHA1, MD5
+          "AuthenticationPassword": "",
+          "EncryptionType": "",        // supported types: DES, AES
+          "EncryptionPassword": ""
+        },
         "IpHostWebManagementPort": 80
       },
       {
         "Name": "GPON OLT C",
         "IpAddress": "10.2.1.11",
         "SnmpPort": "161",
-        "SnmpVersion": "2",
+        "SnmpVersion": "3",
         "SnmpCommunity": "public",
         "SnmpTimeout": 6000,
+        "SnmpV3Credentials": {
+          "AuthenticationUsername": "username",
+          "AuthenticationType": "SHA1",   // supported types: SHA1, MD5
+          "AuthenticationPassword": "userAuthenticationPassword",
+          "EncryptionType": "DES",        // supported types: DES, AES
+          "EncryptionPassword": "encryptionPassword"
+        },
         "IpHostWebManagementPort": 80
       }
     ]
