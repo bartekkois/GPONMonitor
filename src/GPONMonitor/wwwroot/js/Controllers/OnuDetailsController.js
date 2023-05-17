@@ -120,7 +120,7 @@
 
         // Onu IP Host 1
         $("#onu-ip-host-1").empty();
-        if (result.ipHost1.description !== "0.0.0.0" && result.ipHost1.description != "NoSuchInstance") {
+        if (result.ipHost1.description.indexOf("0.0.0.0") == -1 && result.ipHost1.description.indexOf("NoSuchInstance") == -1) {
             $("#onu-ip-host-1").parent("tr").removeClass("d-none");
             $("#onu-ip-host-1").append("<a href=http://" + result.ipHost1.description + " target=\"_blank\" rel=\"noopener noreferrer\">" + result.ipHost1.description + "</a>");
         }
