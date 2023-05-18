@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   gponmonitor.tests:
-    image: bartekkois/gponmonitor.tests:1.0.13
+    image: bartekkois/gponmonitor.tests:1.0.14
     volumes:
       - ./temp:/var/temp
       - /etc/localtime:/etc/localtime:ro
