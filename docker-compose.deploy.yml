@@ -8,4 +8,4 @@ services:
       - /docker/GPONMonitor/devicesconfiguration.json:/app/devicesconfiguration.json:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "5001:80"
+      - "5001:8080"

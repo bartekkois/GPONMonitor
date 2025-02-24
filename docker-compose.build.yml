@@ -7,7 +7,7 @@ services:
     volumes:
       - /docker/GPONMonitor/devicesconfiguration.json:/app/devicesconfiguration.json:ro
     ports:
-      - "5001:80"
+      - "5001:8080"
     build:
       context: .
       dockerfile: ./Dockerfile
