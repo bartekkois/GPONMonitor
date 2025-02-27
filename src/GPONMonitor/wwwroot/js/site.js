@@ -249,10 +249,31 @@ var OnuDetailsController = function (onuDetailsService) {
     var onuDetailsRefreshButton = $("#refresh-onu-details");
     var alertIndicator = $("#alert-indicator");
     var alertDescription = $("#alert-description");
+    var resetOnuButton = $("#reset-onu-button");
+    var blockOnuButton = $("#block-onu-button");
+    var unblockOnuButton = $("unblock-onu-button");
+    var currentAction = null;
 
     var init = function () {
         onuListTableTbody.on("click", "tr.clickable-row", getOnuDetails);
         $(document).on("click", "#refresh-onu-details", refreshOnuDetails);
+        $(document).on("click", "#reset-onu-icon", function () { showPasswordModal(resetOnu); });
+        $(document).on("click", "#block-onu-icon", function () { showPasswordModal(blockOnu); });
+        $(document).on("click", "#unblock-onu-icon", function () { showPasswordModal(unblockOnu); });
+        $(document).on("click", "#submitPassword", submitPassword);
+
+        // Add keypress event listener for Enter key on the password input field
+        $('#commandProtectionPassword').on('keypress', function (e) {
+            if (e.which === 13) { // Enter key pressed
+                $('#submitPassword').click();
+            }
+        });
+
+        // Set focus on the password input field and clear it when the modal is shown
+        $('#passwordModal').on('shown.bs.modal', function () {
+            $('#commandProtectionPassword').val(''); // Clear the input field
+            $('#commandProtectionPassword').focus(); // Set focus on the input field
+        });
     };
 
     var getOnuDetails = function (e) {
@@ -277,6 +298,64 @@ var OnuDetailsController = function (onuDetailsService) {
 
         onuDetailsRefreshButton.addClass("fa-spin");
         onuDetailsService.getOnuDetails(oltId, oltPortId, onuId, done, fail);
+    };
+
+    var showPasswordModal = function (action) {
+        currentAction = action;
+        $("#passwordModal").modal("show");
+    };
+
+    var submitPassword = function () {
+        var password = $("#commandProtectionPassword").val();
+        if (password && currentAction) {
+            currentAction(password);
+            $("#passwordModal").modal("hide");
+        }
+    };
+
+    var resetOnu = function (password) {
+        var oltId = onuDetailsRefreshButton.attr("data-olt-id");
+        var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
+        var onuId = onuDetailsRefreshButton.attr("data-onu-id");
+
+        $.post("api/ResetOnu", { oltId: oltId, oltPortId: oltPortId, onuId: onuId, commandProtectionPasswordHash: CryptoJS.MD5(password).toString() })
+            .done(function (result) {
+                setTimeout(function () { refreshOnuDetails(); }, 3500);
+            })
+            .fail(function (result) {
+                alertIndicator.removeClass("d-none");
+                alertDescription.text("Failed to reset ONU: " + result.responseText);
+            });
+    };
+
+    var blockOnu = function (password) {
+        var oltId = onuDetailsRefreshButton.attr("data-olt-id");
+        var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
+        var onuId = onuDetailsRefreshButton.attr("data-onu-id");
+
+        $.post("api/BlockOnu", { oltId: oltId, oltPortId: oltPortId, onuId: onuId, commandProtectionPasswordHash: CryptoJS.MD5(password).toString() })
+            .done(function (result) {
+                setTimeout(function () { refreshOnuDetails(); }, 1500);
+            })
+            .fail(function (result) {
+                alertIndicator.removeClass("d-none");
+                alertDescription.text("Failed to block ONU: " + result.responseText);
+            });
+    };
+
+    var unblockOnu = function (password) {
+        var oltId = onuDetailsRefreshButton.attr("data-olt-id");
+        var oltPortId = onuDetailsRefreshButton.attr("data-olt-port-id");
+        var onuId = onuDetailsRefreshButton.attr("data-onu-id");
+
+        $.post("api/UnblockOnu", { oltId: oltId, oltPortId: oltPortId, onuId: onuId, commandProtectionPasswordHash: CryptoJS.MD5(password).toString() })
+            .done(function (result) {
+                setTimeout(function () { refreshOnuDetails(); }, 1500);
+            })
+            .fail(function (result) {
+                alertIndicator.removeClass("d-none");
+                alertDescription.text("Failed to unblock ONU: " + result.responseText);
+            });
     };
 
     var translateSeverityLevel = function (level) {
@@ -338,7 +417,13 @@ var OnuDetailsController = function (onuDetailsService) {
         $("#onu-optical-connection-uptime").text(result.opticalConnectionUptime.description);
 
         // Onu System Uptime
-        $("#onu-system-uptime").text(result.systemUptime.description);
+        $("#onu-system-uptime").html(result.systemUptime.description);
+        if (result.opticalConnectionState.value == "2" || result.opticalConnectionState.value == "3") {
+            $("#reset-onu-icon").removeClass("d-none");
+        }
+        else {
+            $("#reset-onu-icon").addClass("d-none");
+        }
 
         // Onu Connection Inactive Time
         $("#onu-connection-inactive-time").text(result.opticalConnectionInactiveTime.description);
@@ -346,6 +431,18 @@ var OnuDetailsController = function (onuDetailsService) {
         // Onu Block Status
         $("#onu-block-status").text(result.blockStatus.description);
         $("#onu-block-status").attr("class", "onu-detail-item").addClass(translateSeverityLevel(result.blockStatus.severity));
+        if (result.blockStatus.value == "255") {
+            $("#block-onu-icon").removeClass("d-none");
+            $("#unblock-onu-icon").addClass("d-none");
+        }
+        else if (result.blockStatus.value == "1" || result.blockStatus.value == "2") {
+            $("#block-onu-icon").addClass("d-none");
+            $("#unblock-onu-icon").removeClass("d-none");
+        }
+        else {
+            $("#block-onu-icon").addClass("d-none");
+            $("#unblock-onu-icon").addClass("d-none");
+        }
 
         // Onu Block Reason
         $("#onu-block-reason").text(result.blockReason.description);

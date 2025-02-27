@@ -39,4 +39,8 @@
     <None Include="package.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\crypto-js\4.1.1\" />
+  </ItemGroup>
+
 </Project>

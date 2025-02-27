@@ -55,6 +55,18 @@ td.onu-list-item {
 	margin-right: 0.4em;
 }
 
+#reset-onu-icon {
+	color: #f04124;
+}
+
+#block-onu-icon {
+	color: #e99002;
+}
+
+#unblock-onu-icon {
+	color: #43ac6a;
+}
+
 table.onu-details {
 	width: 100%;
 }

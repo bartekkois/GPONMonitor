@@ -123,8 +123,14 @@
   <data name="Block status:" xml:space="preserve">
     <value>Stan blokady:</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
   <data name="Connection uptime:" xml:space="preserve">
     <value>Czas połączenia:</value>
+  </data>
+  <data name="Enter command protection password" xml:space="preserve">
+    <value>Wprowadź hasło zabezpieczenia poleceń</value>
   </data>
   <data name="Firmware version:" xml:space="preserve">
     <value>Wersja oprogramowania:</value>
@@ -168,6 +174,9 @@
   <data name="Optical power received:" xml:space="preserve">
     <value>Moc optycza:</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Szukaj</value>
   </data>
@@ -176,6 +185,9 @@
   </data>
   <data name="Service profile:" xml:space="preserve">
     <value>Profil usługowy:</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Zatwierdź</value>
   </data>
   <data name="System uptime:" xml:space="preserve">
     <value>Czas pracy:</value>

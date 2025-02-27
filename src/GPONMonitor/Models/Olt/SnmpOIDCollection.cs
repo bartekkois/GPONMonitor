@@ -19,8 +19,8 @@
         public const string snmpOIDOnuOpticalCabelDistance = "1.3.6.1.4.1.6296.101.23.3.1.1.10";                    // Optical cable distance (followed by OnuPortId and OnuId)
 
         public const string snmpOIDOnuOpticalConnectionUptime = "1.3.6.1.4.1.6296.101.23.3.1.1.23";                 // Optical connection uptime (the elapsed time after ont is up) (followed by OnuPortId and OnuId)
-        public const string snmpOIDOnuOpticalConnectionInactiveTime = "1.3.6.1.4.1.6296.101.23.3.1.1.85";              // Optical connection inactive time (the elapsed time after ont Inactive) (followed by OnuPortId and OnuId)
-        public const string snmpOIDOnuSystemUptime = "1.3.6.1.4.1.6296.101.23.3.1.1.61";                               // System uptime (followed by OnuPortId and OnuId)
+        public const string snmpOIDOnuOpticalConnectionInactiveTime = "1.3.6.1.4.1.6296.101.23.3.1.1.85";           // Optical connection inactive time (the elapsed time after ont Inactive) (followed by OnuPortId and OnuId)
+        public const string snmpOIDOnuSystemUptime = "1.3.6.1.4.1.6296.101.23.3.1.1.61";                            // System uptime (followed by OnuPortId and OnuId)
         public const string snmpOIDOnuTimersUpdate1 = "1.3.6.1.4.1.6296.101.23.3.2.1";                              // Timers update (set 21)
         public const string snmpOIDOnuTimersUpdate2 = "1.3.6.1.4.1.6296.101.23.3.2.6";                              // Timers update (set OltPortId)
         public const string snmpOIDOnuTimersUpdate3 = "1.3.6.1.4.1.6296.101.23.3.2.7";                              // Timers update (set OnuId)
@@ -45,5 +45,15 @@
         public const string snmpOIDOnuVoIPLineStateUpdate0 = "1.3.6.1.4.1.6296.101.23.6.5.2.3";                     // Voip line state (set 0)
         public const string snmpOIDOnuVoIPLineCheckIfPresent = "1.3.6.1.4.1.6296.101.23.6.1.1.1.3";                 // Voip check if line is present
 
+        public const string snmpOIDOnuResetMode = "1.3.6.1.4.1.6296.101.23.3.2.1";                                  // Reset (set 8)
+        public const string snmpOIDOnuResetOltPortId = "1.3.6.1.4.1.6296.101.23.3.2.6";                             // Reset (set OltPortId)
+        public const string snmpOIDOnuResetOnuId = "1.3.6.1.4.1.6296.101.23.3.2.7";                                 // Reset (set OnuId)
+        public const string snmpOIDOnuResetTimer = "1.3.6.1.4.1.6296.101.23.3.2.3";                                 // Reset timer (set 0)
+
+        public const string snmpOIDOnuBlockMode = "1.3.6.1.4.1.6296.101.23.3.2.1";                                  // Block (set 19)
+        public const string snmpOIDOnuBlockOltPortId = "1.3.6.1.4.1.6296.101.23.3.2.6";                             // Block (set OltPortId)
+        public const string snmpOIDOnuBlockOnuId = "1.3.6.1.4.1.6296.101.23.3.2.7";                                 // Block (set OnuId)
+        public const string snmpOIDOnuBlockType = "1.3.6.1.4.1.6296.101.23.3.2.28";                                 // Block type (set 1 - block, set 2 - unblock)
+        public const string snmpOIDOnuBlockTimer = "1.3.6.1.4.1.6296.101.23.3.2.3";                                 // Block timer (set 0)
     }
 }

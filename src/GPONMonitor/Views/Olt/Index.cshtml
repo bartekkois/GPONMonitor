@@ -81,7 +81,7 @@
                         <td class="onu-detail-item indicator-info" id="onu-optical-connection-uptime"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">@Localizer["System uptime:"]</td>
+                        <td class="onu-detail-description"><i id="reset-onu-icon" class="fa fa-power-off d-none"  title="Reset ONU"></i> @Localizer["System uptime:"]</td>
                         <td class="onu-detail-item indicator-info" id="onu-system-uptime"></td>
                     </tr>
                     <tr>
@@ -89,7 +89,7 @@
                         <td class="onu-detail-item indicator-info" id="onu-connection-inactive-time"></td>
                     </tr>
                     <tr>
-                        <td class="onu-detail-description">@Localizer["Block status:"]</td>
+                        <td class="onu-detail-description"><i id="block-onu-icon" class="fa fa-lock d-none" title="Block ONU"></i><i id="unblock-onu-icon" class="fa fa-unlock d-none" title="Unblock ONU"></i> @Localizer["Block status:"]</td>
                         <td class="onu-detail-item" id="onu-block-status"></td>
                     </tr>
                     <tr class="d-none">
@@ -141,6 +141,27 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- Password Modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordModalLabel">@Localizer["Enter command protection password"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="password" class="form-control" id="commandProtectionPassword" placeholder="@Localizer["Password"]">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                <button type="button" class="btn btn-primary" id="submitPassword">@Localizer["Submit"]</button>
+            </div>
         </div>
     </div>
 </div>
