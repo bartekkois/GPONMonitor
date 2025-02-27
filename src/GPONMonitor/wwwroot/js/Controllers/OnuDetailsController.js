@@ -22,14 +22,14 @@
         // Add keypress event listener for Enter key on the password input field
         $('#commandProtectionPassword').on('keypress', function (e) {
             if (e.which === 13) { // Enter key pressed
-                $('#submitPassword').click();
+                $('#submitPassword').trigger('click');
             }
         });
 
         // Set focus on the password input field and clear it when the modal is shown
         $('#passwordModal').on('shown.bs.modal', function () {
             $('#commandProtectionPassword').val(''); // Clear the input field
-            $('#commandProtectionPassword').focus(); // Set focus on the input field
+            $('#commandProtectionPassword').trigger('focus'); // Set focus on the input field
         });
     };
 
