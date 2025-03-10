@@ -320,7 +320,7 @@ var OnuDetailsController = function (onuDetailsService) {
 
         $.post("api/ResetOnu", { oltId: oltId, oltPortId: oltPortId, onuId: onuId, commandProtectionPasswordHash: CryptoJS.MD5(password).toString() })
             .done(function (result) {
-                setTimeout(function () { refreshOnuDetails(); }, 3500);
+                setTimeout(function () { refreshOnuDetails(); }, 5000);
             })
             .fail(function (result) {
                 alertIndicator.removeClass("d-none");
@@ -335,7 +335,7 @@ var OnuDetailsController = function (onuDetailsService) {
 
         $.post("api/BlockOnu", { oltId: oltId, oltPortId: oltPortId, onuId: onuId, commandProtectionPasswordHash: CryptoJS.MD5(password).toString() })
             .done(function (result) {
-                setTimeout(function () { refreshOnuDetails(); }, 1500);
+                setTimeout(function () { refreshOnuDetails(); }, 3000);
             })
             .fail(function (result) {
                 alertIndicator.removeClass("d-none");
@@ -350,7 +350,7 @@ var OnuDetailsController = function (onuDetailsService) {
 
         $.post("api/UnblockOnu", { oltId: oltId, oltPortId: oltPortId, onuId: onuId, commandProtectionPasswordHash: CryptoJS.MD5(password).toString() })
             .done(function (result) {
-                setTimeout(function () { refreshOnuDetails(); }, 1500);
+                setTimeout(function () { refreshOnuDetails(); }, 3000);
             })
             .fail(function (result) {
                 alertIndicator.removeClass("d-none");
