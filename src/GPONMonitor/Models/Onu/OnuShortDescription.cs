@@ -7,14 +7,16 @@
         public string OnuDescription { get; private set; }
         public string OnuGponSerialNumber { get; private set; }
         public string OnuOpticalConnectionState { get; private set; }
+        public string OpticalPowerReceived { get; private set; }
 
-        public OnuShortDescription(uint oltPortId, uint onuId, string onuDescription, string onuGponSerialNumber, string onuOpticalConnectionState)
+        public OnuShortDescription(uint oltPortId, uint onuId, string onuDescription, string onuGponSerialNumber, string onuOpticalConnectionState, string opticalPowerReceived)
         {
             OltPortId = oltPortId;
             OnuId = onuId;
             OnuDescription = onuDescription;
             OnuGponSerialNumber = onuGponSerialNumber;
             OnuOpticalConnectionState = onuOpticalConnectionState;
+            OpticalPowerReceived = opticalPowerReceived;
         }
     }
 }

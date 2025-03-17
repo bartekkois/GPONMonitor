@@ -69,6 +69,7 @@ namespace GPONMonitor.Models.Olt
             List<Variable> snmpOnuGponSerialNumberList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuGponSerialNumber, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
             List<Variable> snmpOnuDescriptionList = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuDescription, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
             List<Variable> snmpOnuOpticalConnectionState = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuOpticalConnectionState, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
+            List<Variable> snmpOnuOpticalPowerReceived = await SnmpWalkAsyncWithTimeout(SnmpVersion, SnmpOIDCollection.snmpOIDOnuOpticalPowerReceived, WalkMode.WithinSubtree, SnmpTimeout, SnmpV3Credentials);
 
             foreach (Variable variable in snmpOnuGponSerialNumberList)
             {
@@ -82,7 +83,6 @@ namespace GPONMonitor.Models.Olt
                     onuGponSerialNumber = _localizer["unknown"];
 
                 var relatedOnuDescription = snmpOnuDescriptionList.FirstOrDefault(x => x.Id.ToNumerical().ToArray().ElementAt(13) == oltPortId && x.Id.ToNumerical().ToArray().ElementAt(14) == onuId);
-
                 string onuDescription;
                 if (relatedOnuDescription != null)
                     onuDescription = relatedOnuDescription.Data.ToString().Replace("_", " ");
@@ -90,7 +90,6 @@ namespace GPONMonitor.Models.Olt
                     onuDescription = _localizer["undefined"];
 
                 var relatedOnuOpticalConnectionState = snmpOnuOpticalConnectionState.FirstOrDefault(x => x.Id.ToNumerical().ToArray().ElementAt(13) == oltPortId && x.Id.ToNumerical().ToArray().ElementAt(14) == onuId);
-
                 string onuOpticalConnectionState;
                 if (relatedOnuOpticalConnectionState != null)
                 {
@@ -104,7 +103,14 @@ namespace GPONMonitor.Models.Olt
                     onuOpticalConnectionState = "down";
                 }
 
-                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription, onuGponSerialNumber, onuOpticalConnectionState));
+                var relatedOnuOpticalPowerReceived = snmpOnuOpticalPowerReceived.FirstOrDefault(x => x.Id.ToNumerical().ToArray().ElementAt(13) == oltPortId && x.Id.ToNumerical().ToArray().ElementAt(14) == onuId);
+                string onuOpticalPowerReceived;
+                if (relatedOnuOpticalPowerReceived != null)
+                    onuOpticalPowerReceived = relatedOnuOpticalPowerReceived.Data.ToString();
+                else
+                    onuOpticalPowerReceived = _localizer["undefined"];
+
+                onuList.Add(new OnuShortDescription(oltPortId, onuId, onuDescription, onuGponSerialNumber, onuOpticalConnectionState, onuOpticalPowerReceived));
             }
 
             return onuList;

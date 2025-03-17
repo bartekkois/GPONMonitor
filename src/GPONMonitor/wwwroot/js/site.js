@@ -167,7 +167,9 @@ var OltDescriptionListController = function (oltDescriptionListService) {
             var oltPortId = result[i].oltPortId;
             var onuId = result[i].onuId;
             var onuGponSerialNumber = result[i].onuGponSerialNumber;
+            var opticalPowerReceived = parseFloat(result[i].opticalPowerReceived)/10;
             var onuDescription;
+
             if (result[i].onuDescription !== "")
                 onuDescription = result[i].onuDescription;
             else
@@ -179,11 +181,21 @@ var OltDescriptionListController = function (oltDescriptionListService) {
             else
                 onuOpticalConnectionStateStyle = "text-danger";
 
+            var opticalPowerReceivedIndicator = "";
+            if (result[i].onuOpticalConnectionState == "up") {
+                if (opticalPowerReceived < -9.0 && opticalPowerReceived > -26.0)
+                    opticalPowerReceivedIndicator = "";
+                else if ((opticalPowerReceived < -8.0 && opticalPowerReceived >= -9.0) || (opticalPowerReceived <= -26.0 && opticalPowerReceived > -27.0))
+                    opticalPowerReceivedIndicator = "<i class='fa fa-bolt text-warning' title='" + opticalPowerReceived + " dBm'></i>";
+                else
+                    opticalPowerReceivedIndicator = "<i class='fa fa-bolt text-danger' title='" + opticalPowerReceived + " dBm'></i>";
+            }
+
             onuListTableTbody.append(
             "<tr class='clickable-row' data-olt-port-id='" + oltPortId + "' data-onu-id='" + onuId + "' data-href='#'>" +
             "<td class='onu-list-id'><span>" + oltPortId + "." + onuId + "</span></td>" +
             "<td class='onu-list-sn'><i class='fa fa-hdd " + onuOpticalConnectionStateStyle + "' title='" + onuGponSerialNumber + "'></i></td>" +
-            "<td class='onu-list-item'><span>" + onuDescription + "</span></td>" +
+                "<td class='onu-list-item'><span>" + onuDescription + " " + opticalPowerReceivedIndicator + "</span></td>" +
             "</tr>");
         }
 
