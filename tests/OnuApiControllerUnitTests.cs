@@ -34,9 +34,9 @@ namespace tests
             dataServiceMock = new Mock<IDataService>();
             dataServiceMock.Setup(x => x.GetOnuDescriptionListAsync(0)).ReturnsAsync(() => new List<OnuShortDescription>()
             {
-                new OnuShortDescription(1, 1, "ONU_B", "DSNW23456789", "inactive"),
-                new OnuShortDescription(1, 2, "ONU_A", "DSNWcbd38d4e", "active"),
-                new OnuShortDescription(1, 3, "ONU_C", "DSNW34567890", "active"),
+                new OnuShortDescription(1, 1, "ONU_B", "DSNW23456789", "inactive", "-180"),
+                new OnuShortDescription(1, 2, "ONU_A", "DSNWcbd38d4e", "active", "-208"),
+                new OnuShortDescription(1, 3, "ONU_C", "DSNW34567890", "active", "-154"),
             });
 
             dataServiceMock.Setup(x => x.GetOnuStateAsync(0, 1, 2)).ReturnsAsync(() => new H645GOnu()

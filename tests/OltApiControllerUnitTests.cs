@@ -32,15 +32,15 @@ namespace tests
             dataServiceMock = new Mock<IDataService>();
             dataServiceMock.Setup(x => x.GetOnuDescriptionListAsync(0)).ReturnsAsync(() => new List<OnuShortDescription>()
             {
-                new OnuShortDescription(1, 1, "ONU_Description_1", "DSNW12345678", "active"),
-                new OnuShortDescription(1, 2, "ONU_Description_2", "DSNW23456789", "inactive"),
-                new OnuShortDescription(1, 3, "ONU_Description_3", "DSNW34567890", "active"),
+                new OnuShortDescription(1, 1, "ONU_Description_1", "DSNW12345678", "active", "-200"),
+                new OnuShortDescription(1, 2, "ONU_Description_2", "DSNW23456789", "inactive", "-180"),
+                new OnuShortDescription(1, 3, "ONU_Description_3", "DSNW34567890", "active", "-270"),
             });
             dataServiceMock.Setup(x => x.GetOnuDescriptionListAsync(1)).ReturnsAsync(() => new List<OnuShortDescription>()
             {
-                new OnuShortDescription(1, 1, "ONU_Description_1", "DSNW45678901", "inactive"),
-                new OnuShortDescription(2, 2, "ONU_Description_2", "DSNW56789012", "inactive"),
-                new OnuShortDescription(3, 3, "ONU_Description_3", "DSNW67890123", "active"),
+                new OnuShortDescription(1, 1, "ONU_Description_1", "DSNW45678901", "inactive", "-100"),
+                new OnuShortDescription(2, 2, "ONU_Description_2", "DSNW56789012", "inactive", "-150"),
+                new OnuShortDescription(3, 3, "ONU_Description_3", "DSNW67890123", "active", "-203"),
             });
             dataServiceMock.Setup(x => x.GetOnuDescriptionListAsync(2)).ReturnsAsync(() => new List<OnuShortDescription>()
             {
