@@ -3,6 +3,7 @@ using GPONMonitor.Models.ComplexStateTypes;
 using GPONMonitor.Models.Olt;
 using GPONMonitor.Models.Onu;
 using GPONMonitor.Services;
+using System.Threading.Tasks;
 
 namespace GPONMonitor.Models.OnuFactory
 {
@@ -59,6 +60,7 @@ namespace GPONMonitor.Models.OnuFactory
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOltPortId, (int)oltPortId);
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdateOnuId, (int)onuId);
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuVoIPLineStateUpdate0, 0);
+            Task.Delay(800).Wait();
 
 
             // VoIP port 1 state

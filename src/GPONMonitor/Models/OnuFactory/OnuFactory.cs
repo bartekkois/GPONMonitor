@@ -4,6 +4,7 @@ using GPONMonitor.Models.Olt;
 using GPONMonitor.Models.Onu;
 using GPONMonitor.Services;
 using GPONMonitor.Utils;
+using System.Threading.Tasks;
 
 namespace GPONMonitor.Models.OnuFactory
 {
@@ -157,6 +158,7 @@ namespace GPONMonitor.Models.OnuFactory
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1UpdateOltPortId, (int)oltPortId);
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1UpdateOnuId, (int)onuId);
             _snmpDataService.SetIntPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1Update0, 0);
+            Task.Delay(400).Wait();
 
             // ip-host-1
             string ipHost1 = _snmpDataService.GetStringPropertyAsync(oltId, SnmpOIDCollection.snmpOIDOnuIpHost1 + "." + oltPortId + "." + onuId + ".1").Result;
